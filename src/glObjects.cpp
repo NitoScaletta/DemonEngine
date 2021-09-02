@@ -1,0 +1,252 @@
+#include "glObjects.h"
+#include "glad/glad.h"
+
+VertexBuffer::VertexBuffer()
+{
+    glGenBuffers(1, &id);
+
+}
+
+VertexBuffer::VertexBuffer(float vertices[], int size, unsigned int n)
+{
+    glGenBuffers(1, &id);
+    natt = n;
+    bind(vertices, size);
+}
+
+void VertexBuffer::bind(){
+    glBindBuffer(GL_ARRAY_BUFFER, id);
+}
+void VertexBuffer::bind(float vertices[], int size)
+{
+    glBindBuffer(GL_ARRAY_BUFFER, id);
+    glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+}
+
+void VertexBuffer::unbind() const
+{
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void VertexBuffer::bindLayout(VertexArray& vao)
+{
+    vao.newLayout(3,10);
+    vao.newLayout(4,10);
+    vao.newLayout(2,10);
+    vao.newLayout(1,10);
+}
+
+void VertexBuffer::bindDynamic(int size) {
+    glBindBuffer(GL_ARRAY_BUFFER, id);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex)*size, nullptr, GL_DYNAMIC_DRAW);
+}
+
+void VertexBuffer::loadDynamic(int offset, int size,Vertex* vertices){
+        glBufferSubData(GL_ARRAY_BUFFER, offset, size, vertices);
+}
+VertexArray::VertexArray() : index(0) , offset(0), stride(0)
+{
+    glGenVertexArrays(1, &id);
+}
+
+void VertexArray::bind() const
+{
+    glBindVertexArray(id);
+}
+
+void VertexArray::unbind() const
+{
+    glBindVertexArray(0);
+}
+
+void VertexArray::newLayout(int nValues, const int& nAtt)
+{
+    glVertexAttribPointer(index, nValues, GL_FLOAT, GL_FALSE,
+                         nAtt * sizeof(float), (void*)(offset*sizeof(float)));
+    glEnableVertexAttribArray(index);
+    offset = offset + nValues;
+    index++;
+}
+
+void VertexArray::newLayoutDynamic()
+{
+   glEnableVertexAttribArray(0);
+   glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE,sizeof(float)*13, 0);
+   glEnableVertexAttribArray(1);
+   glVertexAttribPointer(1,4, GL_FLOAT, GL_FALSE,sizeof(float)*13, (const void*)offsetof(Vertex, colors));
+   glEnableVertexAttribArray(2);
+   glVertexAttribPointer(2,2, GL_FLOAT, GL_FALSE,sizeof(float)*13, (const void*)offsetof(Vertex,textCoord));
+   glEnableVertexAttribArray(3);
+   glVertexAttribPointer(3,1, GL_FLOAT, GL_FALSE,sizeof(float)*13, (const void*)offsetof(Vertex,textID));
+   glEnableVertexAttribArray(4);
+   glVertexAttribPointer(4,3, GL_FLOAT, GL_FALSE,sizeof(float)*13, (const void*)offsetof(Vertex,normal));
+}
+
+
+
+ElementBuffer::ElementBuffer()
+{
+    glGenBuffers(1,&id);
+}
+
+ElementBuffer::ElementBuffer(int *indices, int size)
+{
+    glGenBuffers(1,&id);
+    bind();
+    set(indices,size);
+}
+
+int ElementBuffer::GetCount() const
+{
+    return iCount;
+}
+
+void ElementBuffer::bind() const
+{
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
+}
+
+void ElementBuffer::unbind() const
+{
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+void ElementBuffer::set(int *indices, int size)
+{
+    iCount = size / sizeof(int);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);
+}
+
+
+void ElementBuffer::setDynamic(int offset, int size, int* indices)
+{
+    iCount = size / sizeof(int);
+    glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, indices);
+}
+
+Texture::Texture()
+{
+    glGenTextures(1, &id);
+}
+
+Texture::Texture(int texture_unit, const char* path)
+{
+    glGenTextures(1, &id);
+    Set(path, texture_unit);
+}
+
+void Texture::bind()
+{
+    glBindTexture(GL_TEXTURE_2D, id);
+}
+
+void Texture::active()
+{
+    glActiveTexture(texture_id);
+    glBindTexture(GL_TEXTURE_2D, id);
+}
+
+void Texture::Set(const char* path, unsigned int texture_unit)
+{
+    texture_id = texture_unit;
+    glBindTexture(GL_TEXTURE_2D, id);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    std::string file = path;
+    if(path[file.length()-3] == 'p')
+    {
+        LoadImagePNG(path);
+    }
+    else
+        LoadImage(path);
+    //glBindTexture(GL_TEXTURE_2D, 0);
+    //active();
+}
+
+
+void Texture::LoadImage(const char* path)
+{
+    data = stbi_load(path, &width, &height, &nrChannels, 0);
+    if(data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+        stbi_image_free(data);
+    }
+    else{
+        std::cout << path << " not found";
+    }
+}
+
+void Texture::LoadImagePNG(const char* path)
+{
+    data = stbi_load(path, &width, &height, &nrChannels, 0);
+    if(data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+        stbi_image_free(data);
+    }
+    else{
+        std::cout << path << "not found" << std::endl;
+    }
+}
+
+Vertex::Vertex()
+{
+}
+Vertex::Vertex(float _x, float _y)
+{
+        setPos( _x, _y, 0.0f);
+        setCol(1.0f, 0.0f, 0.0f, 1.0f);
+        setTCor(1.0f, 1.0f);
+        textID = 0.0f;
+}
+
+
+Vertex::Vertex(float _x, float _y, float _z)
+{
+        setPos( _x, _y, _z);
+        setCol(1.0f, 0.0f, 0.0f, 1.0f);
+        setTCor(1.0f, 1.0f);
+        textID = 0.0f;
+}
+Vertex::~Vertex(){
+
+}
+
+void Vertex::setPos(float x, float y, float z){
+    positions[0] = x;
+    positions[1] = y;
+    positions[2] = z;
+}
+void Vertex::setCol(float r, float g, float b, float a){
+    colors[0] = r;
+    colors[1] = g;
+    colors[2] = b;
+    colors[3] = a;
+}
+
+void Vertex::setTCor(float x, float y){
+    textCoord[0] = x;
+    textCoord[1] = y;
+}
+
+
+void Vertex::print()
+{
+    static int _numbvertex = 0;
+    std::cout <<  ") x: " <<  positions[0] << " y: " << positions[1] << " z: " << positions[2] <<
+        "\tnormal: " <<") x: " <<  normal[0] << " y: " << normal[1] << " z: " << normal[2]
+              << std::endl;
+
+}
+
+void Vertex::setNormal(float x, float y, float z)
+{
+    normal[0] = x;
+    normal[1] = y;
+    normal[2] = z;
+}
