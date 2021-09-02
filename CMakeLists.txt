@@ -23,13 +23,14 @@ add_library(core      src/CoreFun.cpp
                       src/Light.cpp)
 
 add_library(camera src/Camera.cpp)
+
 add_library(imgui   vendor/imgui/imgui.cpp
                     vendor/imgui/imgui_tables.cpp
                     vendor/imgui/imgui_draw.cpp
                     vendor/imgui/imgui_widgets.cpp
                     vendor/imgui/imgui_demo.cpp
-                    vendor/imgui/imgui_impl_opengl3.cpp
-                    vendor/imgui/imgui_impl_glfw.cpp
+                    vendor/imgui/backends/imgui_impl_opengl3.cpp
+                    vendor/imgui/backends/imgui_impl_glfw.cpp
                     )
 
 add_library(test    src/testClearColor.cpp
