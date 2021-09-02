@@ -32,6 +32,11 @@
 *.app
 
 
+*.cmake
+
+vendor/glfw/
+vendor/imgui/
+build/vendor/
 
 build.ninja
 
