@@ -3,6 +3,7 @@ project(LearnOpenGL)
 #include_directories( ${OPENGL_INCLUDE_DIRS} )
 include_directories(include/)
 include_directories(src/include/)
+include_directories(vendor/imgui/)
 
 
 #GLFW config
@@ -35,17 +36,12 @@ add_library(imgui   vendor/imgui/imgui.cpp
 
 add_library(test    src/testClearColor.cpp
                     src/test.cpp
-                    #src/test/TestQuad.cpp
-                    #src/test/TestBatch.cpp
-                    #src/test/TestVector.cpp
-                    #src/test/TestCube.cpp
-                    #src/test/TestDouble.cpp
                     src/test/TestLight.cpp
                     src/test/TestDirLight.cpp
-                    src/test/TestPointLight.cpp
+
                     )
 #exec
-add_executable (LearnOpenGL src/app.cpp)
+add_executable (LearnOpenGL.out src/app.cpp)
 
 
 
