@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+
+
+Makefile
+build.ninja
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
