@@ -41,7 +41,7 @@ add_library(test    src/testClearColor.cpp
 
                     )
 #exec
-add_executable (LearnOpenGL.out src/app.cpp)
+a.out.outdd_executable (LearnOpenGL src/app.cpp)
 
 
 
