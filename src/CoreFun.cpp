@@ -45,7 +45,7 @@ namespace core{
 
 void createIndices(int nquad,std::vector<int>& indices, bool log)
 {
-    Timer timer("indices");
+    //Timer timer("indices");
     int topr, botr;
     indices.clear();
 
@@ -89,7 +89,7 @@ void createIndices(int nquad,std::vector<int>& indices, bool log)
 
 void createVerticesCube(std::vector<Vertex>& vertices, bool log)
 {
-    Timer timer("cubes vertices");
+    //Timer timer("cubes vertices");
     vertices.push_back(Vertex(-0.5f, -0.5f, -0.5f));//0
     vertices.back().setTCor(0.0f, 0.0f);
     vertices.back().setNormal(0.0f, 0.0f, -1.0f);
@@ -129,7 +129,7 @@ void createVerticesCube(std::vector<Vertex>& vertices, bool log)
     vertices.back().setTCor(0.0f, 1.0f);
     vertices.back().setNormal(0.0f, -1.0f, 0.0f);
 
-    vertices.push_back(Vertex(-0.5f, 0.5f, -0.5f));//8
+    vertices.push_back(Vertex(-0.5f, 0.5f, -0.5f));//12
     vertices.back().setTCor(0.0f, 0.0f);
     vertices.back().setNormal(0.0f, 1.0f, 0.0f);
     vertices.push_back(Vertex(0.5f, 0.5f, -0.5f));
@@ -143,7 +143,7 @@ void createVerticesCube(std::vector<Vertex>& vertices, bool log)
     vertices.back().setNormal(0.0f, 1.0f, 0.0f);
 
 
-    vertices.push_back(Vertex(0.5f, -0.5f, -0.5f));//8
+    vertices.push_back(Vertex(0.5f, -0.5f, -0.5f));//16
     vertices.back().setTCor(0.0f, 0.0f);
     vertices.back().setNormal(1.0f, 0.0f, 0.0f);
     vertices.push_back(Vertex(0.5f, -0.5f,  0.5f));
@@ -156,7 +156,7 @@ void createVerticesCube(std::vector<Vertex>& vertices, bool log)
     vertices.back().setTCor(0.0f, 1.0f);
     vertices.back().setNormal(1.0f, 0.0f, 0.0f);
 
-    vertices.push_back(Vertex(-0.5f, -0.5f, -0.5f));//8
+    vertices.push_back(Vertex(-0.5f, -0.5f, -0.5f));//20
     vertices.back().setTCor(0.0f, 0.0f);
     vertices.back().setNormal(-1.0f, 0.0f, 0.0f);
     vertices.push_back(Vertex(-0.5f, -0.5f,  0.5f));
@@ -192,6 +192,7 @@ void msg(const char* mess)
 }
 
 void CreateIndices(std::vector<int>& indices, int quad_number, bool log ){
+    //Timer timer("indices");
     int index = 0;
     indices.clear();
     for(int i = 0; i < quad_number; i++)

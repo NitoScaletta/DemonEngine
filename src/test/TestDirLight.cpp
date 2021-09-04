@@ -26,6 +26,8 @@ namespace test{
 
 
         int x=0 , y=0;
+        {
+        Timer timer("cubes");
         for(int i = 0; i < size; i++)
         {
             cubes.push_back(Cube("fragmentSpot.txt"));
@@ -40,6 +42,7 @@ namespace test{
                 x = 0;}
             else x++;
 
+        }
         }
 
 

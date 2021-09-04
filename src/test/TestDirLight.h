@@ -12,7 +12,6 @@ namespace test{
     class TestDirLight : public Test
     {
         public:
-        Cube* cube;
         std::vector<Cube> cubes;
         int size;
         Flashlight* light;

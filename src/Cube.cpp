@@ -90,6 +90,13 @@ void Shape::setUniFlashlight(Flashlight* light)
 }
 
 
+void Shape::draw(Renderer* rend)
+{
+    if(shouldbeDraw)
+        rend->draw(vao, ebo, ps);
+}
+
+
 
 
 
@@ -99,12 +106,14 @@ Cube::Cube(const char* vertexshader)
     name = "cube";
     std::vector<int> indices;
     core::CreateIndices(indices, 6);
-    core::createVerticesCube(vertices );
+    //core::createVerticesCube(vertices );
+    CreateBuffer();
     vao.bind();
     ebo.bind();
     ebo.set(indices.data(), sizeof(int)*indices.size());
     vbo.bindDynamic(100);
-    vbo.loadDynamic(0, sizeof(Vertex)*vertices.size(), vertices.data());
+    //vbo.loadDynamic(0, sizeof(Vertex)*vertices.size(), vertices.data());
+    vbo.loadDynamic(0, sizeof(vertArr), vertArr);
     vao.newLayoutDynamic();
     vs.initShader(VertexType::VERTEX);
     fs.initShader(VertexType::FRAGMENT);
@@ -113,6 +122,97 @@ Cube::Cube(const char* vertexshader)
     ps.compileShader(vs.id, fs.id);
     Model = glm::mat4(0.0f);
     material.shininess = 32.0f;
+}
+
+
+
+void Cube::CreateBuffer()
+{
+    //Timer  timer("array static");
+    vertArr[0].setPos(-0.5f, -0.5f , -0.5f);
+    vertArr[0].setTCor(0, 0);
+    vertArr[0].setNormal(0, 0, -1);
+    vertArr[1].setPos(0.5f, -0.5f , -0.5f);
+    vertArr[1].setTCor(1, 0);
+    vertArr[1].setNormal(0, 0, -1);
+    vertArr[2].setPos(0.5f, 0.5f , -0.5f);
+    vertArr[2].setTCor(1, 1);
+    vertArr[2].setNormal(0, 0, -1);
+    vertArr[3].setPos(-0.5f, 0.5f , -0.5f);
+    vertArr[3].setTCor(0, 1);
+    vertArr[3].setNormal(0, 0, -1);
+
+    vertArr[4].setPos(-0.5f, -0.5f , 0.5f);
+    vertArr[4].setTCor(0, 0);
+    vertArr[4].setNormal(0, 0, 1);
+    vertArr[5].setPos(0.5f, -0.5f , 0.5f);
+    vertArr[5].setTCor(1, 0);
+    vertArr[5].setNormal(0, 0, 1);
+    vertArr[6].setPos(0.5f, 0.5f , 0.5f);
+    vertArr[6].setTCor(1, 1);
+    vertArr[6].setNormal(0, 0, 1);
+    vertArr[7].setPos(-0.5f, 0.5f , 0.5f);
+    vertArr[7].setTCor(0, 1);
+    vertArr[7].setNormal(0, 0, 1);
+
+
+    vertArr[8].setPos(-0.5f, -0.5f , -0.5f);
+    vertArr[8].setTCor(0, 0);
+    vertArr[8].setNormal(0, -1, 0);
+    vertArr[9].setPos(0.5f, -0.5f , -0.5f);
+    vertArr[9].setTCor(1, 0);
+    vertArr[9].setNormal(0, -1, 0);
+    vertArr[10].setPos(0.5f, -0.5f , 0.5f);
+    vertArr[10].setTCor(1, 1);
+    vertArr[10].setNormal(0, -1, 0);
+    vertArr[11].setPos(-0.5f, -0.5f , 0.5f);
+    vertArr[11].setTCor(0, 1);
+    vertArr[11].setNormal(0, -1, 0);
+
+
+    vertArr[12].setPos(-0.5f, 0.5f , -0.5f);
+    vertArr[12].setTCor(0, 0);
+    vertArr[12].setNormal(0, 1, 0);
+    vertArr[13].setPos(0.5f, 0.5f , -0.5f);
+    vertArr[13].setTCor(1, 0);
+    vertArr[13].setNormal(0, 1, 0);
+    vertArr[14].setPos(0.5f, 0.5f , 0.5f);
+    vertArr[14].setTCor(1, 1);
+    vertArr[14].setNormal(0, 1, 0);
+    vertArr[15].setPos(-0.5f, 0.5f , 0.5f);
+    vertArr[15].setTCor(0, 1);
+    vertArr[15].setNormal(0, 1, 0);
+
+
+    vertArr[16].setPos(0.5f, -0.5f , -0.5f);
+    vertArr[16].setTCor(0, 0);
+    vertArr[16].setNormal(1, 0, 0);
+    vertArr[17].setPos(0.5f, -0.5f , 0.5f);
+    vertArr[17].setTCor(1, 0);
+    vertArr[17].setNormal(1, 0, 0);
+    vertArr[18].setPos(0.5f, 0.5f , 0.5f);
+    vertArr[18].setTCor(1, 1);
+    vertArr[18].setNormal(1, 0, 0);
+    vertArr[19].setPos(0.5f, 0.5f , -0.5f);
+    vertArr[19].setTCor(0, 1);
+    vertArr[19].setNormal(1, 0, 0);
+
+
+    vertArr[20].setPos(-0.5f, -0.5f , -0.5f);
+    vertArr[20].setTCor(0, 0);
+    vertArr[20].setNormal(-1, 0, 0);
+    vertArr[21].setPos(-0.5f, -0.5f , 0.5f);
+    vertArr[21].setTCor(1, 0);
+    vertArr[21].setNormal(-1, 0, 0);
+    vertArr[22].setPos(-0.5f, 0.5f , 0.5f);
+    vertArr[22].setTCor(1, 1);
+    vertArr[22].setNormal(-1, 0, 0);
+    vertArr[23].setPos(-0.5f, 0.5f , -0.5f);
+    vertArr[23].setTCor(0, 1);
+    vertArr[23].setNormal(-1, 0, 0);
+
+
+
 }
 
 
@@ -133,13 +233,6 @@ void Cube::unbind()
     vao.unbind();
     ebo.unbind();
     vbo.unbind();
-}
-
-
-void Shape::draw(Renderer* rend)
-{
-    if(shouldbeDraw)
-        rend->draw(vao, ebo, ps);
 }
 
 

@@ -51,13 +51,17 @@ class Shape
 
 class Cube : public Shape
 {
-    public:
-        Cube(){};
-        Cube(const char* vertexshader);
-        ~Cube();
+        public:
+                Cube(){};
+                Cube(const char* vertexshader);
+                ~Cube();
 
-        void unbind();
-        void SetScale(float Scale);
+                void unbind();
+                void SetScale(float Scale);
+        private:
+                Vertex vertArr[24];
+                void CreateBuffer();
+
 };
 
 
