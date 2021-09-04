@@ -31,19 +31,20 @@ int main(void)
     bool prova;
     Renderer renderer;
     GLFWwindow* window;
-    const char* glsl_version = "#version 130";
+    const char* glsl_version = "#version 430";
     window = renderer.CreateWindow(SCR_X, SCR_Y);
     renderer.init();
     test::TestDirLight tst(window, camera);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mousecall);
     //tst.passWindow(window);
-    //IMGUI_CHECKVERSION();
+    IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     ImGui::StyleColorsDark();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
+
 
     stbi_set_flip_vertically_on_load(true);
     while (!glfwWindowShouldClose(window))
@@ -73,6 +74,9 @@ int main(void)
         glfwPollEvents();
     }
 
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
     glfwTerminate();
     delete(camera);
     return 0;
