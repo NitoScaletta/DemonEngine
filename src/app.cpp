@@ -4,6 +4,7 @@
 #include "test/TestLight.h"
 #include "test/TestPointLight.h"
 #include "Camera.h"
+#include "Timer.h"
 
 const unsigned int SCR_X =1024;
 const unsigned int SCR_Y = 768;
@@ -26,6 +27,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 int main(void)
 {
+    Timer timer("main");
     float deltatime, lastframe;
     lastframe = 0.0f;
     bool prova;

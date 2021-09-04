@@ -1,6 +1,8 @@
 #ifndef COREFUN_H_
 #define COREFUN_H_
 #include "core.h"
+#include "Timer.h"
+
 namespace core{
     void createBuffer(int nquad, std::vector<Vertex>& vertices, float x, float y,
                       float size_x = 100.0f, float size_y = 100.0f, bool log = false);

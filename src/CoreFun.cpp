@@ -1,6 +1,7 @@
 #include "CoreFun.h"
 
 
+
 namespace core{
     void ClearScreen()
 {
@@ -44,6 +45,7 @@ namespace core{
 
 void createIndices(int nquad,std::vector<int>& indices, bool log)
 {
+    Timer timer("indices");
     int topr, botr;
     indices.clear();
 
@@ -87,6 +89,7 @@ void createIndices(int nquad,std::vector<int>& indices, bool log)
 
 void createVerticesCube(std::vector<Vertex>& vertices, bool log)
 {
+    Timer timer("cubes vertices");
     vertices.push_back(Vertex(-0.5f, -0.5f, -0.5f));//0
     vertices.back().setTCor(0.0f, 0.0f);
     vertices.back().setNormal(0.0f, 0.0f, -1.0f);

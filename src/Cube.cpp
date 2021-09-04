@@ -2,27 +2,7 @@
 #include "CoreFun.h"
 #include "Light.h"
 
-Cube::~Cube(){}
-Cube::Cube(const char* vertexshader)
-{
-    name = "cube";
-    std::vector<int> indices;
-    core::CreateIndices(indices, 6);
-    core::createVerticesCube(vertices );
-    vao.bind();
-    ebo.bind();
-    ebo.set(indices.data(), sizeof(int)*indices.size());
-    vbo.bindDynamic(100);
-    vbo.loadDynamic(0, sizeof(Vertex)*vertices.size(), vertices.data());
-    vao.newLayoutDynamic();
-    vs.initShader(VertexType::VERTEX);
-    fs.initShader(VertexType::FRAGMENT);
-    vs.readSourceFile("vertex.txt");
-    fs.readSourceFile(vertexshader);
-    ps.compileShader(vs.id, fs.id);
-    Model = glm::mat4(0.0f);
-    material.shininess = 32.0f;
-}
+
 
 void Shape::SetPos(float x, float y, float z)
 {
@@ -53,16 +33,6 @@ glm::mat4 Shape::model()
     return Model;
 }
 
-void Cube::SetScale(float Scale)
-{
-    scale = glm::vec3(Scale);
-}
-
-void Shape::UpdateMVP(glm::mat4 proj,glm::mat4 view){
-    glm::mat4  mvp = proj * view * model();
-    ps.setUniMat4f("aMVP", mvp);
-
-}
 
 void Shape::setUniMaterial(glm::vec3 lightColor, glm::vec3 spec)
 {
@@ -117,6 +87,45 @@ void Shape::setUniFlashlight(Flashlight* light)
     ps.setUniVec3("light.direction", light->direction);
     ps.setUniff("light.cutoff", glm::cos(glm::radians(light->cutOff)));
     ps.setUniff("light.cutoffouter", glm::cos(glm::radians(light->cutOff+light->fade)));
+}
+
+
+
+
+
+Cube::~Cube(){}
+Cube::Cube(const char* vertexshader)
+{
+    name = "cube";
+    std::vector<int> indices;
+    core::CreateIndices(indices, 6);
+    core::createVerticesCube(vertices );
+    vao.bind();
+    ebo.bind();
+    ebo.set(indices.data(), sizeof(int)*indices.size());
+    vbo.bindDynamic(100);
+    vbo.loadDynamic(0, sizeof(Vertex)*vertices.size(), vertices.data());
+    vao.newLayoutDynamic();
+    vs.initShader(VertexType::VERTEX);
+    fs.initShader(VertexType::FRAGMENT);
+    vs.readSourceFile("vertex.txt");
+    fs.readSourceFile(vertexshader);
+    ps.compileShader(vs.id, fs.id);
+    Model = glm::mat4(0.0f);
+    material.shininess = 32.0f;
+}
+
+
+
+void Cube::SetScale(float Scale)
+{
+    scale = glm::vec3(Scale);
+}
+
+void Shape::UpdateMVP(glm::mat4 proj,glm::mat4 view){
+    glm::mat4  mvp = proj * view * model();
+    ps.setUniMat4f("aMVP", mvp);
+
 }
 
 void Cube::unbind()

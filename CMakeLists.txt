@@ -21,7 +21,8 @@ add_library(stb_image src/image.cpp)
 add_library(renderer  src/renderer.cpp)
 add_library(core      src/CoreFun.cpp
                       src/Cube.cpp
-                      src/Light.cpp)
+                      src/Light.cpp
+                      src/Timer.cpp)
 
 add_library(camera src/Camera.cpp)
 

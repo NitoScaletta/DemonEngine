@@ -27,22 +27,21 @@ struct Vertex
 
 class VertexArray{
         public:
-                unsigned int id;
-                unsigned int index;
-                unsigned int offset;
-                int stride;
                 VertexArray();
                 void bind() const;
                 void unbind() const;
                 void newLayout(int nValues, const int& nAtt);
                 void newLayoutDynamic();
+        private:
+                unsigned int id;
+                unsigned int index;
+                unsigned int offset;
+                int stride;
 };
 
 class VertexBuffer
 {
         public:
-                unsigned int natt;//number of attributes
-                unsigned int id;
                 VertexBuffer();
                 VertexBuffer(float vertices[],int size,unsigned int n);
                 void bind();
@@ -51,12 +50,15 @@ class VertexBuffer
                 void bindLayout(VertexArray& vao);
                 void bindDynamic(int size);
                 void loadDynamic(int offset, int size, Vertex*  vertices);
+        private:
+                unsigned int natt;//number of attributes
+                unsigned int id;
+
 };
 
 class ElementBuffer
 {
         public:
-                unsigned int id;
                 ElementBuffer();
                 ElementBuffer(int *indices, int size);
                 void bind() const;
@@ -66,15 +68,12 @@ class ElementBuffer
                 void setDynamic(int offset, int size, int* indices);
         private:
                 unsigned int iCount;
+                unsigned int id;
 };
 
 class Texture
 {
         public:
-                unsigned int id;
-                unsigned char *data;
-                int width, height, nrChannels;
-                int texture_id;
                 Texture();
                 Texture(int texture_unit, const char* path);
                 void bind();
@@ -82,12 +81,16 @@ class Texture
                 void Set(const char* path,unsigned int texture_unit);
                 void LoadImage(const char* path);
                 void LoadImagePNG(const char* path);
+        private:
+                unsigned int id;
+                unsigned char *data;
+                int width, height, nrChannels;
+                int texture_id;
 };
 
 
-class Material
+struct Material
 {
-        public:
                 glm::vec3 ambient;
                 glm::vec3 diffuse;
                 glm::vec3 specular;
