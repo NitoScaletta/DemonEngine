@@ -58,7 +58,8 @@ namespace test{
             cubes.back().UpdateMVP(proj, view);
             cubes.back().SetDiffuseMap(0);
             cubes.back().SetSpecularMap(1);
-            cubes.back().ps.setUniMat4f("model", cubes.back().model());
+            //cubes.back().ps.setUniMat4f("model", cubes.back().model());
+            cubes.back().setUniModel();
             if((i + 1 )%5 == 0 && i != 0)
             {
                 y++;
@@ -67,12 +68,12 @@ namespace test{
 
         }
 
-
         plane.SetPos(0, -1.0f, 0);
         plane.UpdateMVP(proj, view);
         plane.SetDiffuseMap(2);
         plane.SetSpecularMap(3);
-        plane.ps.setUniMat4f("model", plane.model());
+        //plane.ps.setUniMat4f("model", plane.model());
+        plane.setUniModel();
 
         light->SetPos(1,1, 4);
         light->UpdateMVP(proj, view);
@@ -95,14 +96,14 @@ namespace test{
             cubes[i].setUniFlashlight(light);
             cubes[i].setUniLight(light);
             cubes[i].setUniMaterial(light->lightColor);
-            cubes[i].ps.setUniVec3("viewPos", camera->cameraPosition);
+            cubes[i].setCameraPosition(camera);
         }
 
 
         plane.UpdateMVP(proj, view);
         plane.setUniLight(light);
         plane.setUniMaterial(light->lightColor);
-        plane.ps.setUniVec3("viewPos", camera->cameraPosition);
+        plane.setCameraPosition(camera);
 
          camera->statusController();
     }

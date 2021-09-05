@@ -96,7 +96,16 @@ void Shape::draw(Renderer* rend)
         rend->draw(vao, ebo, ps);
 }
 
+void Shape::setCameraPosition(Camera* camera)
+{
+    ps.setUniVec3("viewPos", camera->cameraPosition);
+}
 
+
+void Shape::setUniModel()
+{
+    ps.setUniMat4f("model", Model);
+}
 
 
 

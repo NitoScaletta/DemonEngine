@@ -7,7 +7,7 @@ class PhongLight;
 class DirectionalLight;
 class PointLight;
 class Flashlight;
-
+class Camera;
 
 
 class Shape
@@ -20,7 +20,6 @@ class Shape
                 glm::vec3 pos;
                 glm::vec3 scale;
                 glm::mat4 model();
-
 
                 Shape() : shouldbeDraw(true){};
                 ~Shape(){};
@@ -35,6 +34,8 @@ class Shape
                 void setUniPointLight(PointLight* light);
                 void setUniFlashlight(Flashlight* light);
                 void setUniMaterial(glm::vec3 lightColor, glm::vec3 spec = glm::vec3(1.0f));
+                void setCameraPosition(Camera* camera);
+                void setUniModel();
 
         protected:
                 std::string name;
