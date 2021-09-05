@@ -19,17 +19,14 @@ namespace test{
         bool asy = true;
         if(asy)
         {
-         std::string te[] = {"container2.png",
-                            "vc.png",
-                            "wall.jpg",
-                            "walls.jpg"};
-        {
-            for(int i = 0; i <4; i++)
-                t_futures.push_back(std::async(std::launch::async, texture::loadText, &data[i], te[i]));
-            for(int i = 0; i <4; i++)
-                t_futures[i].wait();
-        }
-        {
+            std::string te[] = {"container2.png", "vc.png", "wall.jpg", "walls.jpg"};
+            {
+                for(int i = 0; i <4; i++)
+                    t_futures.push_back(std::async(std::launch::async, texture::loadText,
+                                                   &data[i], te[i]));
+                for(int i = 0; i <4; i++)
+                    t_futures[i].wait();
+            }
             texture1. DataSet("container2.png", GL_TEXTURE0, &data[0]);
             specular1.DataSet("vc.png", GL_TEXTURE1,    &data[1]);
             texture2. DataSet("wall.jpg", GL_TEXTURE2,  &data[2]);
@@ -38,7 +35,6 @@ namespace test{
             specular1.active();
             texture2.active();
             specular2.active();
-        }
         }
         else{
             texture1.Set("container2.png", GL_TEXTURE0);
