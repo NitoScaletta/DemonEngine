@@ -71,6 +71,12 @@ class ElementBuffer
                 unsigned int id;
 };
 
+struct TextureData
+{
+        int width, height, nrChannels;
+        unsigned char *data;
+};
+
 class Texture
 {
         public:
@@ -79,15 +85,15 @@ class Texture
                 void bind();
                 void active();
                 void Set(const char* path,unsigned int texture_unit);
-                void LoadImage(const char* path);
-                void LoadImagePNG(const char* path);
+                void DataSet(const char* path,unsigned int texture_unit, TextureData* image);
         private:
                 unsigned int id;
                 unsigned char *data;
                 int width, height, nrChannels;
                 int texture_id;
+                void LoadImage(const char* path);
+                void LoadImagePNG(const char* path);
 };
-
 
 struct Material
 {
@@ -97,5 +103,9 @@ struct Material
                 float shininess;
 };
 
+namespace texture
+{
+        void loadText(TextureData* images, std::string path);
+}
 
 #endif // GLOBJECTS_H_

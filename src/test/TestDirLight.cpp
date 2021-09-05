@@ -1,42 +1,58 @@
 #include "TestDirLight.h"
 #include <thread>
-#include <future>
+#include "stb_image.h"
 
 namespace test{
-    static void loadTexture(Texture texture, const char * filepath, unsigned int id)
-    {
-       texture.Set(filepath, id);
-    }
+
+
 
     TestDirLight::TestDirLight(GLFWwindow* wind, Camera* cam) : window(wind),
                                                                 size(100),
                                                                 camera(cam),
                                                                 TestDir(glm::vec3(1.0f))
     {
+        Timer timer("total ");
         light = new Flashlight(camera);
         constant = 1;
         linear = 0.09f;
         quadratic = 0.032f;
+        bool asy = true;
+        if(asy)
         {
-            core::msg("thread");
-        Timer timer("textures");
-        //std::thread thr(loadTexture,  texture1,  "container2.png", GL_TEXTURE0);
-        //std::thread thr2(loadTexture, specular1,"vc.png", GL_TEXTURE1);
-        //std::thread thr3(loadTexture, texture2, "wall.jpg", GL_TEXTURE2);
-        //std::thread thr4(loadTexture, specular2,"walls.jpg", GL_TEXTURE3);
-        texture1.Set("container2.png", GL_TEXTURE0);
-        specular1.Set("vc.png", GL_TEXTURE1);
-        texture2.Set("wall.jpg", GL_TEXTURE2);
-        specular2.Set("walls.jpg", GL_TEXTURE3);
-        texture1.active();
-        specular1.active();
-        texture2.active();
-        specular2.active();
+         std::string te[] = {"container2.png",
+                            "vc.png",
+                            "wall.jpg",
+                            "walls.jpg"};
+        {
+            for(int i = 0; i <4; i++)
+                t_futures.push_back(std::async(std::launch::async, texture::loadText, &data[i], te[i]));
+            for(int i = 0; i <4; i++)
+                t_futures[i].wait();
         }
-
+        {
+            texture1. DataSet("container2.png", GL_TEXTURE0, &data[0]);
+            specular1.DataSet("vc.png", GL_TEXTURE1,    &data[1]);
+            texture2. DataSet("wall.jpg", GL_TEXTURE2,  &data[2]);
+            specular2.DataSet("walls.jpg", GL_TEXTURE3, &data[3]);
+            texture1.active();
+            specular1.active();
+            texture2.active();
+            specular2.active();
+        }
+        }
+        else{
+            texture1.Set("container2.png", GL_TEXTURE0);
+            specular1.Set("vc.png", GL_TEXTURE1);
+            texture2.Set("wall.jpg", GL_TEXTURE2);
+            specular2.Set("walls.jpg", GL_TEXTURE3);
+            core::msg("loading into gl");
+            texture1.active();
+            specular1.active();
+            texture2.active();
+            specular2.active();
+        }
         proj = core::proj3d(4/3);
         view = camera->view();
-
 
         int x=0 , y=0;
         for(int i = 0; i < size; i++)

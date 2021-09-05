@@ -6,6 +6,7 @@
 #include "Cube.h"
 #include "Light.h"
 #include "Camera.h"
+#include <future>
 
 
 namespace test{
@@ -21,6 +22,9 @@ namespace test{
         GLFWwindow* window;
         float linear, constant, quadratic;
         glm::vec3 TestDir;
+        TextureData data[4];
+
+        std::vector<std::future<void>> t_futures;
 
         glm::mat4 proj, view;
 

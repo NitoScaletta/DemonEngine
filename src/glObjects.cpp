@@ -1,5 +1,7 @@
+#include "CoreFun.h"
 #include "glObjects.h"
 #include "glad/glad.h"
+#include "Timer.h"
 
 VertexBuffer::VertexBuffer()
 {
@@ -160,9 +162,9 @@ void Texture::Set(const char* path, unsigned int texture_unit)
         LoadImagePNG(path);
     }
     else
+    {
         LoadImage(path);
-    //glBindTexture(GL_TEXTURE_2D, 0);
-    //active();
+    }
 }
 
 
@@ -182,7 +184,7 @@ void Texture::LoadImage(const char* path)
 
 void Texture::LoadImagePNG(const char* path)
 {
-    data = stbi_load(path, &width, &height, &nrChannels, 0);
+        data = stbi_load(path, &width, &height, &nrChannels, 0);
     if(data)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -193,6 +195,35 @@ void Texture::LoadImagePNG(const char* path)
         std::cout << path << "not found" << std::endl;
     }
 }
+
+void Texture::DataSet(const char *path, unsigned int texture_unit, TextureData* image)
+{
+    texture_id = texture_unit;
+    glBindTexture(GL_TEXTURE_2D, id);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    std::string file = path;
+    if (image){
+            if(path[file.length()-3] == 'p')
+            {
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->width, image->height,
+                             0, GL_RGBA, GL_UNSIGNED_BYTE, image->data);
+                glGenerateMipmap(GL_TEXTURE_2D);
+                stbi_image_free(image->data);
+            }
+            else
+            {
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->width, image->height,
+                             0, GL_RGB, GL_UNSIGNED_BYTE, image->data);
+                glGenerateMipmap(GL_TEXTURE_2D);
+                stbi_image_free(image->data);
+            }
+    }
+    else core::msg("data not found");
+}
+
 
 Vertex::Vertex()
 {
@@ -249,4 +280,14 @@ void Vertex::setNormal(float x, float y, float z)
     normal[0] = x;
     normal[1] = y;
     normal[2] = z;
+}
+
+namespace texture
+{
+void loadText(TextureData* images, std::string path)
+    {
+        images->data = stbi_load(path.c_str(), &images->width, &images->height,
+                                 &images->nrChannels, 0);
+    }
+
 }
