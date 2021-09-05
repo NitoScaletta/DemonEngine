@@ -1,7 +1,12 @@
 #include "TestDirLight.h"
-
+#include <thread>
+#include <future>
 
 namespace test{
+    static void loadTexture(Texture texture, const char * filepath, unsigned int id)
+    {
+       texture.Set(filepath, id);
+    }
 
     TestDirLight::TestDirLight(GLFWwindow* wind, Camera* cam) : window(wind),
                                                                 size(100),
@@ -12,6 +17,13 @@ namespace test{
         constant = 1;
         linear = 0.09f;
         quadratic = 0.032f;
+        {
+            core::msg("thread");
+        Timer timer("textures");
+        //std::thread thr(loadTexture,  texture1,  "container2.png", GL_TEXTURE0);
+        //std::thread thr2(loadTexture, specular1,"vc.png", GL_TEXTURE1);
+        //std::thread thr3(loadTexture, texture2, "wall.jpg", GL_TEXTURE2);
+        //std::thread thr4(loadTexture, specular2,"walls.jpg", GL_TEXTURE3);
         texture1.Set("container2.png", GL_TEXTURE0);
         specular1.Set("vc.png", GL_TEXTURE1);
         texture2.Set("wall.jpg", GL_TEXTURE2);
@@ -20,14 +32,13 @@ namespace test{
         specular1.active();
         texture2.active();
         specular2.active();
+        }
 
         proj = core::proj3d(4/3);
         view = camera->view();
 
 
         int x=0 , y=0;
-        {
-        Timer timer("cubes");
         for(int i = 0; i < size; i++)
         {
             cubes.push_back(Cube("fragmentSpot.txt"));
@@ -43,7 +54,6 @@ namespace test{
             else x++;
 
         }
-        }
 
 
         plane.SetPos(0, -1.0f, 0);
@@ -56,7 +66,6 @@ namespace test{
         light->UpdateMVP(proj, view);
         light->cutOff = 10.0f;
         light->fade = 5.0f;
-
 
     }
 
@@ -93,7 +102,6 @@ namespace test{
         glClearColor(0.3f,0.5f, 0.6f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         Renderer* renderer;
-        //cube->draw(renderer);
         plane.draw(renderer);
         light->draw(renderer);
         for(int i =0; i < size; i++)
