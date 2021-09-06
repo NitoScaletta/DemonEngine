@@ -107,6 +107,10 @@ void Shape::setUniModel()
     ps.setUniMat4f("model", Model);
 }
 
+void readfile(Shader* shader, std::string str)
+{
+    shader->readSourceFile(str.c_str());
+}
 
 
 Cube::~Cube(){}
@@ -115,24 +119,27 @@ Cube::Cube(const char* vertexshader)
     name = "cube";
     std::vector<int> indices;
     core::CreateIndices(indices, 6);
-    //core::createVerticesCube(vertices );
     CreateBuffer();
     vao.bind();
     ebo.bind();
     ebo.set(indices.data(), sizeof(int)*indices.size());
-    vbo.bindDynamic(100);
-    //vbo.loadDynamic(0, sizeof(Vertex)*vertices.size(), vertices.data());
+    vbo.bindDynamic(24);
     vbo.loadDynamic(0, sizeof(vertArr), vertArr);
     vao.newLayoutDynamic();
+    std::future<void> t1, t2;
     vs.initShader(VertexType::VERTEX);
     fs.initShader(VertexType::FRAGMENT);
+    std::string s1 = "vertex.txt", s2 = vertexshader;
+    //t1 = std::async(std::launch::async, readfile,  &vs, s1 );
+    //t2 = std::async(std::launch::async, readfile,  &fs, s2 );
     vs.readSourceFile("vertex.txt");
     fs.readSourceFile(vertexshader);
+    //t1.wait();
+    //t2.wait();
     ps.compileShader(vs.id, fs.id);
     Model = glm::mat4(0.0f);
     material.shininess = 32.0f;
 }
-
 
 
 void Cube::CreateBuffer()

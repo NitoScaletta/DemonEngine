@@ -58,7 +58,6 @@ namespace test{
             cubes.back().UpdateMVP(proj, view);
             cubes.back().SetDiffuseMap(0);
             cubes.back().SetSpecularMap(1);
-            //cubes.back().ps.setUniMat4f("model", cubes.back().model());
             cubes.back().setUniModel();
             if((i + 1 )%5 == 0 && i != 0)
             {
@@ -72,7 +71,6 @@ namespace test{
         plane.UpdateMVP(proj, view);
         plane.SetDiffuseMap(2);
         plane.SetSpecularMap(3);
-        //plane.ps.setUniMat4f("model", plane.model());
         plane.setUniModel();
 
         light->SetPos(1,1, 4);
