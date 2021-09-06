@@ -24,6 +24,10 @@ Light::Light() : Cube(),
 }
 
 
+void Light::setCubeColor()
+{
+        ps.setUniVec3("aColor", lightColor);
+}
 
 
 PhongLight::PhongLight() : ambientInf(1.0f),

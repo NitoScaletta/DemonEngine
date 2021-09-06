@@ -4,7 +4,16 @@
 
 namespace test{
 
-
+    void updateCube(Cube* cube, Flashlight* light, Camera* camera,
+                    glm::mat4 *proj, glm::mat4 *view)
+    {
+        Timer timer("cube  update");
+        cube->UpdateMVP(*proj, *view);
+        cube->setUniFlashlight(light);
+        cube->setUniLight(light);
+        cube->setUniMaterial(light->lightColor);
+        cube->setCameraPosition(camera);
+    }
 
     TestDirLight::TestDirLight(GLFWwindow* wind, Camera* cam) : window(wind),
                                                                 size(100),
@@ -27,6 +36,7 @@ namespace test{
                 for(int i = 0; i <4; i++)
                     t_futures[i].wait();
             }
+
             texture1. DataSet("container2.png", GL_TEXTURE0, &data[0]);
             specular1.DataSet("vc.png", GL_TEXTURE1,    &data[1]);
             texture2. DataSet("wall.jpg", GL_TEXTURE2,  &data[2]);
@@ -36,7 +46,9 @@ namespace test{
             texture2.active();
             specular2.active();
         }
-        else{
+
+        else
+        {
             texture1.Set("container2.png", GL_TEXTURE0);
             specular1.Set("vc.png", GL_TEXTURE1);
             texture2.Set("wall.jpg", GL_TEXTURE2);
@@ -47,6 +59,7 @@ namespace test{
             texture2.active();
             specular2.active();
         }
+
         proj = core::proj3d(4/3);
         view = camera->view();
 
@@ -59,12 +72,12 @@ namespace test{
             cubes.back().SetDiffuseMap(0);
             cubes.back().SetSpecularMap(1);
             cubes.back().setUniModel();
+
             if((i + 1 )%5 == 0 && i != 0)
             {
                 y++;
                 x = 0;}
             else x++;
-
         }
 
         plane.SetPos(0, -1.0f, 0);
@@ -86,7 +99,7 @@ namespace test{
         view = camera-> view();
         light->UpdateMVP(proj, view);
         light->setOptions( constant, linear, quadratic);
-        light->ps.setUniVec3("aColor", light->lightColor);
+        std::future<void> vecFuture[4];
 
         for(int i =0; i < size; i++)
         {
@@ -132,5 +145,6 @@ namespace test{
         ImGui::SliderFloat("cutoffoffset", &light->fade, 0, 10);
         ImGui::SliderFloat("linaer", &linear, 0, 0.5f);
         ImGui::SliderFloat("quadratic", &quadratic, 0, 0.5f);
+        ImGui::ColorEdit3("color", &light->lightColor.x);
     }
 }

@@ -35,11 +35,8 @@ add_library(imgui   vendor/imgui/imgui.cpp
                     vendor/imgui/backends/imgui_impl_glfw.cpp
                     )
 
-add_library(test    src/testClearColor.cpp
-                    src/test.cpp
-                    src/test/TestLight.cpp
+add_library(test    src/test.cpp
                     src/test/TestDirLight.cpp
-
                     )
 #exec
 add_executable (LearnOpenGL src/app.cpp)

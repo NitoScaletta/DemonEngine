@@ -13,16 +13,15 @@ class Camera;
 class Shape
 {
         public:
-                ShaderProgram ps;
                 glm::mat4 Model;
                 bool shouldbeDraw;
                 Material material;
                 glm::vec3 pos;
                 glm::vec3 scale;
-                glm::mat4 model();
 
                 Shape() : shouldbeDraw(true){};
                 ~Shape(){};
+                glm::mat4 model();
                 void draw(Renderer* rend);
                 void SetTexture(unsigned int texture_id);
                 void SetDiffuseMap(unsigned int texture_id);
@@ -36,6 +35,7 @@ class Shape
                 void setUniMaterial(glm::vec3 lightColor, glm::vec3 spec = glm::vec3(1.0f));
                 void setCameraPosition(Camera* camera);
                 void setUniModel();
+                void SetScale(float Scale);
 
         protected:
                 std::string name;
@@ -43,6 +43,7 @@ class Shape
                 VertexArray vao;
                 VertexBuffer vbo;
                 ElementBuffer ebo;
+                ShaderProgram ps;
                 Shader vs, fs;
                 glm::vec3 rotation;
 };
@@ -58,7 +59,6 @@ class Cube : public Shape
                 ~Cube();
 
                 void unbind();
-                void SetScale(float Scale);
         private:
                 Vertex vertArr[24];
                 void CreateBuffer();

@@ -12,6 +12,7 @@ class Light : public Cube
         Light();
         ~Light(){};
         glm::vec3 lightColor;
+        void setCubeColor();
 };
 
 class  PhongLight : public Light

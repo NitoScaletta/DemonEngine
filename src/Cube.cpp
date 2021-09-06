@@ -3,7 +3,6 @@
 #include "Light.h"
 
 
-
 void Shape::SetPos(float x, float y, float z)
 {
     pos = glm::vec3(x,y,z);
@@ -14,7 +13,6 @@ void Shape::SetTexture(unsigned int texture_id)
 {
     ps.setUnifi("texture1", texture_id);
 }
-
 
 void Shape::SetDiffuseMap(unsigned int texture_id)
 {
@@ -28,8 +26,6 @@ void Shape::SetSpecularMap(unsigned int texture_id)
 
 glm::mat4 Shape::model()
 {
-    Model = glm::scale(glm::mat4(1.0f), scale);
-    Model = glm::translate(glm::mat4(1.0f), pos);
     return Model;
 }
 
@@ -89,6 +85,11 @@ void Shape::setUniFlashlight(Flashlight* light)
     ps.setUniff("light.cutoffouter", glm::cos(glm::radians(light->cutOff+light->fade)));
 }
 
+void Shape::UpdateMVP(glm::mat4 proj,glm::mat4 view){
+    glm::mat4  mvp = proj * view * Model;
+    ps.setUniMat4f("aMVP", mvp);
+}
+
 
 void Shape::draw(Renderer* rend)
 {
@@ -130,12 +131,8 @@ Cube::Cube(const char* vertexshader)
     vs.initShader(VertexType::VERTEX);
     fs.initShader(VertexType::FRAGMENT);
     std::string s1 = "vertex.txt", s2 = vertexshader;
-    //t1 = std::async(std::launch::async, readfile,  &vs, s1 );
-    //t2 = std::async(std::launch::async, readfile,  &fs, s2 );
     vs.readSourceFile("vertex.txt");
     fs.readSourceFile(vertexshader);
-    //t1.wait();
-    //t2.wait();
     ps.compileShader(vs.id, fs.id);
     Model = glm::mat4(0.0f);
     material.shininess = 32.0f;
@@ -233,15 +230,10 @@ void Cube::CreateBuffer()
 
 
 
-void Cube::SetScale(float Scale)
+void Shape::SetScale(float Scale)
 {
     scale = glm::vec3(Scale);
-}
-
-void Shape::UpdateMVP(glm::mat4 proj,glm::mat4 view){
-    glm::mat4  mvp = proj * view * model();
-    ps.setUniMat4f("aMVP", mvp);
-
+    Model = glm::scale(Model, scale);
 }
 
 void Cube::unbind()

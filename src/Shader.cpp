@@ -1,5 +1,6 @@
 #include "glad/glad.h"
 #include "include/Shader.h"
+#include "CoreFun.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
