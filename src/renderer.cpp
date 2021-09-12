@@ -33,11 +33,11 @@ GLFWwindow* Renderer::CreateWindow(unsigned int x, unsigned int y)
         return NULL;
     }
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(x, y, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(x, y, "DemonEngine", NULL, NULL);
     if (!window)
     {
         std::cout << "Impossibile creare finestra glfw" << std::endl;
