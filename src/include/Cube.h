@@ -55,7 +55,7 @@ class Cube : public Shape
 {
         public:
                 Cube(){};
-                Cube(const char* vertexshader);
+                Cube(const char* fragmentshader);
                 ~Cube();
 
                 void unbind();

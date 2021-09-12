@@ -115,7 +115,7 @@ void readfile(Shader* shader, std::string str)
 
 
 Cube::~Cube(){}
-Cube::Cube(const char* vertexshader)
+Cube::Cube(const char* fragmentshader)
 {
     name = "cube";
     std::vector<int> indices;
@@ -127,12 +127,10 @@ Cube::Cube(const char* vertexshader)
     vbo.bindDynamic(24);
     vbo.loadDynamic(0, sizeof(vertArr), vertArr);
     vao.newLayoutDynamic();
-    std::future<void> t1, t2;
     vs.initShader(VertexType::VERTEX);
     fs.initShader(VertexType::FRAGMENT);
-    std::string s1 = "vertex.txt", s2 = vertexshader;
     vs.readSourceFile("vertex.txt");
-    fs.readSourceFile(vertexshader);
+    fs.readSourceFile(fragmentshader);
     ps.compileShader(vs.id, fs.id);
     Model = glm::mat4(0.0f);
     material.shininess = 32.0f;
