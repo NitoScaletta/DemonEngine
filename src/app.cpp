@@ -3,6 +3,7 @@
 #include "test/TestDirLight.h"
 #include "test/TestLight.h"
 #include "test/TestPointLight.h"
+#include "test/TestMultiLight.h"
 #include "Camera.h"
 #include "Timer.h"
 
@@ -36,7 +37,8 @@ int main(void)
     const char* glsl_version = "#version 430";
     window = renderer.CreateWindow(SCR_X, SCR_Y);
     renderer.init();
-    test::TestDirLight tst(window, camera);
+    // test::TestMultiLight tst(window, camera);
+    test::TestMultiLight tst( camera, window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mousecall);
     //tst.passWindow(window);

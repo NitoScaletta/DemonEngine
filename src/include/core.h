@@ -16,6 +16,7 @@
 #include "Shader.h"
 #include "glObjects.h"
 #include "renderer.h"
+#include "Timer.h"
 
 
 #endif // CORE_H_

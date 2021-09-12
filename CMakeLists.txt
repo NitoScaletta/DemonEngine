@@ -37,6 +37,7 @@ add_library(imgui   vendor/imgui/imgui.cpp
 
 add_library(test    src/test.cpp
                     src/test/TestDirLight.cpp
+                    src/test/TestMultiLight.cpp
                     )
 #exec
 add_executable (LearnOpenGL src/app.cpp)
