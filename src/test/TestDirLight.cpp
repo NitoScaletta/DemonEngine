@@ -25,40 +25,23 @@ namespace test{
         constant = 1;
         linear = 0.09f;
         quadratic = 0.032f;
-        bool asy = true;
-        if(asy)
+        std::string te[] = {"container2.png", "vc.png", "wall.jpg", "walls.jpg"};
         {
-            std::string te[] = {"container2.png", "vc.png", "wall.jpg", "walls.jpg"};
-            {
-                for(int i = 0; i <4; i++)
-                    t_futures.push_back(std::async(std::launch::async, texture::loadText,
-                                                   &data[i], te[i]));
-                for(int i = 0; i <4; i++)
-                    t_futures[i].wait();
-            }
-
-            texture1. DataSet("container2.png", GL_TEXTURE0, &data[0]);
-            specular1.DataSet("vc.png", GL_TEXTURE1,    &data[1]);
-            texture2. DataSet("wall.jpg", GL_TEXTURE2,  &data[2]);
-            specular2.DataSet("walls.jpg", GL_TEXTURE3, &data[3]);
-            texture1.active();
-            specular1.active();
-            texture2.active();
-            specular2.active();
+            for(int i = 0; i <4; i++)
+                t_futures.push_back(std::async(std::launch::async, texture::loadText,
+                                                &data[i], te[i]));
+            for(int i = 0; i <4; i++)
+                t_futures[i].wait();
         }
 
-        else
-        {
-            texture1.Set("container2.png", GL_TEXTURE0);
-            specular1.Set("vc.png", GL_TEXTURE1);
-            texture2.Set("wall.jpg", GL_TEXTURE2);
-            specular2.Set("walls.jpg", GL_TEXTURE3);
-            core::msg("loading into gl");
-            texture1.active();
-            specular1.active();
-            texture2.active();
-            specular2.active();
-        }
+        texture1. DataSet("container2.png", GL_TEXTURE0, &data[0]);
+        specular1.DataSet("vc.png", GL_TEXTURE1,    &data[1]);
+        texture2. DataSet("wall.jpg", GL_TEXTURE2,  &data[2]);
+        specular2.DataSet("walls.jpg", GL_TEXTURE3, &data[3]);
+        texture1.active();
+        specular1.active();
+        texture2.active();
+        specular2.active();
 
         proj = core::proj3d(4/3);
         view = camera->view();
