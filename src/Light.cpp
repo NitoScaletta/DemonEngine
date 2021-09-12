@@ -11,7 +11,7 @@ Light::Light() : Cube(),
     vao.bind();
     ebo.bind();
     ebo.set(indices.data(), sizeof(int)*indices.size());
-    vbo.bindDynamic(100);
+    vbo.bindDynamic(24);
     vbo.loadDynamic(0, sizeof(Vertex)*vertices.size(), vertices.data());
     vao.newLayoutDynamic();
     vs.initShader(VertexType::VERTEX);

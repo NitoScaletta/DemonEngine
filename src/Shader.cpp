@@ -29,7 +29,7 @@ void Shader::checkLog(){
     if(!success)
     {
         glGetShaderInfoLog(id, 2048, NULL, infoLog);
-        std::cout<< "ERRORE COMOPILAZIONE SHADER" << std::endl << infoLog << std::endl;
+        std::cout<< pathtosource <<"-----> ERRORE COMOPILAZIONE SHADER" << std::endl << infoLog << std::endl;
     }
 
 }
@@ -41,6 +41,7 @@ void Shader::compileShader()
     checkLog();
 }
 void Shader::readSourceFile(const char*  path){
+    pathtosource = path;
     std::ifstream file;
     if(file){
         std::stringstream buffer;
@@ -91,7 +92,7 @@ void ShaderProgram::checkLog(){
     {
         char infoLog[2048];
         glGetShaderInfoLog(id, 2048, NULL, infoLog);
-        std::cout<< "ERRORE COMOPILAZIONE PROGRAM SHADER"<< std::endl << infoLog << std::endl;
+        std::cout<<" ERRORE COMOPILAZIONE PROGRAM SHADER"<< std::endl << infoLog << std::endl;
     }
 }
 

@@ -234,6 +234,11 @@ void Shape::SetScale(float Scale)
     Model = glm::scale(Model, scale);
 }
 
+ShaderProgram* Shape::getPS() 
+{
+       return &ps; 
+}
+
 void Cube::unbind()
 {
     vao.unbind();

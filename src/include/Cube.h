@@ -36,6 +36,7 @@ class Shape
                 void setCameraPosition(Camera* camera);
                 void setUniModel();
                 void SetScale(float Scale);
+                ShaderProgram* getPS();
 
         protected:
                 std::string name;

@@ -4,6 +4,7 @@
 #include "core.h"
 #include "Cube.h"
 #include "CoreFun.h"
+#include "Light.h"
 
 
 namespace test
@@ -16,8 +17,10 @@ namespace test
         void onRender() override;
         void onImGuiRender() override;
 
-
         Cube* cube;
+        Plane* plane;
+        DirectionalLight* light;
+        
         glm::mat4 proj, view;
         Camera* camera;
 

@@ -11,6 +11,7 @@ class Shader{
     public:
         unsigned int id;
         const char *source;
+        std::string pathtosource;
 
     private:
         void checkLog();
