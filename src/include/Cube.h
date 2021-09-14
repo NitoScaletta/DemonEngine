@@ -31,6 +31,7 @@ class Shape
                 void setUniLight(PhongLight* light);
                 void setUniDirLight(DirectionalLight* light);
                 void setUniPointLight(PointLight* light);
+                void setUniPointLightArray(PointLight* light, int n);
                 void setUniFlashlight(Flashlight* light);
                 void setUniMaterial(glm::vec3 lightColor, glm::vec3 spec = glm::vec3(1.0f));
                 void setCameraPosition(Camera* camera);

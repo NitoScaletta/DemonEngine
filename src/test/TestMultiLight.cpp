@@ -1,7 +1,8 @@
 #include "TestMultiLight.h"
 namespace test
 {
-    TestMultiLight::TestMultiLight(Camera* cam, GLFWwindow * window) : camera(cam) 
+    TestMultiLight::TestMultiLight(Camera* cam, GLFWwindow * window) :  camera(cam),
+                                                                        n_pointlight(4) 
     {
         Timer timer("MultiLight");
 
@@ -10,6 +11,7 @@ namespace test
         texture[1].Set("vc.png", GL_TEXTURE1);
         texture[0].active();
         texture[1].active();
+        glEnable(GL_DEPTH_TEST);
 
 
 
@@ -21,15 +23,19 @@ namespace test
         cube->SetScale(2);
         cube->SetDiffuseMap(0);
         cube->SetSpecularMap(1);
-        //cube->setUniModel();
         cube->UpdateMVP(proj, view);
-        // cube->getPS()->setUniVec3("aColor",glm::vec3(0.4f, 0.3f, 0.1f));
+        cube->setUniModel();
 
-        light = new DirectionalLight;
-        light->SetPos(0, 0, -3);
-        light->UpdateMVP(proj, view);
-        light->SetDir(glm::vec3(1.0f));
-        light->ambientInf = 0.2f;
+        dirlight = new DirectionalLight;
+        dirlight->SetDir(glm::vec3(1.0f));
+        dirlight->UpdateMVP(proj,view);
+
+        for(int i = 0; i<n_pointlight; i++)
+        {
+            pointlight.push_back(PointLight());
+            pointlight.back().SetPos((i*2) - 4, 0, -7);
+            pointlight.back().UpdateMVP(proj, view);
+        }
 
 
         plane = new Plane;
@@ -43,31 +49,45 @@ namespace test
     void TestMultiLight::onUpdate(float deltatime) 
     {
         view = camera->view();
-        // cube->setCameraPosition(camera);
         cube->UpdateMVP(proj, view);
-        cube->setUniDirLight(light);
+        cube->setUniDirLight(dirlight);
+        // cube->setUniPointLight(pointlight);
+        cube->setUniPointLightArray(pointlight.data(), n_pointlight);
+        cube->setCameraPosition(camera);
+        cube->setUniMaterial(dirlight->lightColor);
+
+        for(int i = 0; i < pointlight.size(); i++)
+        {
+            pointlight[i].UpdateMVP(proj, view);
+        }
     
         plane->UpdateMVP(proj,view);
-
-        light->UpdateMVP(proj, view);
         camera->statusController();
     }
     
     void TestMultiLight::onRender() 
     {
-        glEnable(GL_DEPTH_TEST);
         glClearColor(0.3f,0.5f, 0.6f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         Renderer* renderer;
         cube->draw(renderer);
-        light->draw(renderer);
         plane->draw(renderer);
+        for(int i= 0; i <pointlight.size(); i++)
+            pointlight[i].draw(renderer);
     }
     
     void TestMultiLight::onImGuiRender() 
     {
-        ImGui::SliderFloat("ambient inf", &light->ambientInf, 0.0f, 1.0f);
-        ImGui::SliderFloat("diffuse inf", &light->diffuseInf, 0.0f, 1.0f);
-        ImGui::SliderFloat3("direction", &light->direction.x, 0.0f,1.0f);
+        ImGui::SliderFloat ("directional light ambient inf", &dirlight->ambientInf, 0.0f, 1.0f);
+        ImGui::SliderFloat ("directional light diffuse inf", &dirlight->diffuseInf, 0.0f, 1.0f);
+        ImGui::SliderFloat3("directional light direction",  &dirlight->direction.x, 0.0f, 1.0f);
+
+        // ImGui::SliderFloat ("point light ambient inf", &pointlight->ambientInf, 0.0f, 1.0f);
+        // ImGui::SliderFloat ("point light diffuse inf", &pointlight->diffuseInf, 0.0f, 1.0f);
+        // ImGui::SliderFloat ("point light linear", &pointlight->linear, 0.0f, 0.1f);
+        // ImGui::SliderFloat ("point light quadratic", &pointlight->quadratic, 0.0f, 0.1f);
+
+        ImGui::SliderFloat ("Material shininess", &cube->material.shininess, 0.0f, 256.0f);
+        ImGui::SliderFloat3("point light pos", vec, -4,4);
     }
 }

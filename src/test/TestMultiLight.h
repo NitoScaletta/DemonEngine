@@ -5,6 +5,7 @@
 #include "Cube.h"
 #include "CoreFun.h"
 #include "Light.h"
+#include <vector>
 
 
 namespace test
@@ -19,9 +20,12 @@ namespace test
 
         Cube* cube;
         Plane* plane;
-        DirectionalLight* light;
+        DirectionalLight* dirlight;
+        std::vector<PointLight> pointlight;
         
         glm::mat4 proj, view;
+        float vec[3] = {0,0,0};
+        int n_pointlight;
         Camera* camera;
 
     };

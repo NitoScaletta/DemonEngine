@@ -13,6 +13,7 @@ class Light : public Cube
         ~Light(){};
         glm::vec3 lightColor;
         void setCubeColor();
+        virtual void print(){};
 };
 
 class  PhongLight : public Light
@@ -44,11 +45,13 @@ class DirectionalLight : public PhongLight
 class PointLight : public PhongLight
 {
         public:
-                float constant, linear, quadratic;
+                float  linear, quadratic;
+                const float constant = 1;
 
-                PointLight() : constant(1), linear(1), quadratic(1) {}
+                PointLight() : linear(0.09f), quadratic(0.034f) {}
                 ~PointLight(){};
-                void setOptions(float con, float lin, float quadrac);
+                void setOptions(float lin, float quadrac);
+                void print() override;
 
 };
 

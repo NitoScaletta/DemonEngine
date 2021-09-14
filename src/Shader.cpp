@@ -29,7 +29,7 @@ void Shader::checkLog(){
     if(!success)
     {
         glGetShaderInfoLog(id, 2048, NULL, infoLog);
-        std::cout<< pathtosource <<"-----> ERRORE COMOPILAZIONE SHADER" << std::endl << infoLog << std::endl;
+        std::cout<< pathtosource <<" ----> ERRORE COMOPILAZIONE SHADER" << std::endl << infoLog << std::endl;
     }
 
 }
@@ -146,7 +146,7 @@ int ShaderProgram::getUniLocation(const char* name){
         return uniformCache[name];
 
     int location = glGetUniformLocation(id, name);
-    if (location == -1 && errors  < 2)
+    if (location == -1 && errors  < 10)
     {
         std::cout << "UNIFORM " << name << " NOT FOUND" << std::endl;
         errors++;

@@ -23,7 +23,6 @@ Light::Light() : Cube(),
     Model = glm::mat4(1.0f);
 }
 
-
 void Light::setCubeColor()
 {
         ps.setUniVec3("aColor", lightColor);
@@ -61,11 +60,19 @@ void DirectionalLight::SetDir(glm::vec3 dir)
 }
 
 
-void PointLight::setOptions(float con, float lin, float quadra)
+void PointLight::setOptions(float lin, float quadra)
 {
-    constant = con;
     linear = lin;
     quadratic = quadra;
+}
+
+void PointLight::print() 
+{
+      core::printvec("[point light][position]        ", pos); 
+      core::printvec("[point light][Ambient light]   ", ambientColor);
+      core::printvec("[point light][Diffuse light]   ", diffuseColor);
+      std::cout<<    "[point light][linear]          " << linear << std::endl;
+      std::cout<<    "[point light][quadratic]:      " << quadratic << std::endl;
 }
 
 

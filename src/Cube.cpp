@@ -48,23 +48,41 @@ void Shape::setUniLight(PhongLight* light)
 void Shape::setUniDirLight(DirectionalLight* light)
 {
             light->update();
-            ps.setUniVec3("light.ambient",  light->ambientColor);
-            ps.setUniVec3("light.diffuse",  light->diffuseColor);
-            ps.setUniVec3("light.direction", light->direction);
-            ps.setUniVec3("light.specular", light->specular );
+            ps.setUniVec3("dirlight.ambient",  light->ambientColor);
+            ps.setUniVec3("dirlight.diffuse",  light->diffuseColor);
+            ps.setUniVec3("dirlight.direction", light->direction);
+            ps.setUniVec3("dirlight.specular", light->specular );
 }
 
 
 void Shape::setUniPointLight(PointLight* light)
 {
             light->update();
-            ps.setUniVec3("light.position", light->pos);
-            ps.setUniVec3("light.ambient",  light->ambientColor);
-            ps.setUniVec3("light.diffuse",  light->diffuseColor);
-            ps.setUniVec3("light.specular", light->specular );
-            ps.setUniff("light.constant", light->constant);
-            ps.setUniff("light.linear", light->linear);
-            ps.setUniff("light.quadratic", light->quadratic);
+            ps.setUniVec3("pointlight.position", light->pos);
+            ps.setUniVec3("pointlight.ambient",  light->ambientColor);
+            ps.setUniVec3("pointlight.diffuse",  light->diffuseColor);
+            ps.setUniVec3("pointlight.specular", light->specular );
+            ps.setUniff  ("pointlight.constant", light->constant);
+            ps.setUniff  ("pointlight.linear", light->linear);
+            ps.setUniff  ("pointlight.quadratic", light->quadratic);
+}
+
+void Shape::setUniPointLightArray(PointLight* light, int n)
+{
+        std::string pointlight;
+        // for(int i = 0; i < n; i++)
+        // {
+            light[0].update();
+            pointlight = "pointlight["+std::to_string(0)+"].";
+            ps.setUniVec3(std::string(pointlight+"position").c_str(), light[0].pos);
+            ps.setUniVec3(std::string(pointlight+"ambient").c_str(),  light[0].ambientColor);
+            ps.setUniVec3(std::string(pointlight+"diffuse").c_str(),  light[0].diffuseColor);
+            ps.setUniVec3(std::string(pointlight+"specular").c_str(), light[0].specular );
+            ps.setUniff  (std::string(pointlight+"constant").c_str(), light[0].constant);
+            ps.setUniff  (std::string(pointlight+"linear").c_str(),   light[0].linear);
+            ps.setUniff  (std::string(pointlight+"quadratic").c_str(),light[0].quadratic);
+            light[0].print();
+        // }
 }
 
 
