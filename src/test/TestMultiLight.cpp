@@ -34,6 +34,7 @@ namespace test
         {
             pointlight.push_back(PointLight());
             pointlight.back().SetPos((i*2) - 4, 0, -7);
+            light_position[i] = pointlight.back().pos;
             pointlight.back().UpdateMVP(proj, view);
         }
 
@@ -59,6 +60,8 @@ namespace test
         for(int i = 0; i < pointlight.size(); i++)
         {
             pointlight[i].UpdateMVP(proj, view);
+            pointlight[i].SetPos(light_position[i]);
+            pointlight[i].setCubeColor();
         }
     
         plane->UpdateMVP(proj,view);
@@ -82,12 +85,19 @@ namespace test
         ImGui::SliderFloat ("directional light diffuse inf", &dirlight->diffuseInf, 0.0f, 1.0f);
         ImGui::SliderFloat3("directional light direction",  &dirlight->direction.x, 0.0f, 1.0f);
 
-        // ImGui::SliderFloat ("point light ambient inf", &pointlight->ambientInf, 0.0f, 1.0f);
-        // ImGui::SliderFloat ("point light diffuse inf", &pointlight->diffuseInf, 0.0f, 1.0f);
-        // ImGui::SliderFloat ("point light linear", &pointlight->linear, 0.0f, 0.1f);
-        // ImGui::SliderFloat ("point light quadratic", &pointlight->quadratic, 0.0f, 0.1f);
+        for(int i = 0; i < n_pointlight; i++)
+        {
+            if (ImGui::CollapsingHeader(std::string("light n "+std::to_string(i)).c_str()))
+            {
+                ImGui::ColorEdit3(std::string  ("color "                 +std::to_string(i)).c_str(),  &pointlight[i].lightColor.x);
+                ImGui::SliderFloat (std::string("point light ambient inf"+std::to_string(i)).c_str(),  &pointlight[i].ambientInf, 0.0f, 1.0f);
+                ImGui::SliderFloat (std::string("point light diffuse inf"+std::to_string(i)).c_str(),  &pointlight[i].diffuseInf, 0.0f, 1.0f);
+                ImGui::SliderFloat (std::string("point light linear"     +std::to_string(i)).c_str(),  &pointlight[i].linear, 0.0f, 0.1f);
+                ImGui::SliderFloat (std::string("point light quadratic"  +std::to_string(i)).c_str(),  &pointlight[i].quadratic, 0.0f, 0.1f);
+                ImGui::SliderFloat3(std::string("position"               +std::to_string(i)).c_str(),  &light_position[i].x, -8.0f, 8.0f);
+            }
+        }
 
         ImGui::SliderFloat ("Material shininess", &cube->material.shininess, 0.0f, 256.0f);
-        ImGui::SliderFloat3("point light pos", vec, -4,4);
     }
 }

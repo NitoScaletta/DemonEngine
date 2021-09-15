@@ -27,6 +27,7 @@ class Shape
                 void SetDiffuseMap(unsigned int texture_id);
                 void SetSpecularMap(unsigned int texture_id);
                 void SetPos(float x = 0.0f, float y = 0.0f, float z =0.0f);
+                void SetPos(const glm::vec3& vec);
                 void UpdateMVP(glm::mat4 proj,glm::mat4 view);
                 void setUniLight(PhongLight* light);
                 void setUniDirLight(DirectionalLight* light);

@@ -141,11 +141,11 @@ void ShaderProgram::setUniVec3(const char *name, glm::vec3 vect)
 }
 
 
-int ShaderProgram::getUniLocation(const char* name){
+int ShaderProgram::getUniLocation(std::string name){
     if(uniformCache.find(name) != uniformCache.end())
         return uniformCache[name];
 
-    int location = glGetUniformLocation(id, name);
+    int location = glGetUniformLocation(id, name.c_str());
     if (location == -1 && errors  < 10)
     {
         std::cout << "UNIFORM " << name << " NOT FOUND" << std::endl;

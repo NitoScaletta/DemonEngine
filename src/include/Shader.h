@@ -40,10 +40,10 @@ class ShaderProgram{
         void setUniVec3(const char* name, glm::vec3 vect);
 
     private:
-        std::unordered_map<const char*, int> uniformCache;
+        std::unordered_map<std::string , int> uniformCache;
 
         void checkLog();
-        int getUniLocation(const char* name);
+        int getUniLocation(std::string name);
 
 };
 

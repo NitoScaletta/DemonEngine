@@ -1,11 +1,17 @@
 #include "Cube.h"
 #include "CoreFun.h"
 #include "Light.h"
+#include "string.h"
 
 
 void Shape::SetPos(float x, float y, float z)
 {
     pos = glm::vec3(x,y,z);
+    Model =  glm::translate(glm::mat4(1.0f), pos);
+}
+void Shape::SetPos(const glm::vec3& vec)
+{
+    pos = vec;
     Model =  glm::translate(glm::mat4(1.0f), pos);
 }
 
@@ -69,20 +75,39 @@ void Shape::setUniPointLight(PointLight* light)
 
 void Shape::setUniPointLightArray(PointLight* light, int n)
 {
-        std::string pointlight;
-        // for(int i = 0; i < n; i++)
-        // {
-            light[0].update();
-            pointlight = "pointlight["+std::to_string(0)+"].";
-            ps.setUniVec3(std::string(pointlight+"position").c_str(), light[0].pos);
-            ps.setUniVec3(std::string(pointlight+"ambient").c_str(),  light[0].ambientColor);
-            ps.setUniVec3(std::string(pointlight+"diffuse").c_str(),  light[0].diffuseColor);
-            ps.setUniVec3(std::string(pointlight+"specular").c_str(), light[0].specular );
-            ps.setUniff  (std::string(pointlight+"constant").c_str(), light[0].constant);
-            ps.setUniff  (std::string(pointlight+"linear").c_str(),   light[0].linear);
-            ps.setUniff  (std::string(pointlight+"quadratic").c_str(),light[0].quadratic);
-            light[0].print();
-        // }
+    
+        char pointlight[50], temp1[50], base[50];
+    
+        for(int i = 0; i < n; i++)
+        {
+            light[i].update();
+            strcpy(pointlight, "pointlight[");
+            strcpy(temp1, std::to_string(i).c_str());
+            strcat(temp1, "].");
+            strcat(pointlight, temp1);
+            strcpy(base,pointlight);
+            strcat(pointlight, "position");
+            ps.setUniVec3(pointlight, light[i].pos);
+            strcpy(pointlight, base);
+            strcat(pointlight, "ambient");
+            ps.setUniVec3(pointlight, light[i].ambientColor);
+            strcpy(pointlight, base);
+            strcat(pointlight, "diffuse");
+            ps.setUniVec3(pointlight, light[i].diffuseColor);
+            strcpy(pointlight, base);
+            strcat(pointlight, "specular");
+            ps.setUniVec3(pointlight, light[i].specular);
+            strcpy(pointlight, base);
+            strcat(pointlight, "constant");
+            ps.setUniff  (pointlight, light[i].constant);
+            strcpy(pointlight, base);
+            strcat(pointlight, "linear");
+            ps.setUniff  (pointlight, light[i].linear);
+            strcpy(pointlight, base);
+            strcat(pointlight, "quadratic");
+            ps.setUniff  (pointlight, light[i].quadratic);
+        
+       }
 }
 
 

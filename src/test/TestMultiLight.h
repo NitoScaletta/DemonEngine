@@ -22,9 +22,9 @@ namespace test
         Plane* plane;
         DirectionalLight* dirlight;
         std::vector<PointLight> pointlight;
+        glm::vec3 light_position[10];
         
         glm::mat4 proj, view;
-        float vec[3] = {0,0,0};
         int n_pointlight;
         Camera* camera;
 
