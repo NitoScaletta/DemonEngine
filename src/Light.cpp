@@ -29,7 +29,7 @@ void Light::setCubeColor()
 }
 
 
-PhongLight::PhongLight() : ambientInf(1.0f),
+PhongLight::PhongLight() : ambientInf(0.1f),
                            diffuseInf(0.5f),
                            specular(glm::vec3(1.0f))
 {

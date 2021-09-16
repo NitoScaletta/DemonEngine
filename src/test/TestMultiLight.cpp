@@ -2,7 +2,7 @@
 namespace test
 {
     TestMultiLight::TestMultiLight(Camera* cam, GLFWwindow * window) :  camera(cam),
-                                                                        n_pointlight(4) 
+                                                                        n_pointlight(10) 
     {
         Timer timer("MultiLight");
 
@@ -18,14 +18,23 @@ namespace test
         proj = core::proj3d(4/3);
         view = camera->view();
 
-        cube = new Cube("fragmentMulti.txt");
-        cube->SetPos(0,0,0);
-        cube->SetScale(2);
-        cube->SetDiffuseMap(0);
-        cube->SetSpecularMap(1);
-        cube->UpdateMVP(proj, view);
-        cube->setUniModel();
 
+        int x = 0, y =0;
+        for(int i = 0; i <  100; i++)
+        {
+            cubes.push_back(Cube("fragmentMulti.txt"));
+            cubes.back().SetPos(x,y,y);
+            cubes.back().SetDiffuseMap(0);
+            cubes.back().SetSpecularMap(1);
+            cubes.back().UpdateMVP(proj, view);
+            cubes.back().setUniModel();
+            if((i + 1 )%5 == 0 && i != 0)
+            {
+                y++;
+                x = 0;
+                }
+            else x++;
+        }
         dirlight = new DirectionalLight;
         dirlight->SetDir(glm::vec3(1.0f));
         dirlight->UpdateMVP(proj,view);
@@ -37,6 +46,10 @@ namespace test
             light_position[i] = pointlight.back().pos;
             pointlight.back().UpdateMVP(proj, view);
         }
+
+        flashlight = new Flashlight(camera);
+        flashlight->cutOff = 10.0f;
+        flashlight->fade = 5.0f;
 
 
         plane = new Plane;
@@ -50,12 +63,16 @@ namespace test
     void TestMultiLight::onUpdate(float deltatime) 
     {
         view = camera->view();
-        cube->UpdateMVP(proj, view);
-        cube->setUniDirLight(dirlight);
-        // cube->setUniPointLight(pointlight);
-        cube->setUniPointLightArray(pointlight.data(), n_pointlight);
-        cube->setCameraPosition(camera);
-        cube->setUniMaterial(dirlight->lightColor);
+        for(int i = 0; i<cubes.size(); i++)
+        {
+            cubes[i].UpdateMVP(proj, view);
+            cubes[i].setUniDirLight(dirlight);
+            cubes[i].setUniPointLightArray(pointlight.data(), n_pointlight);
+            cubes[i].setCameraPosition(camera);
+            cubes[i].setUniMaterial(dirlight->lightColor);
+            cubes[i].setUniFlashlight(flashlight);
+        }
+
 
         for(int i = 0; i < pointlight.size(); i++)
         {
@@ -73,7 +90,8 @@ namespace test
         glClearColor(0.3f,0.5f, 0.6f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         Renderer* renderer;
-        cube->draw(renderer);
+        for(int i = 0; i<cubes.size(); i++)
+            cubes[i].draw(renderer);
         plane->draw(renderer);
         for(int i= 0; i <pointlight.size(); i++)
             pointlight[i].draw(renderer);
@@ -81,9 +99,12 @@ namespace test
     
     void TestMultiLight::onImGuiRender() 
     {
-        ImGui::SliderFloat ("directional light ambient inf", &dirlight->ambientInf, 0.0f, 1.0f);
-        ImGui::SliderFloat ("directional light diffuse inf", &dirlight->diffuseInf, 0.0f, 1.0f);
-        ImGui::SliderFloat3("directional light direction",  &dirlight->direction.x, 0.0f, 1.0f);
+        if(ImGui::CollapsingHeader("DirectionalLight"))
+        {
+            ImGui::SliderFloat ("directional light ambient inf", &dirlight->ambientInf, 0.0f, 1.0f);
+            ImGui::SliderFloat ("directional light diffuse inf", &dirlight->diffuseInf, 0.0f, 1.0f);
+            ImGui::SliderFloat3("directional light direction",  &dirlight->direction.x, 0.0f, 1.0f);
+        }
 
         for(int i = 0; i < n_pointlight; i++)
         {
@@ -98,6 +119,15 @@ namespace test
             }
         }
 
-        ImGui::SliderFloat ("Material shininess", &cube->material.shininess, 0.0f, 256.0f);
+        if(ImGui::CollapsingHeader("Flash light"))
+        {
+            ImGui::SliderFloat ("flashlight ambient inf" , &flashlight->ambientInf, 0.0f, 1.0f);
+            ImGui::SliderFloat ("flashlight diffuse inf" , &flashlight->diffuseInf, 0.0f, 1.0f);
+            ImGui::SliderFloat ("flashlight linear"      , &flashlight->linear, 0.0f, 0.1f);
+            ImGui::SliderFloat ("flashlight quadratic"   , &flashlight->quadratic, 0.0f, 0.1f);
+            ImGui::SliderFloat ("flashlight  circle"     , &flashlight->cutOff, 0.0f, 0.1f);
+            ImGui::SliderFloat ("point light quadratic"  , &flashlight->fade, 0.1f, 10.0f);
+        }
+
     }
 }

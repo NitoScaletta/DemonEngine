@@ -55,7 +55,6 @@ namespace test{
             cubes.back().SetDiffuseMap(0);
             cubes.back().SetSpecularMap(1);
             cubes.back().setUniModel();
-
             if((i + 1 )%5 == 0 && i != 0)
             {
                 y++;

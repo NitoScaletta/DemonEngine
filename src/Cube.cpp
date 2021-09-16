@@ -116,16 +116,16 @@ void Shape::setUniFlashlight(Flashlight* light)
     light->direction = light->camera->cameraFront;
     light->pos = light->camera->cameraPosition;
     light->update();
-    ps.setUniVec3("light.position", light->pos);
-    ps.setUniVec3("light.ambient",  light->ambientColor);
-    ps.setUniVec3("light.diffuse",  light->diffuseColor);
-    ps.setUniVec3("light.specular", light->specular );
-    ps.setUniff("light.constant", light->constant);
-    ps.setUniff("light.linear", light->linear);
-    ps.setUniff("light.quadratic", light->quadratic);
-    ps.setUniVec3("light.direction", light->direction);
-    ps.setUniff("light.cutoff", glm::cos(glm::radians(light->cutOff)));
-    ps.setUniff("light.cutoffouter", glm::cos(glm::radians(light->cutOff+light->fade)));
+    ps.setUniVec3("spotlight.position",  light->pos);
+    ps.setUniVec3("spotlight.ambient",   light->ambientColor);
+    ps.setUniVec3("spotlight.diffuse",   light->diffuseColor);
+    ps.setUniVec3("spotlight.specular",  light->specular );
+    ps.setUniff  ("spotlight.constant",  light->constant);
+    ps.setUniff  ("spotlight.linear",    light->linear);
+    ps.setUniff  ("spotlight.quadratic", light->quadratic);
+    ps.setUniVec3("spotlight.direction", light->direction);
+    ps.setUniff  ("spotlight.cutoff", glm::cos(glm::radians(light->cutOff)));
+    ps.setUniff  ("spotlight.cutoffouter", glm::cos(glm::radians(light->cutOff+light->fade)));
 }
 
 void Shape::UpdateMVP(glm::mat4 proj,glm::mat4 view){

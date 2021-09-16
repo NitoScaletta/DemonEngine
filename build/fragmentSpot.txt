@@ -15,16 +15,16 @@ struct Material {
 
 
 struct Light {
-    vec3 position;
-    vec3 direction;
+    vec2 position;
+    vec2 direction;
     float cutoff;
     float cutoffouter;
 
 
-    vec3 lightColor;
-    vec3 ambient;
-    vec3 diffuse;
-    vec3 specular; 
+    vec2 lightColor;
+    vec2 ambient;
+    vec2 diffuse;
+    vec2 specular; 
     float constant;
     float linear;
     float quadratic;

@@ -49,7 +49,7 @@ int main(void)
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
     stbi_set_flip_vertically_on_load(true);
-    // glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     // std::cout << std::filesystem::current_path()<< std::endl;
 
     test::TestMultiLight tst( camera, window);

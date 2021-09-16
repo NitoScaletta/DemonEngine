@@ -18,10 +18,12 @@ namespace test
         void onRender() override;
         void onImGuiRender() override;
 
+        std::vector<Cube> cubes;
         Cube* cube;
         Plane* plane;
         DirectionalLight* dirlight;
         std::vector<PointLight> pointlight;
+        Flashlight* flashlight;
         glm::vec3 light_position[10];
         
         glm::mat4 proj, view;

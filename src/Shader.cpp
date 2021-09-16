@@ -146,7 +146,7 @@ int ShaderProgram::getUniLocation(std::string name){
         return uniformCache[name];
 
     int location = glGetUniformLocation(id, name.c_str());
-    if (location == -1 && errors  < 10)
+    if (location == -1 && errors  < 2)
     {
         std::cout << "UNIFORM " << name << " NOT FOUND" << std::endl;
         errors++;
