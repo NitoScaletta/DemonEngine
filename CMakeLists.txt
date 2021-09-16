@@ -1,16 +1,28 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.21)
 project(LearnOpenGL)
+set (CMAKE_CXX_STANDARD 20)
 #include_directories( ${OPENGL_INCLUDE_DIRS} )
 include_directories(include/)
 include_directories(src/include/)
 include_directories(vendor/imgui/)
+include_directories(vendor/assimp/include/)
 
 
 #GLFW config
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
+#ASSIMP
+SET (ASSIMP_BUILD_TESTS OFF)
+
+
+
 add_subdirectory(vendor/glfw)
+add_subdirectory(vendor/assimp)
+
+# set_property(TARGET assimp PROPERTY CMAKE_CXX_STANDARD 20)
+
 
 add_compile_definitions(IMGUI_IMPL_OPENGL_LOADER_GLAD)
 
@@ -34,6 +46,7 @@ add_library(imgui   vendor/imgui/imgui.cpp
                     vendor/imgui/backends/imgui_impl_opengl3.cpp
                     vendor/imgui/backends/imgui_impl_glfw.cpp
                     )
+                    
 
 add_library(test    src/test.cpp
                     src/test/TestDirLight.cpp
@@ -56,6 +69,7 @@ target_link_libraries(LearnOpenGL   libGL.so
                                     test
                                     core
                                     camera
+                                    assimp
                                     )
 
 target_link_libraries(renderer      GLAD
