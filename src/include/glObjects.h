@@ -8,21 +8,26 @@
 
 struct Vertex
 {
-        float positions[3];
-        float colors [4];
-        float textCoord[2];
+        glm::vec3 position;
+        glm::vec4 colors;
+        glm::vec2 textCoord;
         float textID;
-        float normal[3];
+        glm::vec3 normal;
 
         Vertex();
         Vertex(float _x, float _y);
         Vertex(float _x, float _y, float _z);
         ~Vertex();
         void setPos(float x, float y, float z);
+        void setPos(glm::vec3 pos);
         void setCol(float r, float g, float b, float a);
+        void setCol(glm::vec3 col, float a = 1.0f);
+        void setCol(glm::vec4 col);
         void setTCor(float x, float y);
+        void setTCor(glm::vec2 coords);
         void print();
         void setNormal(float x, float y, float z);
+        void setNormal(glm::vec3 norm);
 };
 
 class VertexArray{

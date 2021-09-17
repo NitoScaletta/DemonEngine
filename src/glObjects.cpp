@@ -249,37 +249,64 @@ Vertex::~Vertex(){
 }
 
 void Vertex::setPos(float x, float y, float z){
-    positions[0] = x;
-    positions[1] = y;
-    positions[2] = z;
+    position.x = x;
+    position.y = y;
+    position.z = z;
 }
+
+void Vertex::setPos(glm::vec3 pos)
+{
+    position = pos;
+}
+
 void Vertex::setCol(float r, float g, float b, float a){
-    colors[0] = r;
-    colors[1] = g;
-    colors[2] = b;
-    colors[3] = a;
+    colors.x = r;
+    colors.y = g;
+    colors.z = b;
+    colors.w = a;
+}
+
+void Vertex::setCol(glm::vec3 col, float a)
+{
+    colors = glm::vec4(col,a);
+}
+
+
+void Vertex::setCol(glm::vec4 col)
+{
+    colors = col;
 }
 
 void Vertex::setTCor(float x, float y){
-    textCoord[0] = x;
-    textCoord[1] = y;
+    textCoord.x = x;
+    textCoord.y = y;
+}
+
+
+void Vertex::setTCor(glm::vec2 tcoo)
+{
+    textCoord =  tcoo;
 }
 
 
 void Vertex::print()
 {
     static int _numbvertex = 0;
-    std::cout <<  ") x: " <<  positions[0] << " y: " << positions[1] << " z: " << positions[2] <<
-        "\tnormal: " <<") x: " <<  normal[0] << " y: " << normal[1] << " z: " << normal[2]
+    std::cout <<  ") x: " <<  position.x << " y: " << position.y << " z: " << position.z<<
+        "\tnormal: " <<") x: " <<  normal.x << " y: " << normal.y << " z: " << normal.z
               << std::endl;
 
 }
 
 void Vertex::setNormal(float x, float y, float z)
 {
-    normal[0] = x;
-    normal[1] = y;
-    normal[2] = z;
+    normal.x = x;
+    normal.y = y;
+    normal.z = z;
+}
+void Vertex::setNormal(glm::vec3 norm)
+{
+    normal = norm;
 }
 
 namespace texture
@@ -289,5 +316,4 @@ void loadText(TextureData* images, std::string path)
         images->data = stbi_load(path.c_str(), &images->width, &images->height,
                                  &images->nrChannels, 0);
     }
-
 }
