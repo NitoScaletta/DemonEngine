@@ -79,6 +79,7 @@ class ElementBuffer
 struct TextureData
 {
         int width, height, nrChannels;
+        std::string path;
         unsigned char *data;
 };
 
@@ -90,10 +91,9 @@ class Texture
                 void bind();
                 void active();
                 void Set(const char* path,unsigned int texture_unit);
-                void DataSet(const char* path,unsigned int texture_unit, TextureData* image);
+                void DataSet(unsigned int texture_unit, TextureData* image);
         private:
                 unsigned int id;
-                unsigned char *data;
                 int width, height, nrChannels;
                 int texture_id;
                 void LoadImage(const char* path);

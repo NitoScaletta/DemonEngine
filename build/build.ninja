@@ -81,17 +81,17 @@ build CMakeFiles/test.dir/src/test.cpp.o: CXX_COMPILER__test_Debug /home/enzo/co
   OBJECT_DIR = CMakeFiles/test.dir
   OBJECT_FILE_DIR = CMakeFiles/test.dir/src
 
-build CMakeFiles/test.dir/src/test/TestDirLight.cpp.o: CXX_COMPILER__test_Debug /home/enzo/coding/cpp/DemonEngine/src/test/TestDirLight.cpp || cmake_object_order_depends_target_test
+build CMakeFiles/test.dir/src/test/TestMultiLight.cpp.o: CXX_COMPILER__test_Debug /home/enzo/coding/cpp/DemonEngine/src/test/TestMultiLight.cpp || cmake_object_order_depends_target_test
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD
-  DEP_FILE = CMakeFiles/test.dir/src/test/TestDirLight.cpp.o.d
+  DEP_FILE = CMakeFiles/test.dir/src/test/TestMultiLight.cpp.o.d
   FLAGS = -g -std=gnu++20
   INCLUDES = -I/home/enzo/coding/cpp/DemonEngine/include -I/home/enzo/coding/cpp/DemonEngine/src/include -I/home/enzo/coding/cpp/DemonEngine/vendor/imgui -I/home/enzo/coding/cpp/DemonEngine/vendor/assimp/include
   OBJECT_DIR = CMakeFiles/test.dir
   OBJECT_FILE_DIR = CMakeFiles/test.dir/src/test
 
-build CMakeFiles/test.dir/src/test/TestMultiLight.cpp.o: CXX_COMPILER__test_Debug /home/enzo/coding/cpp/DemonEngine/src/test/TestMultiLight.cpp || cmake_object_order_depends_target_test
+build CMakeFiles/test.dir/src/test/TestModel.cpp.o: CXX_COMPILER__test_Debug /home/enzo/coding/cpp/DemonEngine/src/test/TestModel.cpp || cmake_object_order_depends_target_test
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD
-  DEP_FILE = CMakeFiles/test.dir/src/test/TestMultiLight.cpp.o.d
+  DEP_FILE = CMakeFiles/test.dir/src/test/TestModel.cpp.o.d
   FLAGS = -g -std=gnu++20
   INCLUDES = -I/home/enzo/coding/cpp/DemonEngine/include -I/home/enzo/coding/cpp/DemonEngine/src/include -I/home/enzo/coding/cpp/DemonEngine/vendor/imgui -I/home/enzo/coding/cpp/DemonEngine/vendor/assimp/include
   OBJECT_DIR = CMakeFiles/test.dir
@@ -105,7 +105,7 @@ build CMakeFiles/test.dir/src/test/TestMultiLight.cpp.o: CXX_COMPILER__test_Debu
 #############################################
 # Link the static library libtestd.a
 
-build libtestd.a: CXX_STATIC_LIBRARY_LINKER__test_Debug CMakeFiles/test.dir/src/test.cpp.o CMakeFiles/test.dir/src/test/TestDirLight.cpp.o CMakeFiles/test.dir/src/test/TestMultiLight.cpp.o
+build libtestd.a: CXX_STATIC_LIBRARY_LINKER__test_Debug CMakeFiles/test.dir/src/test.cpp.o CMakeFiles/test.dir/src/test/TestMultiLight.cpp.o CMakeFiles/test.dir/src/test/TestModel.cpp.o
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles/test.dir
   POST_BUILD = :
@@ -316,6 +316,14 @@ build CMakeFiles/core.dir/src/Timer.cpp.o: CXX_COMPILER__core_Debug /home/enzo/c
   OBJECT_DIR = CMakeFiles/core.dir
   OBJECT_FILE_DIR = CMakeFiles/core.dir/src
 
+build CMakeFiles/core.dir/src/Mesh.cpp.o: CXX_COMPILER__core_Debug /home/enzo/coding/cpp/DemonEngine/src/Mesh.cpp || cmake_object_order_depends_target_core
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD
+  DEP_FILE = CMakeFiles/core.dir/src/Mesh.cpp.o.d
+  FLAGS = -g -std=gnu++20
+  INCLUDES = -I/home/enzo/coding/cpp/DemonEngine/include -I/home/enzo/coding/cpp/DemonEngine/src/include -I/home/enzo/coding/cpp/DemonEngine/vendor/imgui -I/home/enzo/coding/cpp/DemonEngine/vendor/assimp/include
+  OBJECT_DIR = CMakeFiles/core.dir
+  OBJECT_FILE_DIR = CMakeFiles/core.dir/src
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target core
@@ -324,7 +332,7 @@ build CMakeFiles/core.dir/src/Timer.cpp.o: CXX_COMPILER__core_Debug /home/enzo/c
 #############################################
 # Link the static library libcored.a
 
-build libcored.a: CXX_STATIC_LIBRARY_LINKER__core_Debug CMakeFiles/core.dir/src/CoreFun.cpp.o CMakeFiles/core.dir/src/Cube.cpp.o CMakeFiles/core.dir/src/Light.cpp.o CMakeFiles/core.dir/src/Timer.cpp.o
+build libcored.a: CXX_STATIC_LIBRARY_LINKER__core_Debug CMakeFiles/core.dir/src/CoreFun.cpp.o CMakeFiles/core.dir/src/Cube.cpp.o CMakeFiles/core.dir/src/Light.cpp.o CMakeFiles/core.dir/src/Timer.cpp.o CMakeFiles/core.dir/src/Mesh.cpp.o
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles/core.dir
   POST_BUILD = :

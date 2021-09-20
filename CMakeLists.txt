@@ -34,7 +34,9 @@ add_library(renderer  src/renderer.cpp)
 add_library(core      src/CoreFun.cpp
                       src/Cube.cpp
                       src/Light.cpp
-                      src/Timer.cpp)
+                      src/Timer.cpp
+                      src/Mesh.cpp
+                      )
 
 add_library(camera src/Camera.cpp)
 
@@ -49,8 +51,8 @@ add_library(imgui   vendor/imgui/imgui.cpp
                     
 
 add_library(test    src/test.cpp
-                    src/test/TestDirLight.cpp
                     src/test/TestMultiLight.cpp
+                    src/test/TestModel.cpp
                     )
 #exec
 add_executable (LearnOpenGL src/app.cpp)

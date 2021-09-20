@@ -7,9 +7,6 @@
 #include "Camera.h"
 #include "Timer.h"
 #include <filesystem>
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
 
 const unsigned int SCR_X =1024;
 const unsigned int SCR_Y = 768;

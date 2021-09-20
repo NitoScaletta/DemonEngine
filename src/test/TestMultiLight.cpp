@@ -1,23 +1,37 @@
 #include "TestMultiLight.h"
+#include <future>
 namespace test
 {
     TestMultiLight::TestMultiLight(Camera* cam, GLFWwindow * window) :  camera(cam),
                                                                         n_pointlight(10) 
     {
         Timer timer("MultiLight");
-
-        Texture texture[2];
-        texture[0].Set("container2.png", GL_TEXTURE0);
-        texture[1].Set("vc.png", GL_TEXTURE1);
-        texture[0].active();
-        texture[1].active();
         glEnable(GL_DEPTH_TEST);
 
+        Texture texture[2];
+        std::string te[2] = {"container2.png", "vc.png"};
+        std::future<void> futures[2];
+        TextureData data[2];
+        futures[0] = std::async(std::launch::async, texture::loadText, &data[0], te[0]);
+        futures[1] = std::async(std::launch::async, texture::loadText, &data[1], te[1]);
+        futures[0].wait();
+        futures[1].wait();
 
+        texture[0].DataSet(GL_TEXTURE0, &data[0]);
+        texture[1].DataSet(GL_TEXTURE1, &data[1]);
+        texture[0].active();
+        texture[1].active();
+
+
+
+
+        //texture[0].Set("container2.png", GL_TEXTURE0);
+        //texture[1].Set("vc.png", GL_TEXTURE1);
+        //texture[0].active();
+        //texture[1].active();
 
         proj = core::proj3d(4/3);
         view = camera->view();
-
 
         int x = 0, y =0;
         for(int i = 0; i <  100; i++)

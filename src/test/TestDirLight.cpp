@@ -1,5 +1,4 @@
 #include "TestDirLight.h"
-#include <thread>
 #include "stb_image.h"
 
 namespace test{
