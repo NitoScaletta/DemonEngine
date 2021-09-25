@@ -9,12 +9,6 @@ namespace test{
         public:
             Test(){};
             virtual ~Test(){};
-            //VertexArray vao;
-            //VertexBuffer  vbo;
-            //ElementBuffer  ebo;
-            //Shader vs;
-            //Shader fs;
-            //ShaderProgram ps;
 
             virtual void onUpdate(float deltatime) {}
             virtual void onRender() {}

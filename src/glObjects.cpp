@@ -1,4 +1,4 @@
-#include "CoreFun.h"
+#include <CoreFun.h>
 #include "glObjects.h"
 #include "glad/glad.h"
 #include "Timer.h"
@@ -151,6 +151,7 @@ void Texture::active()
 void Texture::Set(const char* path, unsigned int texture_unit)
 {
     texture_id = texture_unit;
+    FilePath = path;
     glBindTexture(GL_TEXTURE_2D, id);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -170,6 +171,7 @@ void Texture::Set(const char* path, unsigned int texture_unit)
 
 void Texture::LoadImage(const char* path)
 {
+    int32_t width, height, nrChannels;
     unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
     if(data)
     {
@@ -184,7 +186,8 @@ void Texture::LoadImage(const char* path)
 
 void Texture::LoadImagePNG(const char* path)
 {
-        unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
+    int32_t width, height, nrChannels;
+    unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
     if(data)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -221,7 +224,12 @@ void Texture::DataSet( unsigned int texture_unit, TextureData* image)
                 stbi_image_free(image->data);
             }
     }
-    else core::msg("data not found");
+    else std::cout << "data not found" << std::endl;
+}
+
+void Texture::SetType(const char* typ) 
+{
+    type = typ;
 }
 
 
@@ -244,6 +252,13 @@ Vertex::Vertex(float _x, float _y, float _z)
         setTCor(1.0f, 1.0f);
         textID = 0.0f;
 }
+
+Vertex::Vertex(aiVector3D& pos) 
+{
+    position.x = pos.x;
+    position.y = pos.y;
+    position.z = pos.z;
+}
 Vertex::~Vertex(){
 
 }
@@ -257,6 +272,14 @@ void Vertex::setPos(float x, float y, float z){
 void Vertex::setPos(glm::vec3 pos)
 {
     position = pos;
+}
+
+void Vertex::setPos(aiVector3D& pos) 
+{
+    position.x = pos.x;
+    position.y = pos.y;
+    position.z = pos.z;
+    
 }
 
 void Vertex::setCol(float r, float g, float b, float a){
@@ -288,6 +311,12 @@ void Vertex::setTCor(glm::vec2 tcoo)
     textCoord =  tcoo;
 }
 
+void Vertex::setTCor(aiVector3D& coords) 
+{
+    textCoord.x = coords.x;
+    textCoord.y = coords.y;
+}
+
 
 void Vertex::print()
 {
@@ -307,6 +336,13 @@ void Vertex::setNormal(float x, float y, float z)
 void Vertex::setNormal(glm::vec3 norm)
 {
     normal = norm;
+}
+
+void Vertex::setNormal(aiVector3D& norm) 
+{
+    normal.x = norm.x;
+    normal.y = norm.y;
+    normal.z = norm.z;
 }
 
 namespace texture

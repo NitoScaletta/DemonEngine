@@ -4,6 +4,7 @@ set (CMAKE_CXX_STANDARD 20)
 #include_directories( ${OPENGL_INCLUDE_DIRS} )
 include_directories(include/)
 include_directories(src/include/)
+include_directories(src/test/include/)
 include_directories(vendor/imgui/)
 include_directories(vendor/assimp/include/)
 

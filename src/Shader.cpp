@@ -43,9 +43,9 @@ void Shader::compileShader()
 void Shader::readSourceFile(const char*  path){
     pathtosource = path;
     std::ifstream file;
+    file.open(path);
     if(file){
         std::stringstream buffer;
-        file.open(path);
         buffer << file.rdbuf();
         file.close();
         std::string code = buffer.str();
@@ -53,7 +53,7 @@ void Shader::readSourceFile(const char*  path){
         compileShader();
     }
     else{
-        std::cout << "file non trovato" << std::endl;
+        std::cout << path << "file non trovato" << std::endl;
     }
 }
 

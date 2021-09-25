@@ -18,7 +18,6 @@ Camera::Camera() :
                 speed(10.0f),
                 canFly(true)
 {
-
 }
 
 
