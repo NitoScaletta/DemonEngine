@@ -11,7 +11,7 @@ class Renderer
         GLFWwindow* wind;
         void draw(VertexArray& vao, ElementBuffer& ebo, ShaderProgram& ps);
         void init();
-        GLFWwindow* CreateWindow(unsigned int x,unsigned int y);
+        GLFWwindow* createWindow(unsigned int x,unsigned int y);
         void update();
 };
 

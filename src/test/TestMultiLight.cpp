@@ -23,14 +23,7 @@ namespace test
         texture[1].active();
 
 
-
-
-        //texture[0].Set("container2.png", GL_TEXTURE0);
-        //texture[1].Set("vc.png", GL_TEXTURE1);
-        //texture[0].active();
-        //texture[1].active();
-
-        proj = core::proj3d(4/3);
+        proj = core::proj3d(1);
         view = camera->view();
 
         int x = 0, y =0;

@@ -253,12 +253,12 @@ Vertex::Vertex(float _x, float _y, float _z)
         textID = 0.0f;
 }
 
-Vertex::Vertex(aiVector3D& pos) 
-{
-    position.x = pos.x;
-    position.y = pos.y;
-    position.z = pos.z;
-}
+//Vertex::Vertex(aiVector3D& pos) 
+//{
+//    position.x = pos.x;
+//    position.y = pos.y;
+//    position.z = pos.z;
+//}
 Vertex::~Vertex(){
 
 }
@@ -274,13 +274,13 @@ void Vertex::setPos(glm::vec3 pos)
     position = pos;
 }
 
-void Vertex::setPos(aiVector3D& pos) 
-{
-    position.x = pos.x;
-    position.y = pos.y;
-    position.z = pos.z;
-    
-}
+//void Vertex::setPos(aiVector3D& pos) 
+//{
+//    position.x = pos.x;
+//    position.y = pos.y;
+//    position.z = pos.z;
+//    
+//}
 
 void Vertex::setCol(float r, float g, float b, float a){
     colors.x = r;
@@ -311,11 +311,11 @@ void Vertex::setTCor(glm::vec2 tcoo)
     textCoord =  tcoo;
 }
 
-void Vertex::setTCor(aiVector3D& coords) 
-{
-    textCoord.x = coords.x;
-    textCoord.y = coords.y;
-}
+//void Vertex::setTCor(aiVector3D& coords) 
+//{
+//    textCoord.x = coords.x;
+//    textCoord.y = coords.y;
+//}
 
 
 void Vertex::print()
@@ -338,12 +338,12 @@ void Vertex::setNormal(glm::vec3 norm)
     normal = norm;
 }
 
-void Vertex::setNormal(aiVector3D& norm) 
-{
-    normal.x = norm.x;
-    normal.y = norm.y;
-    normal.z = norm.z;
-}
+//void Vertex::setNormal(aiVector3D& norm) 
+//{
+//    normal.x = norm.x;
+//    normal.y = norm.y;
+//    normal.z = norm.z;
+//}
 
 namespace texture
 {

@@ -6,9 +6,6 @@
 #include "stb_image.h"
 #include "glm/glm.hpp"
 
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
 
 struct Vertex
 {
@@ -19,23 +16,23 @@ struct Vertex
         glm::vec3 normal;
 
         Vertex();
-        Vertex(aiVector3D& pos);
+        //Vertex(aiVector3D& pos);
         Vertex(float _x, float _y);
         Vertex(float _x, float _y, float _z);
         ~Vertex();
-        void setPos(float x, float y, float z);
+        void setPos(float x, float y, float z = 1);
         void setPos(glm::vec3 pos);
-        void setPos(aiVector3D& pos);
+        //jvoid setPos(aiVector3D& pos);
         void setCol(float r, float g, float b, float a);
         void setCol(glm::vec3 col, float a = 1.0f);
         void setCol(glm::vec4 col);
         void setTCor(float x, float y);
         void setTCor(glm::vec2 coords);
-        void setTCor(aiVector3D& coords);
+        //void setTCor(aiVector3D& coords);
         void print();
         void setNormal(float x, float y, float z);
         void setNormal(glm::vec3 norm);
-        void setNormal(aiVector3D& norm);
+        //void setNormal(aiVector3D& norm);
 };
 
 class VertexArray{

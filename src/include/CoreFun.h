@@ -14,7 +14,7 @@ namespace core{
     glm::mat4 proj3d(float ratio);
     void msg(const char* mess);
     void printvec(const char* name,glm::vec3 v);
-    const char* vectostr(glm::vec3& v);
+    std::string vectostr(glm::vec3& v);
 }
 
 

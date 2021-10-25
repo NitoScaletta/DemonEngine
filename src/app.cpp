@@ -1,13 +1,12 @@
 #include "core.h"
 #include "CoreFun.h"
-#include <TestMultiLight.h>
-#include <TestModel.h>
+#include "TestBatch.h"
 #include "Camera.h"
 #include "Timer.h"
 #include <filesystem>
 
-const unsigned int SCR_X =1024;
-const unsigned int SCR_Y = 768;
+const unsigned int SCR_X = 1000;
+const unsigned int SCR_Y = 1000;
 const float scr_x = SCR_X;
 const float scr_y = SCR_Y;
 Camera* camera = new Camera();
@@ -34,12 +33,30 @@ int main(void)
     Renderer renderer;
     GLFWwindow* window;
     const char* glsl_version = "#version 430";
-    window = renderer.CreateWindow(SCR_X, SCR_Y);
+    if (!glfwInit())
+    {
+        std::cout << "errore" << std::endl;
+        return NULL;
+    }
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    window = glfwCreateWindow(SCR_X, SCR_Y, "DemonEngine", NULL, NULL);
+    if (!window)
+    {
+        std::cout << "Impossibile creare finestra glfw" << std::endl;
+        glfwTerminate();
+        return NULL;
+    }
+
+    /* Make the window's context current */
+    glfwMakeContextCurrent(window);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    
     renderer.init();
-    // test::TestMultiLight tst(window, camera);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mousecall);
-    //tst.passWindow(window);
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -47,12 +64,11 @@ int main(void)
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
     stbi_set_flip_vertically_on_load(true);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-    // std::cout << std::filesystem::current_path()<< std::endl;
+    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
-    // test::TestMultiLight tst( camera, window);
-    test::TestModel tst(camera);
-    glEnable(GL_DEPTH_TEST);
+    test::TestBatch tst;
+    //glEnable(GL_DEPTH_TEST);
+    renderer.wind = window;
     while (!glfwWindowShouldClose(window))
     {
         renderer.update();

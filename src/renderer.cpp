@@ -23,7 +23,7 @@ void Renderer::init()
 }
 
 
-GLFWwindow* Renderer::CreateWindow(unsigned int x, unsigned int y)
+GLFWwindow* Renderer::createWindow(unsigned int x, unsigned int y)
 {
     bool block_cursor = true;
     GLFWwindow *window;

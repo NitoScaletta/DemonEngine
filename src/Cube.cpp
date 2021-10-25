@@ -167,7 +167,6 @@ Cube::Cube(const char* fragmentshader)
     vao.bind();
     ebo.bind();
     ebo.set(indices.data(), sizeof(int)*indices.size());
-    std::cout << indices.size() << std::endl;
     vbo.bindDynamic(indices.size());
     vbo.loadDynamic(0, sizeof(vertArr), vertArr);
     vao.newLayoutDynamic();

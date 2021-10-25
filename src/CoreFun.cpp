@@ -14,7 +14,7 @@ namespace core{
         std::cout << name << "x = " << v.x << ", y = " << v.y << ", z = " << v.z << std::endl;
     }
     
-    const char* vectostr(glm::vec3& v) 
+    std::string vectostr(glm::vec3& v) 
     {
         return std::string("x = "+std::to_string(v.x)+", y = "+std::to_string(v.y)+", z = "+std::to_string(v.z)).c_str();
     }
