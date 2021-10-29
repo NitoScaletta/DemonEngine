@@ -259,6 +259,7 @@ Vertex::Vertex(float _x, float _y, float _z)
 //    position.y = pos.y;
 //    position.z = pos.z;
 //}
+
 Vertex::~Vertex(){
 
 }
@@ -320,11 +321,9 @@ void Vertex::setTCor(glm::vec2 tcoo)
 
 void Vertex::print()
 {
-    static int _numbvertex = 0;
-    std::cout <<  ") x: " <<  position.x << " y: " << position.y << " z: " << position.z<<
-        "\tnormal: " <<") x: " <<  normal.x << " y: " << normal.y << " z: " << normal.z
-              << std::endl;
-
+    std::cout <<  ") x: " <<  position.x << " y: " << position.y << " z: " << position.z<< std::endl <<
+        "normal: " <<") x: " <<  normal.x << " y: " << normal.y << " z: " << normal.z     << std::endl << 
+        "colors r: " <<  colors.x << " g: " << colors.y << " b: " << colors.z  << "alpha: " << colors.w << std::endl;
 }
 
 void Vertex::setNormal(float x, float y, float z)

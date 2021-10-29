@@ -5,11 +5,10 @@
 #include "Timer.h"
 #include <filesystem>
 
-const unsigned int SCR_X = 1000;
-const unsigned int SCR_Y = 1000;
-const float scr_x = SCR_X;
-const float scr_y = SCR_Y;
-Camera* camera = new Camera();
+const float SCR_X = 1920;
+const float SCR_Y = 1080;
+
+Renderer renderer(SCR_X, SCR_Y);
 
 void processInput(GLFWwindow *window )
 {
@@ -17,93 +16,61 @@ void processInput(GLFWwindow *window )
         glfwSetWindowShouldClose(window,true);
 }
 
-void mousecall(GLFWwindow* window, double xpos, double ypos);
+void mousecall(GLFWwindow* window, double xpos, double ypos)
+{
+        //camera->mouseInput(window, xpos, ypos);
+}
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
+    renderer.updateResolution(width, height);
 }
 
 int main(void)
 {
     Timer timer("main");
+    Renderer& rend = renderer;
     float deltatime, lastframe;
     lastframe = 0.0f;
     bool prova;
-    Renderer renderer;
-    GLFWwindow* window;
+    GLFWwindow* window = renderer.WindowInit();
     const char* glsl_version = "#version 430";
-    if (!glfwInit())
-    {
-        std::cout << "errore" << std::endl;
-        return NULL;
-    }
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    window = glfwCreateWindow(SCR_X, SCR_Y, "DemonEngine", NULL, NULL);
-    if (!window)
-    {
-        std::cout << "Impossibile creare finestra glfw" << std::endl;
-        glfwTerminate();
-        return NULL;
-    }
-
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    
     renderer.init();
+    renderer.ImGuiInit();
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mousecall);
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    ImGui::StyleColorsDark();
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init(glsl_version);
     stbi_set_flip_vertically_on_load(true);
     //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
-    test::TestBatch tst;
+    test::TestBatch tst(renderer);
     //glEnable(GL_DEPTH_TEST);
-    renderer.wind = window;
     while (!glfwWindowShouldClose(window))
     {
-        renderer.update();
+        if(glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        if(glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+
         float currentframe = glfwGetTime();
         deltatime = currentframe - lastframe;
         lastframe = currentframe;
 
-        camera->run(deltatime);
         processInput(window);
         /* Poll for and process events */
         tst.onUpdate(deltatime);
+        renderer.Clear();
         tst.onRender();
 
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+        renderer.ImGuiStart();
 
         tst.onImGuiRender();
-        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
-                            1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        renderer.ImGuiEnd();
 
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        renderer.End();
     }
-
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
+    renderer.ImGuiClose();
     glfwTerminate();
-    delete(camera);
     return 0;
 }
-    void mousecall(GLFWwindow* window, double xpos, double ypos)
-    {
-        camera->mouseInput(window, xpos, ypos);
-    }
+   

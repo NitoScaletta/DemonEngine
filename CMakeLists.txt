@@ -41,7 +41,8 @@ add_library(core      src/CoreFun.cpp
                       #src/Mesh.cpp
                       )
 
-add_library(camera src/Camera.cpp)
+add_library(camera  src/Camera.cpp
+                    src/Camera2d.cpp)
 
 add_library(imgui   vendor/imgui/imgui.cpp
                     vendor/imgui/imgui_tables.cpp

@@ -9,13 +9,13 @@ layout (location = 4) in vec3 aNormal;
 
 out vec3 FragPos;
 out vec2 TexCoord;
-out vec4 Color;
+out vec4 ourColor;
+out vec4 o_aPos;
 
 uniform mat4 aMVP;
 
 void main()
 {
-    Color = aColor;
+    ourColor = aColor;
     gl_Position = aMVP * aPos;
-    FragPos = vec3(aPos);
 }

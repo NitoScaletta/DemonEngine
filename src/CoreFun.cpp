@@ -22,7 +22,9 @@ namespace core{
 
     void createBuffer(int nquad, std::vector<Vertex>& vertices, float x, float y,
                     float size_x, float size_y, bool log)
-{        vertices.clear();
+
+{       
+        vertices.clear();
         vertices.push_back(Vertex(x, y));
         vertices.back().setTCor(0.0f, 0.0f);
         vertices.push_back(Vertex(x + size_x, y));

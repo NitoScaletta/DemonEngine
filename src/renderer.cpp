@@ -1,8 +1,6 @@
-#include "include/renderer.h"
-#include "include/glObjects.h"
-#include "include/Shader.h"
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
+#include "renderer.h"
+#include "glObjects.h"
+#include "Shader.h"
 #include <iostream>
 
 
@@ -20,10 +18,51 @@ void Renderer::init()
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
     }
+
+    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+}
+
+void Renderer::ImGuiInit() 
+{
+    const char* glsl_version = "#version 430";
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
+    ImGui_ImplGlfw_InitForOpenGL(wind, true);
+    ImGui_ImplOpenGL3_Init(glsl_version);
+}
+
+void Renderer::ImGuiStart()
+{
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+}
+
+void Renderer::ImGuiEnd() 
+{
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void Renderer::ImGuiClose() 
+{
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+}
+
+void Renderer::updateResolution(const float x, const float y) 
+{
+    wind_size_x = x; 
+    wind_size_y = y; 
+    camera->ResetProjMatrix(-x, x, -y, y); 
 }
 
 
-GLFWwindow* Renderer::createWindow(unsigned int x, unsigned int y)
+GLFWwindow* Renderer::WindowInit()
 {
     bool block_cursor = true;
     GLFWwindow *window;
@@ -37,7 +76,7 @@ GLFWwindow* Renderer::createWindow(unsigned int x, unsigned int y)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(x, y, "DemonEngine", NULL, NULL);
+    window = glfwCreateWindow(wind_size_x, wind_size_y, "DemonEngine", NULL, NULL);
     if (!window)
     {
         std::cout << "Impossibile creare finestra glfw" << std::endl;
@@ -52,11 +91,29 @@ GLFWwindow* Renderer::createWindow(unsigned int x, unsigned int y)
     return window;
 }
 
+void Renderer::Clear(float r, float g, float b, float alpha)
+{
+    glClearColor(0.6f, 0.0f, 0.4f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void Renderer::End() 
+{
+    glfwSwapBuffers(wind);
+    glfwPollEvents();
+}
 
 void Renderer::update()
 {
-    if(glfwGetKey(wind, GLFW_KEY_P) == GLFW_PRESS)
-        glfwSetInputMode(wind, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    if(glfwGetKey(wind, GLFW_KEY_O) == GLFW_PRESS)
-        glfwSetInputMode(wind, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+}
+
+Renderer::~Renderer() 
+{
+    //ImGuiClose();
+    //glfwTerminate();
+}
+
+Renderer::Renderer(float x, float y) : wind_size_x(x), wind_size_y(y) 
+{
+    camera = new Camera2d(-wind_size_x, wind_size_x, -wind_size_y, wind_size_y);
 }
