@@ -1,8 +1,7 @@
-#include "core.h"
-#include "CoreFun.h"
-#include "TestBatch.h"
-#include "Camera.h"
-#include "Timer.h"
+#include <core/core.h>
+#include <core/CoreFun.h>
+#include <TestBatch.h>
+#include <core/profiling/Timer.h>
 #include <filesystem>
 
 const float SCR_X = 1920;
@@ -19,6 +18,11 @@ void processInput(GLFWwindow *window )
 void mousecall(GLFWwindow* window, double xpos, double ypos)
 {
         //camera->mouseInput(window, xpos, ypos);
+}
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+    renderer.camera->ChangeZoomLevel(yoffset);
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -38,8 +42,11 @@ int main(void)
     const char* glsl_version = "#version 430";
     renderer.init();
     renderer.ImGuiInit();
+
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mousecall);
+    glfwSetScrollCallback(window, scroll_callback);
+
     stbi_set_flip_vertically_on_load(true);
     //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 

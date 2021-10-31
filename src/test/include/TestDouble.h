@@ -2,9 +2,9 @@
 #define TESTDOUBLE_H_
 
 #include "test.h"
-#include "core.h"
-#include "Camera.h"
-#include "Cube.h"
+#include "core/core.h"
+#include "Renderer/Camera.h"
+#include "meshes/Cube.h"
 
 namespace test{
 

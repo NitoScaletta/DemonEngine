@@ -2,8 +2,8 @@
 #define __TESTBATCH_H__
 
 #include <test.h>
-#include <core.h>
-#include <Camera2d.h>
+#include <core/core.h>
+#include <Renderer/Camera2d.h>
 
 namespace test{
 class TestBatch : public Test

@@ -2,8 +2,8 @@
 #define TESTVECTOR_H_
 #include "../include/test.h"
 #include "../glad/glad.h"
-#include "../include/glObjects.h"
-#include "../include/Shader.h"
+#include "../include/graphic/glObjects.h"
+#include "../include/graphic/Shader.h"
 #include <vector>
 
 

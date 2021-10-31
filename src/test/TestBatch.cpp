@@ -1,5 +1,5 @@
 #include <TestBatch.h>
-#include <CoreFun.h>
+#include <core/CoreFun.h>
 
 namespace test{
     TestBatch::TestBatch(Renderer& render) : renderer(render)
@@ -7,6 +7,7 @@ namespace test{
         nquad = 1;
         prev_nquad = 0;
         vertices = nullptr;
+        Texture texture(1, "vc.png");
         vao.bind();
         ebo.bind();
         vbo.bindDynamic(10000000);
@@ -71,9 +72,9 @@ namespace test{
             delete[] vertices;
         core::CreateIndices(indices, n);
         vertices = new Vertex[n*4];
-        int x = -500;
-        int y = -500;
-        int size = 5;
+        int x = 0;
+        int y = 0;
+        int size = 1;
         int j = 0;
         int offset = 0;
         for (int i = 0; i < n*4; i+=4)
@@ -92,7 +93,7 @@ namespace test{
             if(i % 1200 == 0 && i != 0)
             {
                 y += size + offset;
-                x = -500;
+                x = 0;
             }
         }
         prev_nquad = nquad;

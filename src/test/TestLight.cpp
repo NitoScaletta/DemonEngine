@@ -1,6 +1,6 @@
 #include "TestLight.h"
-#include "CoreFun.h"
-#include "Light.h"
+#include "core/CoreFun.h"
+#include "meshes/Light.h"
 #include "glm/gtx/normal.hpp"
 
 namespace test{

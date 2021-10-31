@@ -39,7 +39,7 @@ namespace test
             {
                 y++;
                 x = 0;
-                }
+            }
             else x++;
         }
         dirlight = new DirectionalLight;

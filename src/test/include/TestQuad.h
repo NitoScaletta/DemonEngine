@@ -2,8 +2,8 @@
 #define TESTQUAD_H_
 
 #include "../include/test.h"
-#include "../include/Shader.h"
-#include "glObjects.h"
+#include "../include/graphic/Shader.h"
+#include "graphic/glObjects.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"

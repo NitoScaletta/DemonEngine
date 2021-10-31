@@ -2,8 +2,8 @@
 #define __TESTMODEL_H__
 
 #include <test.h>
-#include <Mesh.h>
-#include<Camera.h>
+#include <meshes/Mesh.h>
+#include<Renderer/Camera.h>
 
 namespace test
 {

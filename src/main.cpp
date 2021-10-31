@@ -1,8 +1,8 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include <iostream>
-#include "include/Shader.h"
-#include "include/glObjects.h"
+#include "include/graphic/Shader.h"
+#include "include/graphic/glObjects.h"
 #include "stb_image.h"
 #include "include/renderer.h"
 #include <math.h>

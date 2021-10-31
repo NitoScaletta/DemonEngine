@@ -1,10 +1,10 @@
 #pragma once 
 #include "test.h"
-#include "Camera.h"
-#include "core.h"
-#include "Cube.h"
-#include "CoreFun.h"
-#include "Light.h"
+#include "Renderer/Camera.h"
+#include "core/core.h"
+#include "meshes/Cube.h"
+#include "core/CoreFun.h"
+#include "meshes/Light.h"
 #include <vector>
 
 

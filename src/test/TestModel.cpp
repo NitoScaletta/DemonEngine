@@ -1,6 +1,6 @@
 
 #include "TestModel.h"
-#include "CoreFun.h"
+#include "core/CoreFun.h"
 
 
 namespace test{

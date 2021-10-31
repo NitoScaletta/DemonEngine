@@ -77,78 +77,6 @@ build GLAD.lib: C_STATIC_LIBRARY_LINKER__GLAD_Debug CMakeFiles/GLAD.dir/vendor/G
   TARGET_PDB = GLAD.pdb
 
 # =============================================================================
-# Object build statements for STATIC_LIBRARY target Shader
-
-
-#############################################
-# Order-only phony target for Shader
-
-build cmake_object_order_depends_target_Shader: phony || CMakeFiles/Shader.dir
-
-build CMakeFiles/Shader.dir/src/Shader.cpp.obj: CXX_COMPILER__Shader_Debug C$:/Users/darks/repos/DemonEngine/src/Shader.cpp || cmake_object_order_depends_target_Shader
-  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
-  DEP_FILE = CMakeFiles\Shader.dir\src\Shader.cpp.obj.d
-  FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
-  INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
-  OBJECT_DIR = CMakeFiles\Shader.dir
-  OBJECT_FILE_DIR = CMakeFiles\Shader.dir\src
-  TARGET_COMPILE_PDB = CMakeFiles\Shader.dir\Shader.pdb
-  TARGET_PDB = Shader.pdb
-
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target Shader
-
-
-#############################################
-# Link the static library Shader.lib
-
-build Shader.lib: CXX_STATIC_LIBRARY_LINKER__Shader_Debug CMakeFiles/Shader.dir/src/Shader.cpp.obj
-  LANGUAGE_COMPILE_FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd
-  OBJECT_DIR = CMakeFiles\Shader.dir
-  POST_BUILD = cd .
-  PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\Shader.dir\Shader.pdb
-  TARGET_FILE = Shader.lib
-  TARGET_PDB = Shader.pdb
-
-# =============================================================================
-# Object build statements for STATIC_LIBRARY target glObjects
-
-
-#############################################
-# Order-only phony target for glObjects
-
-build cmake_object_order_depends_target_glObjects: phony || CMakeFiles/glObjects.dir
-
-build CMakeFiles/glObjects.dir/src/glObjects.cpp.obj: CXX_COMPILER__glObjects_Debug C$:/Users/darks/repos/DemonEngine/src/glObjects.cpp || cmake_object_order_depends_target_glObjects
-  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
-  DEP_FILE = CMakeFiles\glObjects.dir\src\glObjects.cpp.obj.d
-  FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
-  INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
-  OBJECT_DIR = CMakeFiles\glObjects.dir
-  OBJECT_FILE_DIR = CMakeFiles\glObjects.dir\src
-  TARGET_COMPILE_PDB = CMakeFiles\glObjects.dir\glObjects.pdb
-  TARGET_PDB = glObjects.pdb
-
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target glObjects
-
-
-#############################################
-# Link the static library glObjects.lib
-
-build glObjects.lib: CXX_STATIC_LIBRARY_LINKER__glObjects_Debug CMakeFiles/glObjects.dir/src/glObjects.cpp.obj
-  LANGUAGE_COMPILE_FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd
-  OBJECT_DIR = CMakeFiles\glObjects.dir
-  POST_BUILD = cd .
-  PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\glObjects.dir\glObjects.pdb
-  TARGET_FILE = glObjects.lib
-  TARGET_PDB = glObjects.pdb
-
-# =============================================================================
 # Object build statements for STATIC_LIBRARY target stb_image
 
 
@@ -185,42 +113,6 @@ build stb_image.lib: CXX_STATIC_LIBRARY_LINKER__stb_image_Debug CMakeFiles/stb_i
   TARGET_PDB = stb_image.pdb
 
 # =============================================================================
-# Object build statements for STATIC_LIBRARY target renderer
-
-
-#############################################
-# Order-only phony target for renderer
-
-build cmake_object_order_depends_target_renderer: phony || cmake_object_order_depends_target_GLAD cmake_object_order_depends_target_Shader cmake_object_order_depends_target_glObjects
-
-build CMakeFiles/renderer.dir/src/renderer.cpp.obj: CXX_COMPILER__renderer_Debug C$:/Users/darks/repos/DemonEngine/src/renderer.cpp || cmake_object_order_depends_target_renderer
-  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
-  DEP_FILE = CMakeFiles\renderer.dir\src\renderer.cpp.obj.d
-  FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
-  INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
-  OBJECT_DIR = CMakeFiles\renderer.dir
-  OBJECT_FILE_DIR = CMakeFiles\renderer.dir\src
-  TARGET_COMPILE_PDB = CMakeFiles\renderer.dir\renderer.pdb
-  TARGET_PDB = renderer.pdb
-
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target renderer
-
-
-#############################################
-# Link the static library renderer.lib
-
-build renderer.lib: CXX_STATIC_LIBRARY_LINKER__renderer_Debug CMakeFiles/renderer.dir/src/renderer.cpp.obj || GLAD.lib Shader.lib glObjects.lib
-  LANGUAGE_COMPILE_FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd
-  OBJECT_DIR = CMakeFiles\renderer.dir
-  POST_BUILD = cd .
-  PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\renderer.dir\renderer.pdb
-  TARGET_FILE = renderer.lib
-  TARGET_PDB = renderer.pdb
-
-# =============================================================================
 # Object build statements for STATIC_LIBRARY target core
 
 
@@ -229,43 +121,33 @@ build renderer.lib: CXX_STATIC_LIBRARY_LINKER__renderer_Debug CMakeFiles/rendere
 
 build cmake_object_order_depends_target_core: phony || CMakeFiles/core.dir
 
-build CMakeFiles/core.dir/src/CoreFun.cpp.obj: CXX_COMPILER__core_Debug C$:/Users/darks/repos/DemonEngine/src/CoreFun.cpp || cmake_object_order_depends_target_core
+build CMakeFiles/core.dir/src/core/CoreFun.cpp.obj: CXX_COMPILER__core_Debug C$:/Users/darks/repos/DemonEngine/src/core/CoreFun.cpp || cmake_object_order_depends_target_core
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
-  DEP_FILE = CMakeFiles\core.dir\src\CoreFun.cpp.obj.d
+  DEP_FILE = CMakeFiles\core.dir\src\core\CoreFun.cpp.obj.d
   FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
   INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
   OBJECT_DIR = CMakeFiles\core.dir
-  OBJECT_FILE_DIR = CMakeFiles\core.dir\src
+  OBJECT_FILE_DIR = CMakeFiles\core.dir\src\core
   TARGET_COMPILE_PDB = CMakeFiles\core.dir\core.pdb
   TARGET_PDB = core.pdb
 
-build CMakeFiles/core.dir/src/Cube.cpp.obj: CXX_COMPILER__core_Debug C$:/Users/darks/repos/DemonEngine/src/Cube.cpp || cmake_object_order_depends_target_core
+build CMakeFiles/core.dir/src/core/Window.cpp.obj: CXX_COMPILER__core_Debug C$:/Users/darks/repos/DemonEngine/src/core/Window.cpp || cmake_object_order_depends_target_core
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
-  DEP_FILE = CMakeFiles\core.dir\src\Cube.cpp.obj.d
+  DEP_FILE = CMakeFiles\core.dir\src\core\Window.cpp.obj.d
   FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
   INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
   OBJECT_DIR = CMakeFiles\core.dir
-  OBJECT_FILE_DIR = CMakeFiles\core.dir\src
+  OBJECT_FILE_DIR = CMakeFiles\core.dir\src\core
   TARGET_COMPILE_PDB = CMakeFiles\core.dir\core.pdb
   TARGET_PDB = core.pdb
 
-build CMakeFiles/core.dir/src/Light.cpp.obj: CXX_COMPILER__core_Debug C$:/Users/darks/repos/DemonEngine/src/Light.cpp || cmake_object_order_depends_target_core
+build CMakeFiles/core.dir/src/core/profiling/Timer.cpp.obj: CXX_COMPILER__core_Debug C$:/Users/darks/repos/DemonEngine/src/core/profiling/Timer.cpp || cmake_object_order_depends_target_core
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
-  DEP_FILE = CMakeFiles\core.dir\src\Light.cpp.obj.d
+  DEP_FILE = CMakeFiles\core.dir\src\core\profiling\Timer.cpp.obj.d
   FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
   INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
   OBJECT_DIR = CMakeFiles\core.dir
-  OBJECT_FILE_DIR = CMakeFiles\core.dir\src
-  TARGET_COMPILE_PDB = CMakeFiles\core.dir\core.pdb
-  TARGET_PDB = core.pdb
-
-build CMakeFiles/core.dir/src/Timer.cpp.obj: CXX_COMPILER__core_Debug C$:/Users/darks/repos/DemonEngine/src/Timer.cpp || cmake_object_order_depends_target_core
-  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
-  DEP_FILE = CMakeFiles\core.dir\src\Timer.cpp.obj.d
-  FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
-  INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
-  OBJECT_DIR = CMakeFiles\core.dir
-  OBJECT_FILE_DIR = CMakeFiles\core.dir\src
+  OBJECT_FILE_DIR = CMakeFiles\core.dir\src\core\profiling
   TARGET_COMPILE_PDB = CMakeFiles\core.dir\core.pdb
   TARGET_PDB = core.pdb
 
@@ -277,7 +159,7 @@ build CMakeFiles/core.dir/src/Timer.cpp.obj: CXX_COMPILER__core_Debug C$:/Users/
 #############################################
 # Link the static library core.lib
 
-build core.lib: CXX_STATIC_LIBRARY_LINKER__core_Debug CMakeFiles/core.dir/src/CoreFun.cpp.obj CMakeFiles/core.dir/src/Cube.cpp.obj CMakeFiles/core.dir/src/Light.cpp.obj CMakeFiles/core.dir/src/Timer.cpp.obj
+build core.lib: CXX_STATIC_LIBRARY_LINKER__core_Debug CMakeFiles/core.dir/src/core/CoreFun.cpp.obj CMakeFiles/core.dir/src/core/Window.cpp.obj CMakeFiles/core.dir/src/core/profiling/Timer.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd
   OBJECT_DIR = CMakeFiles\core.dir
   POST_BUILD = cd .
@@ -287,50 +169,152 @@ build core.lib: CXX_STATIC_LIBRARY_LINKER__core_Debug CMakeFiles/core.dir/src/Co
   TARGET_PDB = core.pdb
 
 # =============================================================================
-# Object build statements for STATIC_LIBRARY target camera
+# Object build statements for STATIC_LIBRARY target renderer
 
 
 #############################################
-# Order-only phony target for camera
+# Order-only phony target for renderer
 
-build cmake_object_order_depends_target_camera: phony || CMakeFiles/camera.dir
+build cmake_object_order_depends_target_renderer: phony || cmake_object_order_depends_target_GLAD cmake_object_order_depends_target_graphics
 
-build CMakeFiles/camera.dir/src/Camera.cpp.obj: CXX_COMPILER__camera_Debug C$:/Users/darks/repos/DemonEngine/src/Camera.cpp || cmake_object_order_depends_target_camera
+build CMakeFiles/renderer.dir/src/renderer/Camera.cpp.obj: CXX_COMPILER__renderer_Debug C$:/Users/darks/repos/DemonEngine/src/renderer/Camera.cpp || cmake_object_order_depends_target_renderer
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
-  DEP_FILE = CMakeFiles\camera.dir\src\Camera.cpp.obj.d
+  DEP_FILE = CMakeFiles\renderer.dir\src\renderer\Camera.cpp.obj.d
   FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
   INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
-  OBJECT_DIR = CMakeFiles\camera.dir
-  OBJECT_FILE_DIR = CMakeFiles\camera.dir\src
-  TARGET_COMPILE_PDB = CMakeFiles\camera.dir\camera.pdb
-  TARGET_PDB = camera.pdb
+  OBJECT_DIR = CMakeFiles\renderer.dir
+  OBJECT_FILE_DIR = CMakeFiles\renderer.dir\src\renderer
+  TARGET_COMPILE_PDB = CMakeFiles\renderer.dir\renderer.pdb
+  TARGET_PDB = renderer.pdb
 
-build CMakeFiles/camera.dir/src/Camera2d.cpp.obj: CXX_COMPILER__camera_Debug C$:/Users/darks/repos/DemonEngine/src/Camera2d.cpp || cmake_object_order_depends_target_camera
+build CMakeFiles/renderer.dir/src/renderer/Camera2d.cpp.obj: CXX_COMPILER__renderer_Debug C$:/Users/darks/repos/DemonEngine/src/renderer/Camera2d.cpp || cmake_object_order_depends_target_renderer
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
-  DEP_FILE = CMakeFiles\camera.dir\src\Camera2d.cpp.obj.d
+  DEP_FILE = CMakeFiles\renderer.dir\src\renderer\Camera2d.cpp.obj.d
   FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
   INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
-  OBJECT_DIR = CMakeFiles\camera.dir
-  OBJECT_FILE_DIR = CMakeFiles\camera.dir\src
-  TARGET_COMPILE_PDB = CMakeFiles\camera.dir\camera.pdb
-  TARGET_PDB = camera.pdb
+  OBJECT_DIR = CMakeFiles\renderer.dir
+  OBJECT_FILE_DIR = CMakeFiles\renderer.dir\src\renderer
+  TARGET_COMPILE_PDB = CMakeFiles\renderer.dir\renderer.pdb
+  TARGET_PDB = renderer.pdb
+
+build CMakeFiles/renderer.dir/src/renderer/renderer.cpp.obj: CXX_COMPILER__renderer_Debug C$:/Users/darks/repos/DemonEngine/src/renderer/renderer.cpp || cmake_object_order_depends_target_renderer
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
+  DEP_FILE = CMakeFiles\renderer.dir\src\renderer\renderer.cpp.obj.d
+  FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
+  INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
+  OBJECT_DIR = CMakeFiles\renderer.dir
+  OBJECT_FILE_DIR = CMakeFiles\renderer.dir\src\renderer
+  TARGET_COMPILE_PDB = CMakeFiles\renderer.dir\renderer.pdb
+  TARGET_PDB = renderer.pdb
 
 
 # =============================================================================
-# Link build statements for STATIC_LIBRARY target camera
+# Link build statements for STATIC_LIBRARY target renderer
 
 
 #############################################
-# Link the static library camera.lib
+# Link the static library renderer.lib
 
-build camera.lib: CXX_STATIC_LIBRARY_LINKER__camera_Debug CMakeFiles/camera.dir/src/Camera.cpp.obj CMakeFiles/camera.dir/src/Camera2d.cpp.obj
+build renderer.lib: CXX_STATIC_LIBRARY_LINKER__renderer_Debug CMakeFiles/renderer.dir/src/renderer/Camera.cpp.obj CMakeFiles/renderer.dir/src/renderer/Camera2d.cpp.obj CMakeFiles/renderer.dir/src/renderer/renderer.cpp.obj || GLAD.lib graphics.lib
   LANGUAGE_COMPILE_FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd
-  OBJECT_DIR = CMakeFiles\camera.dir
+  OBJECT_DIR = CMakeFiles\renderer.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\camera.dir\camera.pdb
-  TARGET_FILE = camera.lib
-  TARGET_PDB = camera.pdb
+  TARGET_COMPILE_PDB = CMakeFiles\renderer.dir\renderer.pdb
+  TARGET_FILE = renderer.lib
+  TARGET_PDB = renderer.pdb
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target graphics
+
+
+#############################################
+# Order-only phony target for graphics
+
+build cmake_object_order_depends_target_graphics: phony || CMakeFiles/graphics.dir
+
+build CMakeFiles/graphics.dir/src/graphics/Shader.cpp.obj: CXX_COMPILER__graphics_Debug C$:/Users/darks/repos/DemonEngine/src/graphics/Shader.cpp || cmake_object_order_depends_target_graphics
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
+  DEP_FILE = CMakeFiles\graphics.dir\src\graphics\Shader.cpp.obj.d
+  FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
+  INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
+  OBJECT_DIR = CMakeFiles\graphics.dir
+  OBJECT_FILE_DIR = CMakeFiles\graphics.dir\src\graphics
+  TARGET_COMPILE_PDB = CMakeFiles\graphics.dir\graphics.pdb
+  TARGET_PDB = graphics.pdb
+
+build CMakeFiles/graphics.dir/src/graphics/glObjects.cpp.obj: CXX_COMPILER__graphics_Debug C$:/Users/darks/repos/DemonEngine/src/graphics/glObjects.cpp || cmake_object_order_depends_target_graphics
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
+  DEP_FILE = CMakeFiles\graphics.dir\src\graphics\glObjects.cpp.obj.d
+  FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
+  INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
+  OBJECT_DIR = CMakeFiles\graphics.dir
+  OBJECT_FILE_DIR = CMakeFiles\graphics.dir\src\graphics
+  TARGET_COMPILE_PDB = CMakeFiles\graphics.dir\graphics.pdb
+  TARGET_PDB = graphics.pdb
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target graphics
+
+
+#############################################
+# Link the static library graphics.lib
+
+build graphics.lib: CXX_STATIC_LIBRARY_LINKER__graphics_Debug CMakeFiles/graphics.dir/src/graphics/Shader.cpp.obj CMakeFiles/graphics.dir/src/graphics/glObjects.cpp.obj
+  LANGUAGE_COMPILE_FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd
+  OBJECT_DIR = CMakeFiles\graphics.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = CMakeFiles\graphics.dir\graphics.pdb
+  TARGET_FILE = graphics.lib
+  TARGET_PDB = graphics.pdb
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target meshes
+
+
+#############################################
+# Order-only phony target for meshes
+
+build cmake_object_order_depends_target_meshes: phony || CMakeFiles/meshes.dir
+
+build CMakeFiles/meshes.dir/src/meshes/Cube.cpp.obj: CXX_COMPILER__meshes_Debug C$:/Users/darks/repos/DemonEngine/src/meshes/Cube.cpp || cmake_object_order_depends_target_meshes
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
+  DEP_FILE = CMakeFiles\meshes.dir\src\meshes\Cube.cpp.obj.d
+  FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
+  INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
+  OBJECT_DIR = CMakeFiles\meshes.dir
+  OBJECT_FILE_DIR = CMakeFiles\meshes.dir\src\meshes
+  TARGET_COMPILE_PDB = CMakeFiles\meshes.dir\meshes.pdb
+  TARGET_PDB = meshes.pdb
+
+build CMakeFiles/meshes.dir/src/meshes/Light.cpp.obj: CXX_COMPILER__meshes_Debug C$:/Users/darks/repos/DemonEngine/src/meshes/Light.cpp || cmake_object_order_depends_target_meshes
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
+  DEP_FILE = CMakeFiles\meshes.dir\src\meshes\Light.cpp.obj.d
+  FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
+  INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
+  OBJECT_DIR = CMakeFiles\meshes.dir
+  OBJECT_FILE_DIR = CMakeFiles\meshes.dir\src\meshes
+  TARGET_COMPILE_PDB = CMakeFiles\meshes.dir\meshes.pdb
+  TARGET_PDB = meshes.pdb
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target meshes
+
+
+#############################################
+# Link the static library meshes.lib
+
+build meshes.lib: CXX_STATIC_LIBRARY_LINKER__meshes_Debug CMakeFiles/meshes.dir/src/meshes/Cube.cpp.obj CMakeFiles/meshes.dir/src/meshes/Light.cpp.obj
+  LANGUAGE_COMPILE_FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd
+  OBJECT_DIR = CMakeFiles\meshes.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = CMakeFiles\meshes.dir\meshes.pdb
+  TARGET_FILE = meshes.lib
+  TARGET_PDB = meshes.pdb
 
 # =============================================================================
 # Object build statements for STATIC_LIBRARY target imgui
@@ -447,16 +431,6 @@ build CMakeFiles/test.dir/src/test.cpp.obj: CXX_COMPILER__test_Debug C$:/Users/d
   TARGET_COMPILE_PDB = CMakeFiles\test.dir\test.pdb
   TARGET_PDB = test.pdb
 
-build CMakeFiles/test.dir/src/test/TestMultiLight.cpp.obj: CXX_COMPILER__test_Debug C$:/Users/darks/repos/DemonEngine/src/test/TestMultiLight.cpp || cmake_object_order_depends_target_test
-  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
-  DEP_FILE = CMakeFiles\test.dir\src\test\TestMultiLight.cpp.obj.d
-  FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -std=gnu++20
-  INCLUDES = -IC:/Users/darks/repos/DemonEngine/include -IC:/Users/darks/repos/DemonEngine/src/include -IC:/Users/darks/repos/DemonEngine/src/test/include -IC:/Users/darks/repos/DemonEngine/vendor/imgui -IC:/Users/darks/repos/DemonEngine/vendor/GLAD/include -IC:/Users/darks/repos/DemonEngine/vendor/assimp/include
-  OBJECT_DIR = CMakeFiles\test.dir
-  OBJECT_FILE_DIR = CMakeFiles\test.dir\src\test
-  TARGET_COMPILE_PDB = CMakeFiles\test.dir\test.pdb
-  TARGET_PDB = test.pdb
-
 build CMakeFiles/test.dir/src/test/TestBatch.cpp.obj: CXX_COMPILER__test_Debug C$:/Users/darks/repos/DemonEngine/src/test/TestBatch.cpp || cmake_object_order_depends_target_test
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   DEP_FILE = CMakeFiles\test.dir\src\test\TestBatch.cpp.obj.d
@@ -475,7 +449,7 @@ build CMakeFiles/test.dir/src/test/TestBatch.cpp.obj: CXX_COMPILER__test_Debug C
 #############################################
 # Link the static library test.lib
 
-build test.lib: CXX_STATIC_LIBRARY_LINKER__test_Debug CMakeFiles/test.dir/src/test.cpp.obj CMakeFiles/test.dir/src/test/TestMultiLight.cpp.obj CMakeFiles/test.dir/src/test/TestBatch.cpp.obj
+build test.lib: CXX_STATIC_LIBRARY_LINKER__test_Debug CMakeFiles/test.dir/src/test.cpp.obj CMakeFiles/test.dir/src/test/TestBatch.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd
   OBJECT_DIR = CMakeFiles\test.dir
   POST_BUILD = cd .
@@ -491,7 +465,7 @@ build test.lib: CXX_STATIC_LIBRARY_LINKER__test_Debug CMakeFiles/test.dir/src/te
 #############################################
 # Order-only phony target for DemonEngine
 
-build cmake_object_order_depends_target_DemonEngine: phony || cmake_object_order_depends_target_GLAD cmake_object_order_depends_target_Shader cmake_object_order_depends_target_camera cmake_object_order_depends_target_core cmake_object_order_depends_target_glObjects cmake_object_order_depends_target_glfw cmake_object_order_depends_target_imgui cmake_object_order_depends_target_renderer cmake_object_order_depends_target_stb_image cmake_object_order_depends_target_test
+build cmake_object_order_depends_target_DemonEngine: phony || cmake_object_order_depends_target_GLAD cmake_object_order_depends_target_core cmake_object_order_depends_target_glfw cmake_object_order_depends_target_graphics cmake_object_order_depends_target_imgui cmake_object_order_depends_target_meshes cmake_object_order_depends_target_renderer cmake_object_order_depends_target_stb_image cmake_object_order_depends_target_test
 
 build CMakeFiles/DemonEngine.dir/src/app.cpp.obj: CXX_COMPILER__DemonEngine_Debug C$:/Users/darks/repos/DemonEngine/src/app.cpp || cmake_object_order_depends_target_DemonEngine
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
@@ -511,10 +485,10 @@ build CMakeFiles/DemonEngine.dir/src/app.cpp.obj: CXX_COMPILER__DemonEngine_Debu
 #############################################
 # Link the executable DemonEngine.exe
 
-build DemonEngine.exe: CXX_EXECUTABLE_LINKER__DemonEngine_Debug CMakeFiles/DemonEngine.dir/src/app.cpp.obj | vendor/glfw/src/glfw3.lib GLAD.lib Shader.lib glObjects.lib stb_image.lib renderer.lib imgui.lib test.lib core.lib camera.lib GLAD.lib Shader.lib glObjects.lib || GLAD.lib Shader.lib camera.lib core.lib glObjects.lib imgui.lib renderer.lib stb_image.lib test.lib vendor/glfw/src/glfw3.lib
+build DemonEngine.exe: CXX_EXECUTABLE_LINKER__DemonEngine_Debug CMakeFiles/DemonEngine.dir/src/app.cpp.obj | vendor/glfw/src/glfw3.lib GLAD.lib stb_image.lib renderer.lib imgui.lib test.lib core.lib graphics.lib meshes.lib GLAD.lib || GLAD.lib core.lib graphics.lib imgui.lib meshes.lib renderer.lib stb_image.lib test.lib vendor/glfw/src/glfw3.lib
   FLAGS = -g -Xclang -gcodeview -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd
   LINK_FLAGS = -Xlinker /subsystem:console
-  LINK_LIBRARIES = -lopengl32.lib  vendor/glfw/src/glfw3.lib  GLAD.lib  Shader.lib  glObjects.lib  stb_image.lib  renderer.lib  imgui.lib  test.lib  core.lib  camera.lib  GLAD.lib  Shader.lib  glObjects.lib  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -loldnames
+  LINK_LIBRARIES = -lopengl32.lib  vendor/glfw/src/glfw3.lib  GLAD.lib  stb_image.lib  renderer.lib  imgui.lib  test.lib  core.lib  graphics.lib  meshes.lib  GLAD.lib  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -loldnames
   OBJECT_DIR = CMakeFiles\DemonEngine.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -927,19 +901,17 @@ build DemonEngine: phony DemonEngine.exe
 
 build GLAD: phony GLAD.lib
 
-build Shader: phony Shader.lib
-
-build camera: phony camera.lib
-
 build core: phony core.lib
-
-build glObjects: phony glObjects.lib
 
 build glfw: phony vendor/glfw/src/glfw3.lib
 
 build glfw3.lib: phony vendor/glfw/src/glfw3.lib
 
+build graphics: phony graphics.lib
+
 build imgui: phony imgui.lib
+
+build meshes: phony meshes.lib
 
 build renderer: phony renderer.lib
 
@@ -957,7 +929,7 @@ build uninstall: phony vendor/glfw/uninstall
 #############################################
 # Folder: C:/Users/darks/repos/DemonEngine/build
 
-build all: phony GLAD.lib Shader.lib glObjects.lib stb_image.lib renderer.lib core.lib camera.lib imgui.lib test.lib DemonEngine.exe vendor/glfw/all
+build all: phony GLAD.lib stb_image.lib core.lib renderer.lib graphics.lib meshes.lib imgui.lib test.lib DemonEngine.exe vendor/glfw/all
 
 # =============================================================================
 

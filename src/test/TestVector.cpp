@@ -1,6 +1,6 @@
 #include "TestVector.h"
-#include "CoreFun.h"
-#include "core.h"
+#include "core/CoreFun.h"
+#include "core/core.h"
 
 
 namespace test {

@@ -1,11 +1,11 @@
 #ifndef TESTPOINTLIGHT_H_
 #define TESTPOINTLIGHT_H_
 
-#include "core.h"
+#include "core/core.h"
 #include "test.h"
-#include "Cube.h"
-#include "Light.h"
-#include "Camera.h"
+#include "meshes/Cube.h"
+#include "meshes/Light.h"
+#include "Renderer/Camera.h"
 
 
 namespace test{

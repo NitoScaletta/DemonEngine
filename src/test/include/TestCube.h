@@ -1,10 +1,10 @@
 #ifndef TESTCUBE_H_
 #define TESTCUBE_H_
 
-#include "core.h"
+#include "core/core.h"
 #include "test.h"
-#include "Camera.h"
-#include "Cube.h"
+#include "Renderer/Camera.h"
+#include "meshes/Cube.h"
 
 namespace test {
 

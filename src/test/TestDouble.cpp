@@ -1,5 +1,5 @@
 #include "TestDouble.h"
-#include "CoreFun.h"
+#include "core/CoreFun.h"
 
 namespace test{
 

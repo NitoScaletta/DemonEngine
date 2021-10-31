@@ -1,5 +1,5 @@
 #include "TestCube.h"
-#include "CoreFun.h"
+#include "core/CoreFun.h"
 
 namespace test{
     TestCube::TestCube(){}

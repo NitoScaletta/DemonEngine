@@ -1,7 +1,7 @@
 #ifndef TEST_H_
 #define TEST_H_
-#include "glObjects.h"
-#include "Shader.h"
+#include "graphic/glObjects.h"
+#include "graphic/Shader.h"
 
 namespace test{
 

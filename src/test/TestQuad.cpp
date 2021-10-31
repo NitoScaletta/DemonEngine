@@ -1,12 +1,12 @@
 #include "glad/glad.h"
 #include "TestQuad.h"
 #include "imgui/imgui.h"
-#include "renderer.h"
-#include "glObjects.h"
-#include "Shader.h"
+#include "Renderer/renderer.h"
+#include "graphic/glObjects.h"
+#include "graphic/Shader.h"
 #include <iostream>
 #include <vector>
-#include "CoreFun.h"
+#include "core/CoreFun.h"
 
 
 namespace test{
