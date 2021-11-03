@@ -19,7 +19,7 @@ camera(cam)
     //for(int i = 0; i < 10; i++) 
     //{
     //    m_future[i] = std::async(std::launch::async, loadModel, &models[i]);
-    //    std::cout << "loading model " << i << std::endl;
+    //    std::cout << "loading model " << i << '\n';
     //}
     //for(int i = 0; i < 10; i++)
     //{

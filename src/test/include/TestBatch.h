@@ -4,21 +4,27 @@
 #include <test.h>
 #include <core/core.h>
 #include <Renderer/Camera2d.h>
+#include <core/Window.h>
+#include <core/Events/Events.h>
+#include <core/Events/KeyEvents.h>
+#include<core/Events/ApplicationEvents.h>
+#include <core/Events/MouseEvents.h>
 
 namespace test{
 class TestBatch : public Test
 {
     public:
-        TestBatch(Renderer& render);
+        TestBatch(Renderer& render, CrossPlatformWindow& window);
         ShaderProgram ps;
         void onUpdate(float deltatime) override;
         void onRender() override;
         void onImGuiRender() override;
-        
+        void onEvent(Event& e) override;
 
     
     private:
         GLFWwindow* window;
+        CrossPlatformWindow& m_Window;
         Renderer& renderer;
         VertexArray vao;
         int x = 0;
@@ -35,7 +41,10 @@ class TestBatch : public Test
         void VerticesInit(int nquad);
         void VerticesInitParallel(int nquad);
         void CameraController(float deltatime);
-
+        bool onWindowResizeEvent(WindowResizeEvent& e);
+        bool onMouseScrollEvent(MouseScrolledEvent& e);
+        bool onKeyPressedEvent(KeyPressedEvent& e);
+        bool onKeyReleasedEvent(KeyReleasedEvent& e);
 };
 
 

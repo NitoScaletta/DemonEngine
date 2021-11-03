@@ -25,9 +25,8 @@ void Renderer::init()
 {
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        std::cout << "Failed to initialize GLAD" << std::endl;
+        std::cout << "Failed to initialize GLAD" << '\n';
     }
-    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }
 
 void Renderer::End() 
@@ -70,38 +69,7 @@ void Renderer::ImGuiClose()
 
 void Renderer::updateResolution(const float x, const float y) 
 {
-    wind_size_x = x; 
-    wind_size_y = y; 
     camera->ResetProjMatrix(x/y); 
-}
-
-GLFWwindow* Renderer::WindowInit()
-{
-    bool block_cursor = true;
-    GLFWwindow *window;
-    if (!glfwInit())
-    {
-        std::cout << "errore" << std::endl;
-        return NULL;
-    }
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(wind_size_x, wind_size_y, "DemonEngine", NULL, NULL);
-    if (!window)
-    {
-        std::cout << "Impossibile creare finestra glfw" << std::endl;
-        glfwTerminate();
-        return NULL;
-    }
-
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    wind = window;
-    return window;
 }
 
 void Renderer::Clear(float r, float g, float b, float alpha)

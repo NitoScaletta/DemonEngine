@@ -6,6 +6,8 @@
 *.lo
 *.o
 *.obj
+*.manifest
+*.ninja
 
 # Precompiled Headers
 *.gch
@@ -38,12 +40,13 @@ vendor/glfw/
 vendor/imgui/
 build/vendor/
 .vscode/
+.vs/
 
 build.ninja
 .ninja_deps
 .ninja_log
 *.ninja
-
+*.pdb
 
 CMakeLists.txt.user
 CMakeCache.txt
@@ -57,3 +60,5 @@ compile_commands.json
 CTestTestfile.cmake
 LearnOpenGL
 _deps
+build/DemonEngine.pdb
+build/build.ninja

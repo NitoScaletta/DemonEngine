@@ -2,6 +2,7 @@
 #define TEST_H_
 #include "graphic/glObjects.h"
 #include "graphic/Shader.h"
+#include "core/Events/Events.h"
 
 namespace test{
 
@@ -10,9 +11,11 @@ namespace test{
             Test(){};
             virtual ~Test(){};
 
-            virtual void onUpdate(float deltatime) {}
-            virtual void onRender() {}
-            virtual void onImGuiRender() {}
+            virtual void onUpdate(float deltatime) = 0;
+            virtual void onRender() = 0;
+            virtual void onImGuiRender() = 0;
+            virtual void onEvent(Event& e) = 0;
+
     };
 }
 

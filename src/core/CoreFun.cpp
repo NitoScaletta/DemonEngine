@@ -6,12 +6,12 @@ namespace core{
     void ClearScreen()
 {
     for(int i = 0; i < 200; i++)
-        std::cout << std::endl;
+        std::cout << '\n';
 }
 
     void printvec(const char* name, glm::vec3 v)
     {
-        std::cout << name << "x = " << v.x << ", y = " << v.y << ", z = " << v.z << std::endl;
+        std::cout << name << "x = " << v.x << ", y = " << v.y << ", z = " << v.z << '\n';
     }
     
     std::string vectostr(glm::vec3& v) 
@@ -90,7 +90,7 @@ void createIndices(int nquad,std::vector<int>& indices, bool log)
     for(int i = 0; i <  indices.size(); i++){
         std::cout << indices[i] << " " ;
     }
-    std::cout << std::endl;
+    std::cout << '\n';
 
 }
 
@@ -191,12 +191,12 @@ void createVerticesCube(std::vector<Vertex>& vertices, bool log)
 void err()
 {
     static int log_number = 0;
-    std::cout << "this is log n " << ++log_number << std::endl;
+    std::cout << "this is log n " << ++log_number << '\n';
 }
 
 void msg(const char* mess)
 {
-    std::cout<< mess << std::endl;
+    std::cout<< mess << '\n';
 }
 
 void CreateIndices(std::vector<int>& indices, int quad_number, bool log ){
@@ -217,9 +217,9 @@ void CreateIndices(std::vector<int>& indices, int quad_number, bool log ){
         for(int i = 0; i <  indices.size(); i++){
                 std:: cout << indices[i] << " ";
                 if((i+1)%6 == 0 && i != 0)
-                    std::cout << std::endl;
+                    std::cout << '\n';
         }
-        std::cout << std::endl;
+        std::cout << '\n';
     }
 
 }

@@ -3,11 +3,13 @@
 #include <TestBatch.h>
 #include <core/profiling/Timer.h>
 #include <filesystem>
+#include <core/Window.h>
+#include <core/Events/ApplicationEvents.h>
+#include <core/Events/KeyEvents.h>
+#include <core/Events/MouseEvents.h>
 
-const float SCR_X = 1920;
-const float SCR_Y = 1080;
 
-Renderer renderer(SCR_X, SCR_Y);
+Renderer renderer(1280.f, 720.f);
 
 void processInput(GLFWwindow *window )
 {
@@ -15,68 +17,36 @@ void processInput(GLFWwindow *window )
         glfwSetWindowShouldClose(window,true);
 }
 
-void mousecall(GLFWwindow* window, double xpos, double ypos)
-{
-        //camera->mouseInput(window, xpos, ypos);
-}
-
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-{
-    renderer.camera->ChangeZoomLevel(yoffset);
-}
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-    renderer.updateResolution(width, height);
-}
-
 int main(void)
 {
+    float lastframe = 0;
     Timer timer("main");
-    Renderer& rend = renderer;
-    float deltatime, lastframe;
-    lastframe = 0.0f;
-    bool prova;
-    GLFWwindow* window = renderer.WindowInit();
-    const char* glsl_version = "#version 430";
-    renderer.init();
+    CrossPlatformWindow window(renderer);
+    window.init();
+    //window.SetRenderer(renderer);
+    renderer.SetWindow(window.ptrWindow());
     renderer.ImGuiInit();
+    renderer.init();
+    window.SetVSync(true);
 
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    glfwSetCursorPosCallback(window, mousecall);
-    glfwSetScrollCallback(window, scroll_callback);
 
-    stbi_set_flip_vertically_on_load(true);
-    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-
-    test::TestBatch tst(renderer);
-    //glEnable(GL_DEPTH_TEST);
-    while (!glfwWindowShouldClose(window))
+    test::TestBatch tst(renderer, window);
+ 
+    while (!window.ShouldClose())
     {
-        if(glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
-            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-        if(glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
-            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-
-        float currentframe = glfwGetTime();
-        deltatime = currentframe - lastframe;
-        lastframe = currentframe;
-
-        processInput(window);
-        /* Poll for and process events */
-        tst.onUpdate(deltatime);
+        tst.onUpdate(window.GetDeltaTime());
         renderer.Clear();
         tst.onRender();
-
         renderer.ImGuiStart();
-
         tst.onImGuiRender();
         renderer.ImGuiEnd();
 
-        renderer.End();
+        //renderer.End();
+        glfwSwapBuffers(window.ptrWindow());
+        glfwPollEvents();
     }
-    renderer.ImGuiClose();
+
+    //renderer.ImGuiClose();
     glfwTerminate();
     return 0;
 }

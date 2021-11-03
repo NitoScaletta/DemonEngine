@@ -24,6 +24,7 @@ class Renderer
 
         void updateResolution(const float x, const float y);
         inline GLFWwindow* GetWindowPointer() const { return wind; }
+        inline void SetWindow(GLFWwindow *window) { wind = window;}
         
 
     private:

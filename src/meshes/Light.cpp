@@ -71,8 +71,8 @@ void PointLight::print()
       core::printvec("[point light][position]        ", pos); 
       core::printvec("[point light][Ambient light]   ", ambientColor);
       core::printvec("[point light][Diffuse light]   ", diffuseColor);
-      std::cout<<    "[point light][linear]          " << linear << std::endl;
-      std::cout<<    "[point light][quadratic]:      " << quadratic << std::endl;
+      std::cout<<    "[point light][linear]          " << linear << '\n';
+      std::cout<<    "[point light][quadratic]:      " << quadratic << '\n';
 }
 
 

@@ -1,8 +1,10 @@
 #include <TestBatch.h>
 #include <core/CoreFun.h>
+#include <functional>
+
 
 namespace test{
-    TestBatch::TestBatch(Renderer& render) : renderer(render)
+    TestBatch::TestBatch(Renderer& render, CrossPlatformWindow& mywindow) : renderer(render), m_Window(mywindow)
     {
         nquad = 1;
         prev_nquad = 0;
@@ -21,6 +23,7 @@ namespace test{
         model = glm::mat4(1.0f);
         view = glm::mat4(1.0f);
         ps.setUniMat4f("aMVP", renderer.camera->GetViewProjMatrix());
+        m_Window.SetEventCallback(std::bind(&TestBatch::onEvent, this, std::placeholders::_1));
     }
 
 
@@ -157,6 +160,36 @@ namespace test{
         if(glfwGetKey(renderer.GetWindowPointer(), GLFW_KEY_A) == GLFW_PRESS)
             cam_pos.x -= speed;
         renderer.camera->SetPosition(cam_pos);
+    }
+
+
+
+    void TestBatch::onEvent(Event& e) 
+    {
+        EventDispatcher dispatcher(e);
+        dispatcher.Dispatch<WindowResizeEvent>(std::bind(&TestBatch::onWindowResizeEvent, this, std::placeholders::_1));
+        dispatcher.Dispatch<MouseScrolledEvent>(std::bind(&TestBatch::onMouseScrollEvent, this, std::placeholders::_1));
+        dispatcher.Dispatch<KeyPressedEvent>(std::bind(&TestBatch::onKeyPressedEvent, this, std::placeholders::_1));
+
+       
+    }
+
+    bool TestBatch::onWindowResizeEvent(WindowResizeEvent& e) 
+    {
+        renderer.camera->ResetProjMatrix(e.GetWidth(), e.GetHeight());
+        return true;
+    }
+
+    bool TestBatch::onMouseScrollEvent(MouseScrolledEvent& e) 
+    {
+        renderer.camera->ChangeZoomLevel(e.GetYoffset());
+        return true;
+    }
+
+
+    bool TestBatch::onKeyPressedEvent(KeyPressedEvent& e) 
+    {
+        return true;
     }
 
 }

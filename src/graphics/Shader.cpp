@@ -29,7 +29,7 @@ void Shader::checkLog(){
     if(!success)
     {
         glGetShaderInfoLog(id, 2048, NULL, infoLog);
-        std::cout<< pathtosource <<" ----> ERRORE COMOPILAZIONE SHADER" << std::endl << infoLog << std::endl;
+        std::cout<< pathtosource <<" ----> ERRORE COMOPILAZIONE SHADER" << '\n' << infoLog << '\n';
     }
 
 }
@@ -55,7 +55,7 @@ void Shader::readSourceFile(const char*  path){
         compileShader();
     }
     else{
-        std::cout << path << "file non trovato" << std::endl;
+        std::cout << path << "file non trovato" << '\n';
     }
 }
 
@@ -94,7 +94,7 @@ void ShaderProgram::checkLog(){
     {
         char infoLog[2048];
         glGetShaderInfoLog(id, 2048, NULL, infoLog);
-        std::cout<<" ERRORE COMOPILAZIONE PROGRAM SHADER"<< std::endl << infoLog << std::endl;
+        std::cout<<" ERRORE COMOPILAZIONE PROGRAM SHADER"<< '\n' << infoLog << '\n';
     }
 }
 
@@ -150,7 +150,7 @@ int ShaderProgram::getUniLocation(std::string name){
     int location = glGetUniformLocation(id, name.c_str());
     if (location == -1 && errors  < 2)
     {
-        std::cout << "UNIFORM " << name << " NOT FOUND" << std::endl;
+        std::cout << "UNIFORM " << name << " NOT FOUND" << '\n';
         errors++;
         return  -1;
     }

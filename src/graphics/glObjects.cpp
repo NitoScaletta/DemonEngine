@@ -199,7 +199,7 @@ void Texture::LoadImagePNG(const char* path)
         stbi_image_free(data);
     }
     else{
-        std::cout << path << "not found" << std::endl;
+        std::cout << path << "not found" << '\n';
     }
 }
 
@@ -228,7 +228,7 @@ void Texture::DataSet( unsigned int texture_unit, TextureData* image)
                 stbi_image_free(image->data);
             }
     }
-    else std::cout << "data not found" << std::endl;
+    else std::cout << "data not found" << '\n';
 }
 
 void Texture::SetType(const char* typ) 
@@ -325,9 +325,9 @@ void Vertex::setTCor(glm::vec2 tcoo)
 
 void Vertex::print()
 {
-    std::cout <<  ") x: " <<  position.x << " y: " << position.y << " z: " << position.z<< std::endl <<
-        "normal: " <<") x: " <<  normal.x << " y: " << normal.y << " z: " << normal.z     << std::endl << 
-        "colors r: " <<  colors.x << " g: " << colors.y << " b: " << colors.z  << "alpha: " << colors.w << std::endl;
+    std::cout <<  ") x: " <<  position.x << " y: " << position.y << " z: " << position.z<< '\n' <<
+        "normal: " <<") x: " <<  normal.x << " y: " << normal.y << " z: " << normal.z     << '\n' << 
+        "colors r: " <<  colors.x << " g: " << colors.y << " b: " << colors.z  << "alpha: " << colors.w << '\n';
 }
 
 void Vertex::setNormal(float x, float y, float z)

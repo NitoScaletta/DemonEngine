@@ -49,8 +49,7 @@ add_library(imgui   vendor/imgui/imgui.cpp
                     vendor/imgui/backends/imgui_impl_opengl3.cpp
                     vendor/imgui/backends/imgui_impl_glfw.cpp
                     )
-add_library(test    src/test.cpp
-                    src/test/TestBatch.cpp
+add_library(test    src/test/TestBatch.cpp
                     )
 add_executable (DemonEngine src/app.cpp)
 
