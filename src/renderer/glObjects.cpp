@@ -1,5 +1,5 @@
 #include <core/CoreFun.h>
-#include "graphic/glObjects.h"
+#include "Renderer/glObjects.h"
 #include "glad/glad.h"
 #include "core/profiling/Timer.h"
 
@@ -51,17 +51,7 @@ VertexArray::VertexArray() : index(0) , offset(0), stride(0)
     glGenVertexArrays(1, &id);
 }
 
-void VertexArray::bind() const
-{
-    glBindVertexArray(id);
-}
-
-void VertexArray::unbind() const
-{
-    glBindVertexArray(0);
-}
-
-void VertexArray::newLayout(int nValues, const int& nAtt)
+void VertexArray::newLayout(int nValues, const int nAtt)
 {
     glVertexAttribPointer(index, nValues, GL_FLOAT, GL_FALSE,
                          nAtt * sizeof(float), (void*)(offset*sizeof(float)));

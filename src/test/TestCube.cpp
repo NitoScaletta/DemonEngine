@@ -19,8 +19,8 @@ namespace test{
         vbo.bindDynamic(1000);
         vbo.loadDynamic(0, sizeof(Vertex)*vertices.size(),vertices.data());
         vao.newLayoutDynamic();
-        vs.initShader(VertexType::VERTEX);
-        fs.initShader(VertexType::FRAGMENT);
+        vs.initShader(VERTEX_SHADER);
+        fs.initShader(FRAGMENT_SHADER);
         vs.readSourceFile("vertex.txt");
         fs.readSourceFile("fragmentQuad.txt");
         ps.compileShader(vs.id, fs.id);

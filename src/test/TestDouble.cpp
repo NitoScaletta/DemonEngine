@@ -26,8 +26,8 @@ namespace test{
             vbo.bindDynamic(1000);
             vbo.loadDynamic(0, sizeof(Vertex)*vertices.size(), vertices.data());
             vao.newLayoutDynamic();
-            vs.initShader(VertexType::VERTEX);
-            fs.initShader(VertexType::FRAGMENT);
+            vs.initShader(VERTEX_SHADER);
+            fs.initShader(FRAGMENT_SHADER);
             vs.readSourceFile("vertex.txt");
             fs.readSourceFile("fragmentQuad.txt");
             ps.compileShader(vs.id, fs.id);
@@ -68,8 +68,8 @@ namespace test{
             vbo2.bindDynamic(1000);
             vbo2.loadDynamic(0, sizeof(Vertex)*vertices.size(), vertices.data());
             vao2.newLayoutDynamic();
-            vs2.initShader(VertexType::VERTEX);
-            fs2.initShader(VertexType::FRAGMENT);
+            vs2.initShader(VERTEX_SHADER);
+            fs2.initShader(FRAGMENT_SHADER);
             vs2.readSourceFile("vertex.txt");
             fs2.readSourceFile("fragmentQuad.txt");
             ps2.compileShader(vs2.id, fs2.id);

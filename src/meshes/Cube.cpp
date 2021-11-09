@@ -170,8 +170,8 @@ Cube::Cube(const char* fragmentshader)
     vbo.bindDynamic(indices.size());
     vbo.loadDynamic(0, sizeof(vertArr), vertArr);
     vao.newLayoutDynamic();
-    vs.initShader(VertexType::VERTEX);
-    fs.initShader(VertexType::FRAGMENT);
+    vs.initShader(VERTEX_SHADER);
+    fs.initShader(FRAGMENT_SHADER);
     vs.readSourceFile("vertex.txt");
     fs.readSourceFile(fragmentshader);
     ps.compileShader(vs.id, fs.id);
@@ -304,8 +304,8 @@ Plane::Plane()
     vbo.bindDynamic(10);
     vbo.loadDynamic(0, sizeof(Vertex)*vertices.size(), vertices.data());
     vao.newLayoutDynamic();
-    vs.initShader(VertexType::VERTEX);
-    fs.initShader(VertexType::FRAGMENT);
+    vs.initShader(VERTEX_SHADER);
+    fs.initShader(FRAGMENT_SHADER);
     vs.readSourceFile("vertex.txt");
     fs.readSourceFile("fragmentDiffuse.txt");
     ps.compileShader(vs.id, fs.id);

@@ -1,7 +1,7 @@
 #ifndef TEST_H_
 #define TEST_H_
-#include "graphic/glObjects.h"
-#include "graphic/Shader.h"
+#include "Renderer/glObjects.h"
+#include "Renderer/Shader.h"
 #include "core/Events/Events.h"
 
 namespace test{

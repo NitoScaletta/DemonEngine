@@ -6,31 +6,22 @@
 class Renderer
 {
     public:
-        Renderer(float x, float y);
         ~Renderer();
-        Camera2d* camera;
-        GLFWwindow* WindowInit();
-        void draw(VertexArray& vao, ElementBuffer& ebo, ShaderProgram& ps);
+        static void draw(VertexArray& vao, ElementBuffer& ebo, ShaderProgram& ps);
 
-        void init();
-        void Clear(float r = 1.0f, float g = 1.0f, float b = 1.0f, float alpha = 1.0f);
-        void End();
-        void update();
+        static void init();
+        static void Clear(float r = 1.0f, float g = 1.0f, float b = 1.0f, float alpha = 1.0f);
+        static void End();
 
-        void ImGuiInit();
-        void ImGuiStart();
-        void ImGuiEnd();    
-        void ImGuiClose();    
+        static void ImGuiInit();
+        static void ImGuiStart();
+        static void ImGuiEnd();    
+        static void ImGuiClose();    
 
-        void updateResolution(const float x, const float y);
-        inline GLFWwindow* GetWindowPointer() const { return wind; }
-        inline void SetWindow(GLFWwindow *window) { wind = window;}
         
 
     private:
-        float wind_size_x, wind_size_y;
-        GLFWwindow* wind;
-
+        Renderer();
 };
 
 #endif // RENDERER_H_

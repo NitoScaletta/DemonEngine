@@ -2,53 +2,47 @@
 #define __WINDOW_H__
 
 #include <iostream>
-#include <Renderer/renderer.h>
 #include <GLFW/glfw3.h>
 #include <core/Events/Events.h>
 
-class Window
-{
-    public: 
-        using EventCallbackFn = std::function<void(Event&)>;
-        virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
-        virtual void init() = 0;
-        virtual bool ShouldClose() = 0;
-        virtual float AspectRatio() = 0;
-        virtual uint16_t GetWidth() = 0;
-        virtual uint16_t GetHeight() = 0;
-        virtual void SetVSync(bool vsync) = 0; 
-
-    protected:
-
-};
-
-
-
-class CrossPlatformWindow : public Window
+class CrossPlatformWindow 
 {
     public:
 
-        CrossPlatformWindow(Renderer& rend);
+        using EventCallbackFn = std::function<void(Event&)>;
         ~CrossPlatformWindow();
-        void init() override;
-        inline bool ShouldClose () override     { return glfwWindowShouldClose(window); } 
-        inline GLFWwindow* ptrWindow()          { return window; }
-        inline float AspectRatio() override        { return m_Data.width/m_Data.height; }
-        inline uint16_t GetWidth()  override     { return m_Data.width; }
-        inline uint16_t GetHeight() override     { return m_Data.height; }
-        virtual void SetVSync(bool vsync) override   { glfwSwapInterval(vsync); m_Data.VSync = vsync;}
-        float GetDeltaTime();
-        inline void SetRenderer(Renderer& rend) {renderer = rend;}
-        virtual void SetEventCallback(const EventCallbackFn& callback) override {
-            m_Data.EventCallback = callback;
-        }
-        inline virtual void CaptureCursor() { glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);}
-        inline virtual void ReleaseCursor() { glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);}
-
+        static void init() { s_window->_init(); }
+        static bool ShouldClose ()       { return glfwWindowShouldClose(s_glfwwindow); } 
+        static float AspectRatio()       { return s_window->_AspectRatio(); }
+        static uint16_t GetWidth()       { return s_window->_GetWidth(); }
+        static uint16_t GetHeight()      { return s_window->_GetHeight(); }
+        static void SetVSync(bool vsync) { glfwSwapInterval(vsync); s_window->m_Data.VSync = vsync;}
+        static void SetEventCallBack(const EventCallbackFn& callback)   
+        { Get()->_SetEventCallback(callback); }
+        static float GetDeltaTime();
+        static void CaptureCursor() { glfwSetInputMode(window_ptr(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);}
+        static void ReleaseCursor() { glfwSetInputMode(window_ptr(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);}
+        static CrossPlatformWindow* Get() {  return s_window; }
+        static GLFWwindow* window_ptr() { return s_glfwwindow; }
 
     private:
+        CrossPlatformWindow();
+        void _init() ;
+        inline bool _ShouldClose ()       { return glfwWindowShouldClose(window); } 
+        inline float _AspectRatio()       { return m_Data.width/m_Data.height; }
+        inline uint16_t _GetWidth()       { return m_Data.width; }
+        inline uint16_t _GetHeight()      { return m_Data.height; }
+        void _SetEventCallback(const EventCallbackFn& callback)  {
+            m_Data.EventCallback = callback;
+        }
+
+
+
+
+
         GLFWwindow *window;
-        Renderer& renderer;
+        static GLFWwindow *s_glfwwindow;
+        static CrossPlatformWindow* s_window;
         struct WindowData
         {
             uint16_t width;
@@ -59,6 +53,5 @@ class CrossPlatformWindow : public Window
         WindowData m_Data;
         float LastFrame;
 };
-
 
 #endif // __WINDOW_H__

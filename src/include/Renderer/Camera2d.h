@@ -18,7 +18,7 @@ class Camera2d
         inline void SetPosition(glm::vec3 position)         { Position = position; CalcViewProjMatrix(); } 
         inline void SetRotation(float rotation)             { Rotation = rotation; CalcViewProjMatrix(); }
         inline void ResetProjMatrix(float aspectratio)      { ProjMatrix = glm::ortho(-aspectratio*ZoomLevel, aspectratio*ZoomLevel, -ZoomLevel, ZoomLevel); 
-                                                                AspectRatio = aspectratio; }
+                                                                AspectRatio = aspectratio; CalcViewProjMatrix(); }
         inline void ResetProjMatrix(float x, float y)       { ResetProjMatrix(x/y);  }
         inline void ChangeZoomLevel(float offset)           { ZoomLevel += offset*(-10); if(ZoomLevel <= 1) ZoomLevel = 1; ResetProjMatrix(AspectRatio); }
     private:

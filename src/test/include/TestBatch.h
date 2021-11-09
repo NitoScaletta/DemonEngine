@@ -14,7 +14,7 @@ namespace test{
 class TestBatch : public Test
 {
     public:
-        TestBatch(Renderer& render, CrossPlatformWindow& window);
+        TestBatch();
         ShaderProgram ps;
         void onUpdate(float deltatime) override;
         void onRender() override;
@@ -24,8 +24,7 @@ class TestBatch : public Test
     
     private:
         GLFWwindow* window;
-        CrossPlatformWindow& m_Window;
-        Renderer& renderer;
+        Camera2d* camera;
         VertexArray vao;
         int x = 0;
         VertexBuffer vbo;

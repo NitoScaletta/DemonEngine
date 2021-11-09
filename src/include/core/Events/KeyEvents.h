@@ -28,7 +28,7 @@ class KeyPressedEvent : public KeyEvent
         std::string toString() const override
         {
             std::stringstream ss;
-            ss << "KeyCode: " << m_KeyCode << "pressed ---> repeated " << RepeatCount << " times";
+            ss << "KeyCode: " << (char)m_KeyCode << " pressed --- repeated " << RepeatCount << " times";
             return ss.str();
         }
         EVENT_CLASS_TYPE(KeyPressed)

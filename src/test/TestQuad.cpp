@@ -2,8 +2,8 @@
 #include "TestQuad.h"
 #include "imgui/imgui.h"
 #include "Renderer/renderer.h"
-#include "graphic/glObjects.h"
-#include "graphic/Shader.h"
+#include "Renderer/glObjects.h"
+#include "Renderer/Shader.h"
 #include <iostream>
 #include <vector>
 #include "core/CoreFun.h"
@@ -33,8 +33,8 @@ namespace test{
         vbo.bindDynamic(10);
         vbo.bindLayout(vao);
         vbo.loadDynamic(0, sizeof(Vertex)*vertices.size(), vertices.data());
-        vs.initShader(VertexType::VERTEX);
-        fs.initShader(VertexType::FRAGMENT);
+        vs.initShader(VERTEX_SHADER);
+        fs.initShader(FRAGMENT_SHADER);
         vs.readSourceFile("vertex.txt");
         fs.readSourceFile("fragmentQuad.txt");
         ps.compileShader(vs.id, fs.id);

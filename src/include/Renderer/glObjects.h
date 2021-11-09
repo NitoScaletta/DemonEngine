@@ -5,6 +5,12 @@
 #include  <iostream>
 #include <stb_image.h>
 #include <glm/glm.hpp>
+#include <glad/glad.h>
+
+
+#define DE_INT 0x1404
+#define DE_UNSIGNED_INT 0x1405
+#define DE_FLOAT 0x1406
 
 
 struct Vertex
@@ -35,17 +41,20 @@ struct Vertex
         //void setNormal(aiVector3D& norm);
 };
 
+
+
 class VertexArray{
         public:
                 VertexArray();
-                void bind() const;
-                void unbind() const;
-                void newLayout(int nValues, const int& nAtt);
+                void bind() const       { glBindVertexArray(id);}
+                void unbind() const     { glBindVertexArray(0); }
+                void newLayout(int nValues, const int nAtt);
                 void newLayoutDynamic();
+                
         private:
                 unsigned int id;
                 unsigned int index;
-                unsigned int offset;
+                size_t offset;
                 int stride;
 };
 

@@ -17,8 +17,8 @@ TestVector::TestVector() : nquad(1)
     vbo.bindDynamic(5000);
     vao.newLayoutDynamic();
     vbo.loadDynamic(0,sizeof(Vertex)*vertices.size(), vertices.data());
-    vs.initShader(VertexType::VERTEX);
-    fs.initShader(VertexType::FRAGMENT);
+    vs.initShader(VERTEX_SHADER);
+    fs.initShader(FRAGMENT_SHADER);
     vs.readSourceFile("vertex.txt");
     fs.readSourceFile("fragment.txt");
     ps.compileShader(vs.id, fs.id);

@@ -34,8 +34,8 @@ Model::Model(std::string path)
     loadedTexture[1].SetTextureID(GL_TEXTURE1);
     loadedTexture[0].active();
     loadedTexture[1].active();
-    vs.initShader(VertexType::VERTEX);
-    fs.initShader(VertexType::FRAGMENT);
+    vs.initShader(VERTEX_SHADER);
+    fs.initShader(FRAGMENT_SHADER);
     vs.readSourceFile("vertex.txt");
     fs.readSourceFile("FragmentModel.glsl");
     ps.compileShader(vs.id, fs.id);

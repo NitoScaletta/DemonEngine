@@ -3,9 +3,11 @@
 #include <core/Events/MouseEvents.h>
 #include <core/Events/KeyEvents.h>
 #include <core/Events/ApplicationEvents.h>
+#include <stb_image.h>
 
 
-CrossPlatformWindow::CrossPlatformWindow(Renderer& rend) : renderer(rend)
+
+CrossPlatformWindow::CrossPlatformWindow() 
 {
     m_Data.width = 1280;
     m_Data.height = 720; 
@@ -16,7 +18,7 @@ CrossPlatformWindow::~CrossPlatformWindow()
 
 }
 
-void CrossPlatformWindow::init() 
+void CrossPlatformWindow::_init() 
 {
     if (!glfwInit())
     {
@@ -36,10 +38,12 @@ void CrossPlatformWindow::init()
         window = nullptr;
     }
     /* Make the window's context current */
+    s_glfwwindow = window;
     glfwMakeContextCurrent(window);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     SetVSync(0);
     glfwSetWindowUserPointer(window, &m_Data);
+    stbi_set_flip_vertically_on_load(true);  
     LastFrame = glfwGetTime();
 
     glfwSetFramebufferSizeCallback(window, [](GLFWwindow *window, int x, int y){
@@ -103,8 +107,8 @@ float CrossPlatformWindow::GetDeltaTime()
 {
     float DeltaTime;
     float CurrentFrame = glfwGetTime();
-    DeltaTime = CurrentFrame - LastFrame;
-    LastFrame = CurrentFrame;
+    DeltaTime = CurrentFrame - s_window->LastFrame;
+    s_window->LastFrame = CurrentFrame;
     return DeltaTime;
 }
         

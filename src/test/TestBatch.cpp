@@ -1,11 +1,12 @@
 #include <TestBatch.h>
 #include <core/CoreFun.h>
-#include <functional>
+#include <core/Input.h>
 
 
 namespace test{
-    TestBatch::TestBatch(Renderer& render, CrossPlatformWindow& mywindow) : renderer(render), m_Window(mywindow)
+    TestBatch::TestBatch() 
     {
+        camera = new Camera2d(16.f/9.f);
         nquad = 1;
         prev_nquad = 0;
         vertices = nullptr;
@@ -14,32 +15,35 @@ namespace test{
         ebo.bind();
         vbo.bindDynamic(10000000);
         vao.newLayoutDynamic();
-        vs.initShader(VertexType::VERTEX);
-        fs.initShader(VertexType::FRAGMENT);
+        vs.initShader(VERTEX_SHADER);
+        fs.initShader(FRAGMENT_SHADER);
         vs.readSourceFile("VertexQuad.glsl");
         fs.readSourceFile("fragment.glsl");
         ps.compileShader(vs.id,fs.id);
         ps.use();
         model = glm::mat4(1.0f);
         view = glm::mat4(1.0f);
-        ps.setUniMat4f("aMVP", renderer.camera->GetViewProjMatrix());
-        m_Window.SetEventCallback(std::bind(&TestBatch::onEvent, this, std::placeholders::_1));
+        ps.setUniMat4f("aMVP", camera->GetViewProjMatrix());
+        CrossPlatformWindow::SetEventCallBack(BIND_EVENT(TestBatch::onEvent));
     }
 
 
 
     void TestBatch::onUpdate(float deltatime) 
     {
-        VerticesInit(nquad);
         CameraController(deltatime);
-        ps.setUniMat4f("aMVP", renderer.camera->GetViewProjMatrix());
-        vbo.loadDynamic(0,sizeof(Vertex)*nquad*4, vertices);
-        ebo.set(indices.data(), sizeof(int)*indices.size());
+        ps.setUniMat4f("aMVP", camera->GetViewProjMatrix());
+        if(nquad != prev_nquad)
+        {
+            VerticesInit(nquad);
+            vbo.loadDynamic(0,sizeof(Vertex)*nquad*4, vertices);
+            ebo.set(indices.data(), sizeof(int)*indices.size());
+        }
     }
 
     void TestBatch::onRender() 
     {
-        renderer.draw(vao,ebo, ps);
+        Renderer::draw(vao,ebo, ps);
     }
 
 
@@ -151,15 +155,15 @@ namespace test{
     void TestBatch::CameraController(float deltatime) 
     {
         float speed = 1000*deltatime;
-        if(glfwGetKey(renderer.GetWindowPointer(), GLFW_KEY_W) == GLFW_PRESS)
+        if(Input::isPressed(Key::W))
             cam_pos.y += speed;
-        if(glfwGetKey(renderer.GetWindowPointer(), GLFW_KEY_S) == GLFW_PRESS)
+        if(Input::isPressed(Key::S))
             cam_pos.y -= speed;
-        if(glfwGetKey(renderer.GetWindowPointer(), GLFW_KEY_D) == GLFW_PRESS)
+        if(Input::isPressed(Key::D))
             cam_pos.x += speed;
-        if(glfwGetKey(renderer.GetWindowPointer(), GLFW_KEY_A) == GLFW_PRESS)
+        if(Input::isPressed(Key::A))
             cam_pos.x -= speed;
-        renderer.camera->SetPosition(cam_pos);
+        camera->SetPosition(cam_pos);
     }
 
 
@@ -167,28 +171,27 @@ namespace test{
     void TestBatch::onEvent(Event& e) 
     {
         EventDispatcher dispatcher(e);
-        dispatcher.Dispatch<WindowResizeEvent>(std::bind(&TestBatch::onWindowResizeEvent, this, std::placeholders::_1));
-        dispatcher.Dispatch<MouseScrolledEvent>(std::bind(&TestBatch::onMouseScrollEvent, this, std::placeholders::_1));
-        dispatcher.Dispatch<KeyPressedEvent>(std::bind(&TestBatch::onKeyPressedEvent, this, std::placeholders::_1));
-
-       
+        dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT(TestBatch::onWindowResizeEvent));
+        dispatcher.Dispatch<MouseScrolledEvent>(BIND_EVENT(TestBatch::onMouseScrollEvent));
+        dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT(TestBatch::onKeyPressedEvent));
     }
 
     bool TestBatch::onWindowResizeEvent(WindowResizeEvent& e) 
     {
-        renderer.camera->ResetProjMatrix(e.GetWidth(), e.GetHeight());
+        camera->ResetProjMatrix(e.GetWidth(), e.GetHeight());
         return true;
     }
 
     bool TestBatch::onMouseScrollEvent(MouseScrolledEvent& e) 
     {
-        renderer.camera->ChangeZoomLevel(e.GetYoffset());
+        camera->ChangeZoomLevel(e.GetYoffset());
         return true;
     }
 
 
     bool TestBatch::onKeyPressedEvent(KeyPressedEvent& e) 
     {
+        core::msg(e.toString().c_str());
         return true;
     }
 

@@ -1,5 +1,4 @@
-#include <glad/glad.h>
-#include <graphic/Shader.h>
+#include <Renderer/Shader.h>
 #include <core/CoreFun.h>
 #include <iostream>
 #include <fstream>
@@ -10,16 +9,14 @@ Shader::Shader(){
 
 }
 
-Shader::Shader(VertexType type)
+Shader::Shader(int type)
 {
     initShader(type);
 }
 
-void Shader::initShader(VertexType type){
-    if (type == VertexType::VERTEX)
-        id = glCreateShader(GL_VERTEX_SHADER);
-    if(type == VertexType::FRAGMENT)
-        id = glCreateShader(GL_FRAGMENT_SHADER);
+void Shader::initShader(int type)
+{
+        id = glCreateShader(type);
 }
 
 void Shader::checkLog(){
@@ -100,21 +97,18 @@ void ShaderProgram::checkLog(){
 
 
 
-void  ShaderProgram::use()
-{
-    glUseProgram(id);
-}
+
 
 void ShaderProgram::setUnifi(const char *name, int pos)
 {
-    use();
+    glUseProgram(id);
     int loc = getUniLocation(name);
     glUniform1i(loc, pos);
 }
 
 void ShaderProgram::setUniff(const char *name, float pos)
 {
-    use();
+    glUseProgram(id);
     int loc = getUniLocation(name);
     glUniform1f( loc, pos);
 }
@@ -123,7 +117,7 @@ void ShaderProgram::setUniff(const char *name, float pos)
 
 void ShaderProgram::setUniMat4f(const char* name,glm::mat4 matrix)
 {
-    use();
+    glUseProgram(id);
     int loc = getUniLocation(name);
     glUniformMatrix4fv(loc,1,GL_FALSE, &matrix[0][0]);
 }
@@ -131,13 +125,13 @@ void ShaderProgram::setUniMat4f(const char* name,glm::mat4 matrix)
 
 void ShaderProgram::setUniVector(const char *name, int size, const int *value)
 {
-    use();
+    glUseProgram(id);
     int loc = getUniLocation(name);
     glUniform1iv(loc, size, value);
 }
 void ShaderProgram::setUniVec3(const char *name, glm::vec3 vect)
 {
-    use();
+    glUseProgram(id);
     int loc = getUniLocation(name);
     glUniform3fv(loc, 1, &vect.x);
 }

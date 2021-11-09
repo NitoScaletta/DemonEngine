@@ -14,8 +14,8 @@ Light::Light() : Cube(),
     vbo.bindDynamic(24);
     vbo.loadDynamic(0, sizeof(Vertex)*vertices.size(), vertices.data());
     vao.newLayoutDynamic();
-    vs.initShader(VertexType::VERTEX);
-    fs.initShader(VertexType::FRAGMENT);
+    vs.initShader(VERTEX_SHADER);
+    fs.initShader(FRAGMENT_SHADER);
     vs.readSourceFile("vertex.txt");
     fs.readSourceFile("fragmentLight.txt");
     ps.compileShader(vs.id, fs.id);

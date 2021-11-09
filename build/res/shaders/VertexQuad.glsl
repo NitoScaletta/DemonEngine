@@ -16,6 +16,7 @@ uniform mat4 aMVP;
 
 void main()
 {
+    TexCoord = aTexCoord;
     ourColor = aColor;
     gl_Position = aMVP * aPos;
 }

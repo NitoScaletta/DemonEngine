@@ -1,15 +1,19 @@
 #include <core/core.h>
 #include <core/CoreFun.h>
 #include <TestBatch.h>
+#include <TestTexture.h>
 #include <core/profiling/Timer.h>
 #include <filesystem>
 #include <core/Window.h>
 #include <core/Events/ApplicationEvents.h>
 #include <core/Events/KeyEvents.h>
 #include <core/Events/MouseEvents.h>
+#include <core/Input.h>
 
 
-Renderer renderer(1280.f, 720.f);
+GLFWwindow *CrossPlatformWindow::s_glfwwindow;
+CrossPlatformWindow *CrossPlatformWindow::s_window = new CrossPlatformWindow;
+
 
 void processInput(GLFWwindow *window )
 {
@@ -21,32 +25,29 @@ int main(void)
 {
     float lastframe = 0;
     Timer timer("main");
-    CrossPlatformWindow window(renderer);
-    window.init();
+    CrossPlatformWindow::init();
     //window.SetRenderer(renderer);
-    renderer.SetWindow(window.ptrWindow());
-    renderer.ImGuiInit();
-    renderer.init();
-    window.SetVSync(true);
+    Renderer::init();
+    Renderer::ImGuiInit();
+    CrossPlatformWindow::SetVSync(false);
 
-
-    test::TestBatch tst(renderer, window);
+    test::TestTexture tst;
  
-    while (!window.ShouldClose())
+    while (!CrossPlatformWindow::ShouldClose())
     {
-        tst.onUpdate(window.GetDeltaTime());
-        renderer.Clear();
+        tst.onUpdate(CrossPlatformWindow::GetDeltaTime());
+        Renderer::Clear();
         tst.onRender();
-        renderer.ImGuiStart();
+        Renderer::ImGuiStart();
         tst.onImGuiRender();
-        renderer.ImGuiEnd();
+        Renderer::ImGuiEnd();
 
-        //renderer.End();
-        glfwSwapBuffers(window.ptrWindow());
+        //Renderer::End();
+        glfwSwapBuffers(CrossPlatformWindow::window_ptr());
         glfwPollEvents();
     }
 
-    //renderer.ImGuiClose();
+    //Renderer::ImGuiClose();
     glfwTerminate();
     return 0;
 }

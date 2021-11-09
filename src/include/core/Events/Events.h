@@ -2,12 +2,14 @@
 #define __EVENTS_H__
 #include<iostream>
 #include <functional>
+#include <sstream>
 
 #define EVENT_CLASS_TYPE(type)      static EventType GetStaticType() { return EventType::type; }\
                                     virtual EventType GetEventType() const override { return GetStaticType(); }\
                                     virtual const char* GetName() const override { return #type; }
 #define EVENT_CATEGORIES(category)  virtual int GetCategories() const override { return category; }
 
+#define BIND_EVENT(fn)std::bind(&fn, this, std::placeholders::_1)
 
 enum EventType
 {
@@ -39,7 +41,7 @@ class Event{
 
 class EventDispatcher
 {
-    template<typename T>
+    template<typename T> 
     using EventFun = std::function<bool(T&)>;
     public:
         EventDispatcher(Event& e) : m_Event(e) {}

@@ -1,16 +1,15 @@
 #include "Renderer/renderer.h"
-#include "graphic/glObjects.h"
-#include "graphic/Shader.h"
+#include "Renderer/glObjects.h"
+#include "Renderer/Shader.h"
+#include<core/Window.h>
 #include <iostream>
 
-Renderer::Renderer(float x, float y) : wind_size_x(x), wind_size_y(y) 
+Renderer::Renderer()
 {
-    camera = new Camera2d(wind_size_x/wind_size_y);
 }
 
 Renderer::~Renderer() 
 {
-    delete camera;
 }
 
 void Renderer::draw(VertexArray& vao, ElementBuffer& ebo, ShaderProgram& ps )
@@ -27,11 +26,13 @@ void Renderer::init()
     {
         std::cout << "Failed to initialize GLAD" << '\n';
     }
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void Renderer::End() 
 {
-    glfwSwapBuffers(wind);
+    glfwSwapBuffers(CrossPlatformWindow::window_ptr());
     glfwPollEvents();
 }
 
@@ -42,7 +43,7 @@ void Renderer::ImGuiInit()
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     ImGui::StyleColorsDark();
-    ImGui_ImplGlfw_InitForOpenGL(wind, true);
+    ImGui_ImplGlfw_InitForOpenGL(CrossPlatformWindow::window_ptr(), true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 }
 
@@ -67,17 +68,9 @@ void Renderer::ImGuiClose()
     ImGui::DestroyContext();
 }
 
-void Renderer::updateResolution(const float x, const float y) 
-{
-    camera->ResetProjMatrix(x/y); 
-}
 
 void Renderer::Clear(float r, float g, float b, float alpha)
 {
     glClearColor(0.6f, 0.0f, 0.4f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-}
-
-void Renderer::update()
-{
 }

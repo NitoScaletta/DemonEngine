@@ -3,8 +3,10 @@
 #include <glm/glm.hpp>
 #include <unordered_map>
 #include <string>
+#include <glad/glad.h>
 
-enum VertexType{VERTEX, FRAGMENT};
+#define VERTEX_SHADER 0x8B31
+#define FRAGMENT_SHADER 0x8B30
 
 class Shader{
 
@@ -18,11 +20,11 @@ class Shader{
 
     public:
         Shader();
-        Shader(VertexType type);
+        Shader(int type);
         void compileShader();
         void deleteShader();
         void readSourceFile(const  char*  path);
-        void initShader(VertexType type);
+        void initShader(int type);
 };
 
 class ShaderProgram{
@@ -32,7 +34,7 @@ class ShaderProgram{
         ShaderProgram();
         ShaderProgram(unsigned int vid, unsigned int fid);
         void compileShader(unsigned int vid, unsigned int fid);
-        void use();
+        inline void use() { glUseProgram(id); }
         void setUnifi(const char* name, int pos);
         void setUniff(const char *name, float pos);
         void setUniMat4f(const char* name,glm::mat4 matrix);
@@ -41,7 +43,6 @@ class ShaderProgram{
 
     private:
         std::unordered_map<std::string , int> uniformCache;
-
         void checkLog();
         int getUniLocation(std::string name);
 

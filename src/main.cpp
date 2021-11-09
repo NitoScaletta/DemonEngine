@@ -1,8 +1,8 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include <iostream>
-#include "include/graphic/Shader.h"
-#include "include/graphic/glObjects.h"
+#include "include/Renderer/Shader.h"
+#include "include/Renderer/glObjects.h"
 #include "stb_image.h"
 #include "include/renderer.h"
 #include <math.h>
@@ -89,8 +89,8 @@ int main(void)
     glm::mat4  model = glm::translate(glm::mat4(1.0f),glm::vec3(100.0f,100.0f,0));
     glm::mat4 mvp = proj * view * model;
 
-    Shader vs(VertexType::VERTEX);
-    Shader fs(VertexType::FRAGMENT);
+    Shader vs(VERTEX_SHADER);
+    Shader fs(FRAGMENT_SHADER);
 
     vs.readSourceFile("file.txt");
     fs.readSourceFile("fragment2.txt");
