@@ -2,6 +2,7 @@
 #include <core/CoreFun.h>
 #include <TestBatch.h>
 #include <TestTexture.h>
+#include <TestSpawnQuad.h>
 #include <core/profiling/Timer.h>
 #include <filesystem>
 #include <core/Window.h>
@@ -11,30 +12,22 @@
 #include <core/Input.h>
 
 
-GLFWwindow *CrossPlatformWindow::s_glfwwindow;
-CrossPlatformWindow *CrossPlatformWindow::s_window = new CrossPlatformWindow;
 
 
-void processInput(GLFWwindow *window )
-{
-    if(glfwGetKey(window,GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window,true);
-}
 
 int main(void)
 {
-    float lastframe = 0;
     Timer timer("main");
     CrossPlatformWindow::init();
-    //window.SetRenderer(renderer);
     Renderer::init();
     Renderer::ImGuiInit();
-    CrossPlatformWindow::SetVSync(false);
+    CrossPlatformWindow::SetVSync(true);
 
-    test::TestTexture tst;
+    test::TestSpawQuad tst;
  
     while (!CrossPlatformWindow::ShouldClose())
     {
+        CrossPlatformWindow::CalcDeltaTime();
         tst.onUpdate(CrossPlatformWindow::GetDeltaTime());
         Renderer::Clear();
         tst.onRender();

@@ -1,6 +1,5 @@
 #include "include/TestTexture.h"
 #include <core/Window.h>
-#include <core/Events/Events.h>
 #include <core/CoreFun.h>
 #include <core/Input.h>
 
@@ -9,7 +8,6 @@ namespace  test
 
     TestTexture::TestTexture() 
     {
-        camera = new Camera2d(16.f/9.f);
         CrossPlatformWindow::SetEventCallBack(BIND_EVENT(TestTexture::onEvent));
         vertices = nullptr;
         createVertices();
@@ -27,13 +25,30 @@ namespace  test
         fs.readSourceFile("fragment.glsl");
         ps.compileShader(vs.id,fs.id);
         ps.use();
-        ps.setUniMat4f("aMVP", camera->GetViewProjMatrix());
+        ps.setUniMat4f("aMVP", camera.GetViewProjMatrix());
         ps.setUnifi("m_texture", 0);
     }
 
     void TestTexture::onUpdate(float deltatime) 
     {
-        ps.setUniMat4f("aMVP", camera->GetViewProjMatrix());
+        if(Window::GetTimeInt()%2 == 0)
+        {
+            vertices[0].setTCor(0.5f, 0.0f);
+            vertices[1].setTCor(1.f, 0.0f);
+            vertices[2].setTCor(1.f, 1.0f);
+            vertices[3].setTCor( 0.5f, 1.0f);
+            animFrame = 1;
+        }
+        else
+        {
+            vertices[0].setTCor(0.0f, 0.0f);
+            vertices[1].setTCor(0.5f, 0.0f);
+            vertices[2].setTCor(0.5f, 1.0f);
+            vertices[3].setTCor( 0.0f, 1.0f);
+            animFrame = 0;
+        }
+        camera.movement(deltatime);
+        ps.setUniMat4f("aMVP", camera.GetViewProjMatrix());
         vbo.loadDynamic(0, sizeof(Vertex)* 4, vertices);
     }
 
@@ -52,8 +67,8 @@ namespace  test
         EventDispatcher dispatcher(e);
         dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT(TestTexture::onKeyPressed));
         dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT(TestTexture::onWindowResizedEvent));
-
-
+        dispatcher.Dispatch<MouseScrolledEvent>(BIND_EVENT(TestTexture::onMouseScrolledEvent));
+        dispatcher.Dispatch<MouseMovedEvent>(BIND_EVENT(TestTexture::onMouseMovementEvent));
     }
 
 
@@ -99,8 +114,25 @@ namespace  test
 
     bool TestTexture::onWindowResizedEvent(WindowResizeEvent& e) 
     {
-        camera->ResetProjMatrix(e.GetWidth(), e.GetHeight());
+        camera.ResetAspectRatio(e.GetWidth(), e.GetHeight());
         return true;
     }
+
+
+    bool TestTexture::onMouseScrolledEvent(MouseScrolledEvent& e) 
+    {
+        camera.Zoom(e.GetYoffset());
+        return true;
+    }
+
+
+    bool TestTexture::onMouseMovementEvent(MouseMovedEvent& e) 
+    {
+        float worldspacex = camera.GetMousePositionInWorldSpceX(e.GetMouseX());
+        float worldspacey = camera.GetMousePositionInWorldSpceY(e.GetMouseY());
+        std::cout << "world space--> x = " <<  worldspacex << "   y = " << worldspacey << '\n';
+        return true;
+    }
+    
 
 }

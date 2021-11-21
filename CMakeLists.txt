@@ -48,6 +48,7 @@ add_library(imgui   vendor/imgui/imgui.cpp
                     )
 add_library(test    src/test/TestBatch.cpp
                     src/test/TestTexture.cpp
+                    src/test/TestSpawnQuad.cpp
                     )
 add_executable (DemonEngine src/app.cpp)
 

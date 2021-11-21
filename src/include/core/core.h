@@ -3,6 +3,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <core/CoreFun.h>
 #include <iostream>
 #include <vector>
 #include <future>

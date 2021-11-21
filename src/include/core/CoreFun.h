@@ -2,6 +2,7 @@
 #define COREFUN_H_
 #include "core/core.h"
 #include "core/profiling/Timer.h"
+#include "Renderer/glObjects.h"
 
 namespace core{
     void createBuffer(int nquad, std::vector<Vertex>& vertices, float x, float y,

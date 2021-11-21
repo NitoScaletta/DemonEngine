@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <core/Events/Events.h>
 
+
 class CrossPlatformWindow 
 {
     public:
@@ -18,18 +19,21 @@ class CrossPlatformWindow
         static uint16_t GetHeight()      { return s_window->_GetHeight(); }
         static void SetVSync(bool vsync) { glfwSwapInterval(vsync); s_window->m_Data.VSync = vsync;}
         static void SetEventCallBack(const EventCallbackFn& callback)   
-        { Get()->_SetEventCallback(callback); }
-        static float GetDeltaTime();
-        static void CaptureCursor() { glfwSetInputMode(window_ptr(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);}
-        static void ReleaseCursor() { glfwSetInputMode(window_ptr(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);}
-        static CrossPlatformWindow* Get() {  return s_window; }
-        static GLFWwindow* window_ptr() { return s_glfwwindow; }
+                                            { Get()->_SetEventCallback(callback); }
+        static float CalcDeltaTime();
+        static float GetDeltaTime() { return m_deltaTime; };
+        static void CaptureCursor()         { glfwSetInputMode(window_ptr(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);}
+        static void ReleaseCursor()         { glfwSetInputMode(window_ptr(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);}
+        static CrossPlatformWindow* Get()   { return s_window; }
+        static GLFWwindow* window_ptr()     { return s_glfwwindow; }
+        static float GetTime()              { return glfwGetTime(); }
+        static int GetTimeInt()             { return glfwGetTime(); }
 
     private:
         CrossPlatformWindow();
         void _init() ;
         inline bool _ShouldClose ()       { return glfwWindowShouldClose(window); } 
-        inline float _AspectRatio()       { return m_Data.width/m_Data.height; }
+        inline float _AspectRatio()       { return static_cast<float>(m_Data.width)/static_cast<float>(m_Data.height); }
         inline uint16_t _GetWidth()       { return m_Data.width; }
         inline uint16_t _GetHeight()      { return m_Data.height; }
         void _SetEventCallback(const EventCallbackFn& callback)  {
@@ -51,7 +55,9 @@ class CrossPlatformWindow
             EventCallbackFn EventCallback;
         };
         WindowData m_Data;
-        float LastFrame;
+        float LastFrame = 0;
+        static float m_deltaTime;
 };
 
+using Window = CrossPlatformWindow;
 #endif // __WINDOW_H__

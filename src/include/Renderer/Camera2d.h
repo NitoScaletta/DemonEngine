@@ -17,10 +17,23 @@ class Camera2d
         inline const float& GetRotation() const             { return Rotation; }
         inline void SetPosition(glm::vec3 position)         { Position = position; CalcViewProjMatrix(); } 
         inline void SetRotation(float rotation)             { Rotation = rotation; CalcViewProjMatrix(); }
-        inline void ResetProjMatrix(float aspectratio)      { ProjMatrix = glm::ortho(-aspectratio*ZoomLevel, aspectratio*ZoomLevel, -ZoomLevel, ZoomLevel); 
-                                                                AspectRatio = aspectratio; CalcViewProjMatrix(); }
         inline void ResetProjMatrix(float x, float y)       { ResetProjMatrix(x/y);  }
-        inline void ChangeZoomLevel(float offset)           { ZoomLevel += offset*(-10); if(ZoomLevel <= 1) ZoomLevel = 1; ResetProjMatrix(AspectRatio); }
+        inline float GetZoom()                              { return ZoomLevel;}
+        inline glm::vec3 GetPosition()                      { return Position; }
+
+        inline void ResetProjMatrix(float aspectratio)      
+        { 
+            ProjMatrix = glm::ortho(-aspectratio*ZoomLevel, aspectratio*ZoomLevel, -ZoomLevel, ZoomLevel); 
+            AspectRatio = aspectratio; CalcViewProjMatrix(); 
+        }
+
+        inline void ChangeZoomLevel(float offset)          
+        { 
+            ZoomLevel += offset*(-10);
+            if(ZoomLevel <= 1) ZoomLevel = 1; 
+            ResetProjMatrix(AspectRatio); 
+        }
+
     private:
         float ZoomLevel = 1;
         float AspectRatio;
@@ -29,6 +42,7 @@ class Camera2d
         glm::mat4 ProjMatrix;
         glm::vec3 Position;
         float Rotation;
+        
         void CalcViewProjMatrix();
 };
 

@@ -1,6 +1,7 @@
 #include "core/profiling/Timer.h"
 #include <iostream>
 
+
 Timer::Timer(const char* nfo) : info(nfo)
 {
    start = std::chrono::high_resolution_clock::now();

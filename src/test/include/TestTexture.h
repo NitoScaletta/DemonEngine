@@ -3,10 +3,13 @@
 
 #include <test.h>
 #include <Renderer/renderer.h>
+#include <core/Events/Events.h>
 #include <core/Events/KeyEvents.h>
+#include <core/Events/MouseEvents.h>
 #include <core/Events/ApplicationEvents.h>
 #include <core/core.h>
-#include <Renderer/Camera2d.h>
+#include <Renderer/Camera2dController.h>
+#include <meshes/quad.h>
 
 namespace test
 {
@@ -21,6 +24,8 @@ namespace test
             virtual void onEvent(Event& e) override;
             bool onKeyPressed(KeyPressedEvent& e);
             bool onWindowResizedEvent(WindowResizeEvent& e);
+            bool onMouseScrolledEvent(MouseScrolledEvent& e);
+            bool onMouseMovementEvent(MouseMovedEvent& e);
 
         private:
             int animFrame = 0;
@@ -33,9 +38,8 @@ namespace test
             Texture texture;
             void createVertices();
             std::vector<int> indices;
-            Camera2d* camera;
-
-
+            Camera2dController camera;
     };
+  
 }
 #endif // __TESTTEXTURE_H__

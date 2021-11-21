@@ -15,7 +15,6 @@ Renderer::~Renderer()
 void Renderer::draw(VertexArray& vao, ElementBuffer& ebo, ShaderProgram& ps )
 {
     vao.bind();
-    ebo.bind();
     ps.use();
     glDrawElements(GL_TRIANGLES, ebo.GetCount(), GL_UNSIGNED_INT, nullptr );
 }

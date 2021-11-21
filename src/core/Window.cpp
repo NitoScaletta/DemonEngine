@@ -9,8 +9,8 @@
 
 CrossPlatformWindow::CrossPlatformWindow() 
 {
-    m_Data.width = 1280;
-    m_Data.height = 720; 
+    m_Data.width = 1920;
+    m_Data.height = 1080; 
 }
 
 CrossPlatformWindow::~CrossPlatformWindow() 
@@ -96,6 +96,8 @@ void CrossPlatformWindow::_init()
                 glfwSetInputMode(window , GLFW_CURSOR, GLFW_CURSOR_DISABLED);
             if(glfwGetKey(window , GLFW_KEY_O) == GLFW_PRESS)
                 glfwSetInputMode(window , GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+            if(glfwGetKey(window, GLFW_KEY_ESCAPE))
+                glfwSetWindowShouldClose(window, GLFW_TRUE);
         });
 }
 
@@ -103,12 +105,25 @@ void CrossPlatformWindow::_init()
 
 
 
-float CrossPlatformWindow::GetDeltaTime() 
+float CrossPlatformWindow::CalcDeltaTime() 
 {
-    float DeltaTime;
+    
     float CurrentFrame = glfwGetTime();
-    DeltaTime = CurrentFrame - s_window->LastFrame;
+    m_deltaTime = CurrentFrame - s_window->LastFrame;
     s_window->LastFrame = CurrentFrame;
-    return DeltaTime;
+    return m_deltaTime;
 }
-        
+
+
+//void processInput(GLFWwindow *window )
+//{
+//    if(glfwGetKey(window,GLFW_KEY_ESCAPE) == GLFW_PRESS)
+//        glfwSetWindowShouldClose(window,true);
+//}
+
+
+
+
+GLFWwindow *CrossPlatformWindow::s_glfwwindow;
+CrossPlatformWindow *CrossPlatformWindow::s_window = new CrossPlatformWindow;
+float CrossPlatformWindow::m_deltaTime;
