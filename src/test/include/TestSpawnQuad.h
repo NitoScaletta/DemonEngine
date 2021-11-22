@@ -4,7 +4,7 @@
 #include <meshes/quad.h>
 #include <Renderer/Camera2dController.h>
 #include <core/Events/MouseEvents.h>
-#include  <core/Events/KeyEvents.h>
+#include <core/Events/KeyEvents.h>
 #include <core/profiling/Timer.h>
 #include <Renderer/ParticleSystem.h>
 

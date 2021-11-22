@@ -6,7 +6,6 @@ include_directories(src/include/)
 include_directories(src/test/include/)
 include_directories(vendor/imgui/)
 include_directories(vendor/GLAD/include/)
-include_directories(vendor/assimp/include/)
 
 
 file (GLOB Renderer     "src/Renderer/*.cpp")
@@ -19,13 +18,8 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-#ASSIMP
-SET (ASSIMP_BUILD_TESTS OFF)
-
-
 
 add_subdirectory(vendor/glfw)
-#add_subdirectory(vendor/assimp)
 
 # set_property(TARGET assimp PROPERTY CMAKE_CXX_STANDARD 20)
 
