@@ -137,6 +137,15 @@ void ShaderProgram::setUniVec3(const char *name, glm::vec3 vect)
 }
 
 
+void ShaderProgram::setUniVec4(const char* name, glm::vec4 vect) 
+{
+    glUseProgram(id);
+    int loc = getUniLocation(name);
+    glUniform4fv(loc, 1, &vect.x);
+}
+
+
+
 int ShaderProgram::getUniLocation(std::string name){
     if(uniformCache.find(name) != uniformCache.end())
         return uniformCache[name];

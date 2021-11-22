@@ -9,7 +9,8 @@ struct ParticleProps
     float LifeTime,RotationPerTimeStep;
     glm::vec3 Position;
     glm::vec3 Velocity;
-
+    glm::vec4 Color;
+    void RandomValues();
 };
 
 
@@ -43,7 +44,7 @@ class ParticleSystem
         float Scale, RotationPerTimeStep, Rotation = 0;
         glm::vec3 Position;
         glm::vec3 Velocity;
-
+        glm::vec4 Color;
     };
     ParticleQuad particleQuad;
     std::vector<Particle> particles;

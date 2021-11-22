@@ -40,6 +40,7 @@ class ShaderProgram{
         void setUniMat4f(const char* name,glm::mat4 matrix);
         void setUniVector(const char* name, int size, const int* value);
         void setUniVec3(const char* name, glm::vec3 vect);
+        void setUniVec4(const char* name, glm::vec4 vect);
 
     private:
         std::unordered_map<std::string , int> uniformCache;

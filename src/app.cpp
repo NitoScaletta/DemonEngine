@@ -1,15 +1,7 @@
-#include <core/core.h>
-#include <core/CoreFun.h>
-#include <TestBatch.h>
-#include <TestTexture.h>
 #include <TestSpawnQuad.h>
 #include <core/profiling/Timer.h>
-#include <filesystem>
 #include <core/Window.h>
-#include <core/Events/ApplicationEvents.h>
-#include <core/Events/KeyEvents.h>
-#include <core/Events/MouseEvents.h>
-#include <core/Input.h>
+#include <Renderer/renderer.h>
 
 
 
@@ -21,14 +13,14 @@ int main(void)
     CrossPlatformWindow::init();
     Renderer::init();
     Renderer::ImGuiInit();
-    CrossPlatformWindow::SetVSync(true);
+   Window::SetVSync(true);
 
     test::TestSpawQuad tst;
  
-    while (!CrossPlatformWindow::ShouldClose())
+    while (!Window::ShouldClose())
     {
-        CrossPlatformWindow::CalcDeltaTime();
-        tst.onUpdate(CrossPlatformWindow::GetDeltaTime());
+        Window::CalcDeltaTime();
+        tst.onUpdate(Window::GetDeltaTime());
         Renderer::Clear();
         tst.onRender();
         Renderer::ImGuiStart();
@@ -36,7 +28,7 @@ int main(void)
         Renderer::ImGuiEnd();
 
         //Renderer::End();
-        glfwSwapBuffers(CrossPlatformWindow::window_ptr());
+        glfwSwapBuffers(Window::window_ptr());
         glfwPollEvents();
     }
 

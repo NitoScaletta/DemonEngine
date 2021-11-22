@@ -29,12 +29,12 @@ void TestSpawQuad::onUpdate(float deltatime)
 
 void TestSpawQuad::onRender() 
 {
+    quad->draw();
+    particles.onRender(camera.GetViewProjMatrix());
 }
 
 void TestSpawQuad::onImGuiRender() 
 {
-    quad->draw();
-    particles.onRender(camera.GetViewProjMatrix());
 }
 
 
@@ -48,24 +48,18 @@ void TestSpawQuad::onEvent(Event& e)
 
 bool TestSpawQuad::onMouseMovedEvent(MouseMovedEvent& e) 
 {
-    float speed = 1 * Window::GetDeltaTime();
-    float x,y, vx, vy;
-    x = camera.GetMousePositionInWorldSpceX(e.GetMouseX());
-    y = camera.GetMousePositionInWorldSpceY(e.GetMouseY());
-    x > worldspacex ? vx = 1 : vx = -1;
-    y > worldspacey ? vy = -1 : vy = 1;
+    glm::vec4 color = {0.6f, 0.4, 0.2f, 1.0f};
+    worldspacex = camera.GetMousePositionInWorldSpceX(e.GetMouseX());
+    worldspacey = camera.GetMousePositionInWorldSpceY(e.GetMouseY());
     ParticleProps props;
     props.x = worldspacex;
     props.y = worldspacey;
-    props.Scale = 1.0f/10.0f;
-    props.Velocity = {vx*Random::Float()* speed, vy*Random::Float()* speed, 0};
-    props.LifeTime = 10.0f;
-    int RotationSense;
-    Random::Float() > 0.5 ? RotationSense = 1 : RotationSense = -1;
-    props.RotationPerTimeStep = RotationSense * 300.0f;
-    particles.Emit(props);
-    worldspacex = x;
-    worldspacey = y;
+    props.Color = color;
+    for(int i = 0; i < 10; i++)
+    {
+        props.RandomValues();
+        particles.Emit(props);
+    }
     return true;
 }
 
