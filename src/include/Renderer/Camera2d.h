@@ -18,7 +18,7 @@ class Camera2d
         inline void SetPosition(glm::vec3 position)         { Position = position; CalcViewProjMatrix(); } 
         inline void SetRotation(float rotation)             { Rotation = rotation; CalcViewProjMatrix(); }
         inline void ResetProjMatrix(float x, float y)       { ResetProjMatrix(x/y);  }
-        inline float GetZoom()                              { return ZoomLevel;}
+        inline const float GetZoom() const                  { return ZoomLevel;}
         inline glm::vec3 GetPosition()                      { return Position; }
 
         inline void ResetProjMatrix(float aspectratio)      

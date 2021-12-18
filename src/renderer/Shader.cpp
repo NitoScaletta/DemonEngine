@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <core/Log.h>
 
 
 Shader::Shader(){
@@ -26,7 +27,8 @@ void Shader::checkLog(){
     if(!success)
     {
         glGetShaderInfoLog(id, 2048, NULL, infoLog);
-        std::cout<< pathtosource <<" ----> ERRORE COMOPILAZIONE SHADER" << '\n' << infoLog << '\n';
+        DE_CORE_ERROR("{0}----> ERRORE COMOPILAZIONE SHADER",pathtosource);  
+        DE_CORE_TRACE("{0}",infoLog);
     }
 
 }
@@ -44,6 +46,7 @@ void Shader::readSourceFile(const char*  path){
     std::ifstream file;
     file.open(completePath);
     if(file){
+        DE_CORE_TRACE("{} has been loaded!", completePath);
         std::stringstream buffer;
         buffer << file.rdbuf();
         file.close();
@@ -52,9 +55,17 @@ void Shader::readSourceFile(const char*  path){
         compileShader();
     }
     else{
-        std::cout << path << "file non trovato" << '\n';
+        DE_CORE_WARNING("{0} file non trovato", path);
     }
 }
+
+
+void Shader::LoadDefault(const char* _source)
+{
+    glShaderSource(id, 1, &_source, NULL);
+    glCompileShader(id);
+    checkLog();
+};
 
 
 void Shader::deleteShader()
@@ -86,13 +97,20 @@ void ShaderProgram::compileShader(unsigned int vid, unsigned int fid)
 
 void ShaderProgram::checkLog(){
     int success;
-    glGetProgramiv(id,GL_LINK_STATUS, &success);
-    if(!success)
+	char infoLog[2048];
+    for (int i = 0; i< 2048; i++)
     {
-        char infoLog[2048];
-        glGetShaderInfoLog(id, 2048, NULL, infoLog);
-        std::cout<<" ERRORE COMOPILAZIONE PROGRAM SHADER"<< '\n' << infoLog << '\n';
+        infoLog[i] = 'a';
     }
+    glGetProgramiv(id,GL_LINK_STATUS, &success);
+    if (!success)
+    {
+        glGetShaderInfoLog(id, 2047, NULL, infoLog);
+        DE_CORE_ERROR("ERRORE COMOPILAZIONE PROGRAM SHADER");
+        DE_CORE_TRACE("{0}", infoLog);
+    }
+    else
+        DE_CORE_TRACE("PROGRAM SHADER {} compiled succesfully", id);
 }
 
 
@@ -129,6 +147,15 @@ void ShaderProgram::setUniVector(const char *name, int size, const int *value)
     int loc = getUniLocation(name);
     glUniform1iv(loc, size, value);
 }
+
+
+void ShaderProgram::setUniVec2(const char* name, glm::vec2 vect) 
+{
+    glUseProgram(id);
+    int loc = getUniLocation(name);
+    glUniform2fv(loc, 1, &vect.x);
+}
+
 void ShaderProgram::setUniVec3(const char *name, glm::vec3 vect)
 {
     glUseProgram(id);
@@ -153,7 +180,7 @@ int ShaderProgram::getUniLocation(std::string name){
     int location = glGetUniformLocation(id, name.c_str());
     if (location == -1 && errors  < 2)
     {
-        std::cout << "UNIFORM " << name << " NOT FOUND" << '\n';
+        DE_CORE_WARNING("uniform {0} not found", name);
         errors++;
         return  -1;
     }

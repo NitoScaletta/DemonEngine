@@ -2,6 +2,7 @@
 #include <core/Window.h>
 #include <core/CoreFun.h>
 #include <core/Input.h>
+#include <core/Log.h>
 
 namespace  test
 {
@@ -74,7 +75,7 @@ namespace  test
 
     bool TestTexture::onKeyPressed(KeyPressedEvent& e) 
     {
-        std::cout<< e.toString() << "\n";
+        DE_CORE_TRACE("{}", e.toString());
         if(animFrame == 0)
         {
             vertices[0].setTCor(0.5f, 0.0f);
@@ -130,7 +131,7 @@ namespace  test
     {
         float worldspacex = camera.GetMousePositionInWorldSpceX(e.GetMouseX());
         float worldspacey = camera.GetMousePositionInWorldSpceY(e.GetMouseY());
-        std::cout << "world space--> x = " <<  worldspacex << "   y = " << worldspacey << '\n';
+        DE_CORE_TRACE("world space --> x = {0}, y = {1}", worldspacex, worldspacey);
         return true;
     }
     

@@ -1,6 +1,8 @@
 #include "include/TestSpawnQuad.h"
 #include "core/Input.h"
 #include <core/Random.h>
+#include <core/core.h>
+#include <core/Log.h>
 
 
 
@@ -30,7 +32,7 @@ void TestSpawQuad::onUpdate(float deltatime)
 void TestSpawQuad::onRender() 
 {
     quad->draw();
-    particles.onRender(camera.GetViewProjMatrix());
+    particles.onRender();
 }
 
 void TestSpawQuad::onImGuiRender() 
@@ -43,6 +45,7 @@ void TestSpawQuad::onEvent(Event& e)
     EventDispatcher dispatcher(e);
     dispatcher.Dispatch<MouseMovedEvent>(BIND_EVENT(TestSpawQuad::onMouseMovedEvent));
     dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT(TestSpawQuad::onKeyPressedEvent));
+    dispatcher.Dispatch<MouseScrolledEvent>(BIND_EVENT(TestSpawQuad::onMouseScrolledEvent));
 }
 
 
@@ -69,6 +72,11 @@ bool TestSpawQuad::onKeyPressedEvent(KeyPressedEvent& e)
     return true;
 }
 
+bool TestSpawQuad::onMouseScrolledEvent(MouseScrolledEvent& e)
+{
+    camera.Zoom(e.GetYoffset());
+    return true;
+}
 
 
 

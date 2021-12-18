@@ -39,8 +39,9 @@
 vendor/glfw/
 vendor/imgui/
 build/vendor/
-.vscode/
+out/
 .vs/
+.vscode/
 
 build.ninja
 .ninja_deps

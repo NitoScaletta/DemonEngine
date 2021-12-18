@@ -4,6 +4,9 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
 #include <core/Events/Events.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 
 class CrossPlatformWindow 
@@ -17,15 +20,18 @@ class CrossPlatformWindow
         static float AspectRatio()       { return s_window->_AspectRatio(); }
         static uint16_t GetWidth()       { return s_window->_GetWidth(); }
         static uint16_t GetHeight()      { return s_window->_GetHeight(); }
+        static glm::vec2 GetResolution() { 
+            return glm::vec2(static_cast<float>(GetWidth()), static_cast<float>(GetHeight()));
+        }
         static void SetVSync(bool vsync) { glfwSwapInterval(vsync); s_window->m_Data.VSync = vsync;}
         static void SetEventCallBack(const EventCallbackFn& callback)   
                                             { Get()->_SetEventCallback(callback); }
         static float CalcDeltaTime();
-        static float GetDeltaTime() { return m_deltaTime; };
-        static void CaptureCursor()         { glfwSetInputMode(window_ptr(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);}
-        static void ReleaseCursor()         { glfwSetInputMode(window_ptr(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);}
+        static const float& GetDeltaTime()  { return m_deltaTime; };
+        static void CaptureCursor()         { glfwSetInputMode(GetNativeWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);}
+        static void ReleaseCursor()         { glfwSetInputMode(GetNativeWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);}
         static CrossPlatformWindow* Get()   { return s_window; }
-        static GLFWwindow* window_ptr()     { return s_glfwwindow; }
+        static GLFWwindow* GetNativeWindow()     { return s_glfwwindow; }
         static float GetTime()              { return glfwGetTime(); }
         static int GetTimeInt()             { return glfwGetTime(); }
 

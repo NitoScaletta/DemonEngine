@@ -1,7 +1,6 @@
 #ifndef __TESTSPAWNQUAD_H__
 #define __TESTSPAWNQUAD_H__
 #include <test.h>
-#include <meshes/quad.h>
 #include <Renderer/Camera2dController.h>
 #include <core/Events/MouseEvents.h>
 #include <core/Events/KeyEvents.h>
@@ -20,16 +19,12 @@ namespace test
         virtual void onEvent(Event& e) override;
         bool onMouseMovedEvent(MouseMovedEvent& e);
         bool onKeyPressedEvent(KeyPressedEvent& e);
+        bool onMouseScrolledEvent(MouseScrolledEvent& e);
 
         private:
-        Quad* quad;
         Camera2dController camera;
         float worldspacex = 0, worldspacey = 0;
-        float timestep;
         ParticleSystem particles;
-
-
-
 
     };
     

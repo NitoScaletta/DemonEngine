@@ -10,7 +10,6 @@ TestVector::TestVector() : nquad(1)
     p_nquad = nquad;
     core::createBuffer(4, vertices, 50, 50, 100, 100);
     core::createIndices(nquad*6, indices);
-    std::cout << sizeof(Vertex) * 5 << " kilobytes" << '\n';
     vao.bind();
     ebo.bind();
     ebo.set(indices.data(),sizeof(int)*indices.size());

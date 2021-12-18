@@ -4,6 +4,7 @@
 #include <core/Events/KeyEvents.h>
 #include <core/Events/ApplicationEvents.h>
 #include <stb_image.h>
+#include <core/Log.h>
 
 
 
@@ -22,7 +23,7 @@ void CrossPlatformWindow::_init()
 {
     if (!glfwInit())
     {
-        std::cout << "errore nella creazione della finestra" << '\n';
+        DE_ERROR("errore nella creazione della finestra");
         assert(1);
     }
 
@@ -33,7 +34,7 @@ void CrossPlatformWindow::_init()
     window = glfwCreateWindow(m_Data.width, m_Data.height, "DemonEngine", NULL, NULL);
     if (!window)
     {
-        std::cout << "Impossibile creare finestra glfw" << '\n';
+        DE_ERROR("Impossibile creare finestra glfw");
         glfwTerminate();
         window = nullptr;
     }
@@ -113,14 +114,6 @@ float CrossPlatformWindow::CalcDeltaTime()
     s_window->LastFrame = CurrentFrame;
     return m_deltaTime;
 }
-
-
-//void processInput(GLFWwindow *window )
-//{
-//    if(glfwGetKey(window,GLFW_KEY_ESCAPE) == GLFW_PRESS)
-//        glfwSetWindowShouldClose(window,true);
-//}
-
 
 
 

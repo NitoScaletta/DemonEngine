@@ -12,11 +12,18 @@ class Input{
     public:
 
         static bool isPressed(KeyCode  key) {
-                if(glfwGetKey(CrossPlatformWindow::window_ptr(), key) == GLFW_PRESS)
+                if(glfwGetKey(CrossPlatformWindow::GetNativeWindow(), key) == GLFW_PRESS)
                     return true;
                 
                 return false;
         };
+
+        static glm::vec2 GetMousePosition()
+        {
+            double xpos, ypos;
+            glfwGetCursorPos(Window::GetNativeWindow(), &xpos, &ypos);
+            return { xpos, ypos };
+        }
         
     
 

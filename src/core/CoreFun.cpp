@@ -1,17 +1,13 @@
 #include "core/CoreFun.h"
+#include "core/Log.h"
 
 
 
 namespace core{
-    void ClearScreen()
-{
-    for(int i = 0; i < 200; i++)
-        std::cout << '\n';
-}
 
     void printvec(const char* name, glm::vec3 v)
     {
-        std::cout << name << "x = " << v.x << ", y = " << v.y << ", z = " << v.z << '\n';
+        DE_CORE_TRACE("{3} ----> x= {0}, y= {1} z = {2}", v.x, v.y, v.z, name);
     }
     
     std::string vectostr(glm::vec3& v) 
@@ -19,37 +15,6 @@ namespace core{
         return std::string("x = "+std::to_string(v.x)+", y = "+std::to_string(v.y)+", z = "+std::to_string(v.z)).c_str();
     }
 
-
-    void createBuffer(int nquad, std::vector<Vertex>& vertices, float x, float y,
-                    float size_x, float size_y, bool log)
-
-{       
-        vertices.clear();
-        vertices.push_back(Vertex(x, y));
-        vertices.back().setTCor(0.0f, 0.0f);
-        vertices.push_back(Vertex(x + size_x, y));
-        vertices.back().setTCor(1.0f, 0.0f);
-        vertices.push_back(Vertex(x + size_x, y+ size_y));
-        vertices.back().setTCor(1.0f, 1.0f);
-        vertices.push_back(Vertex(x, y + size_y));
-        vertices.back().setTCor(0.0f, 1.0f);
-        x += size_x*2;
-
-       for(int i = 4; i < nquad; i+=2)
-       {
-            vertices.push_back(Vertex(x, y));
-            if(i+1 >= nquad) break;
-            vertices.push_back(Vertex(x, y + size_y));
-            x+=100;
-       }
-
-       for(int i = 0; i < vertices.size(); i++)
-       {
-            std::cout << i;
-            vertices[i].print();
-       }
-
-}
 
 void createIndices(int nquad,std::vector<int>& indices, bool log)
 {
@@ -88,9 +53,8 @@ void createIndices(int nquad,std::vector<int>& indices, bool log)
     }
 
     for(int i = 0; i <  indices.size(); i++){
-        std::cout << indices[i] << " " ;
+       DE_CORE_TRACE("{0}", indices[i]);
     }
-    std::cout << '\n';
 
 }
 
@@ -181,7 +145,7 @@ void createVerticesCube(std::vector<Vertex>& vertices, bool log)
     {
         for(int i = 0; i < vertices.size(); i++)
         {
-            std::cout << i;
+            DE_CORE_TRACE("{0}", i);
             vertices[i].print();
 
         }
@@ -191,12 +155,12 @@ void createVerticesCube(std::vector<Vertex>& vertices, bool log)
 void err()
 {
     static int log_number = 0;
-    std::cout << "this is log n " << ++log_number << '\n';
+    DE_CORE_TRACE("this is log n ", ++log_number);
 }
 
 void msg(const char* mess)
 {
-    std::cout<< mess << '\n';
+    DE_CORE_TRACE(mess);
 }
 
 void CreateIndices(std::vector<int>& indices, int quad_number, bool log ){
@@ -215,18 +179,10 @@ void CreateIndices(std::vector<int>& indices, int quad_number, bool log ){
     }
     if(log){
         for(int i = 0; i <  indices.size(); i++){
-                std:: cout << indices[i] << " ";
-                if((i+1)%6 == 0 && i != 0)
-                    std::cout << '\n';
+                DE_CORE_TRACE("{0}", indices[i]);
         }
-        std::cout << '\n';
     }
 
 }
 
-
-    glm::mat4 proj3d(float ratio)
-    {
-       return glm::perspective(glm::radians(45.0f), ratio, 0.1f, 200.0f);
-    }
 }

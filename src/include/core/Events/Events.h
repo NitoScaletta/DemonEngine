@@ -11,7 +11,7 @@
 
 #define BIND_EVENT(fn)std::bind(&fn, this, std::placeholders::_1)
 
-enum EventType
+enum  EventType
 {
     WindowClose, WindowFocus, WindowLostFocus, WindowResize, WindowMoved,
     KeyPressed, KeyReleased, KeyTyped,

@@ -2,6 +2,7 @@
 #include "Renderer/glObjects.h"
 #include "glad/glad.h"
 #include "core/profiling/Timer.h"
+#include "core/Log.h"
 
 VertexBuffer::VertexBuffer()
 {
@@ -12,7 +13,6 @@ VertexBuffer::VertexBuffer()
 VertexBuffer::VertexBuffer(float vertices[], int size, unsigned int n)
 {
     glGenBuffers(1, &id);
-    natt = n;
     bind(vertices, size);
 }
 
@@ -22,7 +22,7 @@ void VertexBuffer::bind(){
 void VertexBuffer::bind(float vertices[], int size)
 {
     glBindBuffer(GL_ARRAY_BUFFER, id);
-    glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_DYNAMIC_DRAW);
 }
 
 void VertexBuffer::unbind() const
@@ -38,27 +38,14 @@ void VertexBuffer::bindLayout(VertexArray& vao)
     vao.newLayout(1,10);
 }
 
-void VertexBuffer::bindDynamic(int size) {
-    glBindBuffer(GL_ARRAY_BUFFER, id);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex)*size, nullptr, GL_DYNAMIC_DRAW);
-}
-
-void VertexBuffer::loadDynamic(int offset, int size,Vertex* vertices){
-        glBufferSubData(GL_ARRAY_BUFFER, offset, size, vertices);
-}
-VertexArray::VertexArray() : index(0) , offset(0), stride(0)
+VertexArray::VertexArray() 
 {
     glGenVertexArrays(1, &id);
 }
 
 void VertexArray::newLayout(int nValues, const int nAtt)
 {
-    glVertexAttribPointer(index, nValues, GL_FLOAT, GL_FALSE,
-                         nAtt * sizeof(float), (void*)(offset*sizeof(float)));
-    glEnableVertexAttribArray(index);
-    offset = offset + nValues;
-    index++;
-}
+    }
 
 void VertexArray::newLayoutDynamic()
 {
@@ -75,13 +62,51 @@ void VertexArray::newLayoutDynamic()
 }
 
 
+void VertexArray::Layout2D()
+{
+   glEnableVertexAttribArray(0);
+   glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE,sizeof(float)*5, 0);
+   glEnableVertexAttribArray(1);
+   glVertexAttribPointer(1,2, GL_FLOAT, GL_FALSE,sizeof(float)*5, (const void*)offsetof(Vertex2D, textCoord));
+}
 
-ElementBuffer::ElementBuffer()
+
+void VertexArray::QuadLayout()
+{
+   glEnableVertexAttribArray(0);
+   glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE,sizeof(float)*10, 0);
+   glEnableVertexAttribArray(1);
+   glVertexAttribPointer(1,4, GL_FLOAT, GL_FALSE,sizeof(float)*10, (const void*)offsetof(QuadVertex, Color));
+   glEnableVertexAttribArray(2);
+   glVertexAttribPointer(2,2, GL_FLOAT, GL_FALSE,sizeof(float)*10, (const void*)offsetof(QuadVertex, TextureCoordinates));
+   glEnableVertexAttribArray(3);
+   glVertexAttribPointer(3,1, GL_FLOAT, GL_FALSE,sizeof(float)*10, (const void*)offsetof(QuadVertex, TextureID));
+}
+
+
+void VertexArray::CircleLayout()
+{
+
+   glEnableVertexAttribArray(0);
+   glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE,sizeof(float)*12, 0);
+   glEnableVertexAttribArray(1);
+   glVertexAttribPointer(1,3, GL_FLOAT, GL_FALSE,sizeof(float)*12, (const void*)offsetof(CircleVertex, LocalPosition));
+   glEnableVertexAttribArray(2);
+   glVertexAttribPointer(2,4, GL_FLOAT, GL_FALSE,sizeof(float)*12, (const void*)offsetof(CircleVertex, Color));
+   glEnableVertexAttribArray(3);
+   glVertexAttribPointer(3,1, GL_FLOAT, GL_FALSE,sizeof(float)*12, (const void*)offsetof(CircleVertex, Thickness));
+   glEnableVertexAttribArray(4);
+   glVertexAttribPointer(4,1, GL_FLOAT, GL_FALSE,sizeof(float)*12, (const void*)offsetof(CircleVertex, Fade));
+}
+
+
+
+ElementBuffer::ElementBuffer()  : iCount(0)
 {
     glGenBuffers(1,&id);
 }
 
-ElementBuffer::ElementBuffer(int *indices, int size)
+ElementBuffer::ElementBuffer(uint32_t *indices, int size)
 {
     glGenBuffers(1,&id);
     bind();
@@ -100,23 +125,21 @@ void ElementBuffer::bind() const
 
 void ElementBuffer::unbind() const
 {
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void ElementBuffer::set(int *indices, int size)
+void ElementBuffer::set(uint32_t *indices, int size)
 {
-    iCount = size / sizeof(int);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);
 }
 
 
-void ElementBuffer::setDynamic(int offset, int size, int* indices)
+void ElementBuffer::setDynamic(int offset, int* indices, int size)
 {
-    iCount = size / sizeof(int);
     glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, indices);
 }
 
-Texture::Texture()
+Texture::Texture()  
 {
     glGenTextures(1, &id);
 }
@@ -150,20 +173,20 @@ void Texture::Set(const char* path, unsigned int texture_unit)
     std::string file = path;
     if(path[file.length()-3] == 'p')
     {
-        LoadImagePNG(path);
+        LoadTexturePNG(path);
     }
     else
     {
-        LoadImage(path);
+        LoadTexture(path);
     }
 }
 
 
-void Texture::LoadImage(const char* path)
+void Texture::LoadTexture(const char* path)
 {
     int32_t width, height, nrChannels;
     char completePath[100] = "res/textures/";
-    strncat(completePath, path, 100);
+    strncat(completePath, path, 99);
     unsigned char* data = stbi_load(completePath, &width, &height, &nrChannels, 0);
     if(data)
     {
@@ -172,15 +195,15 @@ void Texture::LoadImage(const char* path)
         stbi_image_free(data);
     }
     else{
-        std::cout << path << " not found";
+        DE_CORE_WARNING("{0} not found", path);
     }
 }
 
-void Texture::LoadImagePNG(const char* path)
+void Texture::LoadTexturePNG(const char* path)
 {
     int32_t width, height, nrChannels;
     char completePath[100] = "res/textures/";
-    strncat(completePath, path, 100);
+    strncat(completePath, path, 99);
     unsigned char* data = stbi_load(completePath, &width, &height, &nrChannels, 0);
     if(data)
     {
@@ -189,7 +212,7 @@ void Texture::LoadImagePNG(const char* path)
         stbi_image_free(data);
     }
     else{
-        std::cout << path << "not found" << '\n';
+        DE_CORE_WARNING("{0} not found", path);
     }
 }
 
@@ -218,7 +241,7 @@ void Texture::DataSet( unsigned int texture_unit, TextureData* image)
                 stbi_image_free(image->data);
             }
     }
-    else std::cout << "data not found" << '\n';
+    else DE_CORE_WARNING("{0} data not found");
 }
 
 void Texture::SetType(const char* typ) 
@@ -230,6 +253,8 @@ void Texture::SetType(const char* typ)
 Vertex::Vertex()
 {
 }
+
+
 Vertex::Vertex(float _x, float _y)
 {
         setPos( _x, _y, 0.0f);
@@ -315,9 +340,9 @@ void Vertex::setTCor(glm::vec2 tcoo)
 
 void Vertex::print()
 {
-    std::cout <<  ") x: " <<  position.x << " y: " << position.y << " z: " << position.z<< '\n' <<
-        "normal: " <<") x: " <<  normal.x << " y: " << normal.y << " z: " << normal.z     << '\n' << 
-        "colors r: " <<  colors.x << " g: " << colors.y << " b: " << colors.z  << "alpha: " << colors.w << '\n';
+    DE_CORE_TRACE("position   x = {0}, y = {1} z = {2}", position.x, position.y, position.z);
+    DE_CORE_TRACE("normal     x = {0}, y = {1} z = {2}", normal.x, normal.y, normal.z);
+    DE_CORE_TRACE("color      r = {0}, g = {1} b = {2}, a = {3}", colors.x, colors.y, colors.z);
 }
 
 void Vertex::setNormal(float x, float y, float z)

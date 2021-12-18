@@ -15,13 +15,13 @@ void Camera2dController::movement(float deltatime)
 {
         float speed = 10*deltatime;
         if(Input::isPressed(Key::W))
-            cam_pos.y += speed;
+            cam_pos.y += speed * camera.GetZoom();
         if(Input::isPressed(Key::S))
-            cam_pos.y -= speed;
+            cam_pos.y -= speed* camera.GetZoom();
         if(Input::isPressed(Key::D))
-            cam_pos.x += speed;
+            cam_pos.x += speed* camera.GetZoom();
         if(Input::isPressed(Key::A))
-            cam_pos.x -= speed;
+            cam_pos.x -= speed* camera.GetZoom();
         camera.SetPosition(cam_pos);
 }
 
@@ -31,8 +31,8 @@ void Camera2dController::movement(float deltatime)
 
 float Camera2dController::GetMousePositionInWorldSpceX(float mouseX) 
 {
-    return camera.GetPosition().x + (mouseX * CrossPlatformWindow::AspectRatio()*2 / 
-            CrossPlatformWindow::GetWidth()) - CrossPlatformWindow::AspectRatio();
+    return camera.GetPosition().x + (mouseX * CrossPlatformWindow::AspectRatio()*2 * camera.GetZoom() /
+            CrossPlatformWindow::GetWidth()) - CrossPlatformWindow::AspectRatio()* camera.GetZoom();
 }
 
 

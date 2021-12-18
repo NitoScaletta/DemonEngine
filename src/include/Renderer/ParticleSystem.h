@@ -1,7 +1,11 @@
 #ifndef __PARTICLESYSTEM_H__
 #define __PARTICLESYSTEM_H__
 #include <core/core.h>
-#include <meshes/quad.h>
+
+enum class ParticleShape
+{
+    Quad, Circle 
+};
 
 struct ParticleProps
 {
@@ -10,30 +14,20 @@ struct ParticleProps
     glm::vec3 Position;
     glm::vec3 Velocity;
     glm::vec4 Color;
+    ParticleShape Shape;
     void RandomValues();
 };
 
 
-class ParticleQuad
-{
-    public:
-    ParticleQuad();
-    ~ParticleQuad(){}
-    VertexArray GetVertexArray()        {   return vao; }
-    ShaderProgram GetShaderProgram()    {   return ps;  }
-     
-    private:
-    VertexArray vao;
-    VertexBuffer vbo;
-    ShaderProgram ps;
-};
+
+
 
 class ParticleSystem
 {
     public:
     ParticleSystem();
     void Emit(ParticleProps& prop);
-    void onRender(glm::mat4 viewprojmatrix);
+    void onRender();
 
     private:
     uint16_t ParticleIndex;
@@ -45,9 +39,10 @@ class ParticleSystem
         glm::vec3 Position;
         glm::vec3 Velocity;
         glm::vec4 Color;
+        ParticleShape Shape;
     };
-    ParticleQuad particleQuad;
     std::vector<Particle> particles;
+    const glm::mat4 m_IdMatrix = glm::mat4(1.0f);
 };
 
    
