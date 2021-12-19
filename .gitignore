@@ -36,10 +36,8 @@
 
 *.cmake
 
-vendor/glfw/
-vendor/imgui/
 build/vendor/
-out/
+out/build/
 .vs/
 .vscode/
 

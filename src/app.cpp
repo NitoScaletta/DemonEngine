@@ -1,4 +1,3 @@
-#include <TestSpawnQuad.h>
 #include <TestRenderBatch.h>
 #include <core/profiling/Timer.h>
 #include <core/Window.h>
@@ -10,7 +9,12 @@
 
 int main(void)
 {
+#ifdef CARLO
+    std::cout << "hwlloworld" << std::endl;
 
+#endif // CARLO
+
+    
     Log::init();
 	DE_CORE_INFO("Welcome to DemonEngine");
     Timer timer("main");

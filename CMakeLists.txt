@@ -5,6 +5,7 @@ set (CMAKE_CXX_STANDARD 20)
 include_directories(src/include/)
 include_directories(src/test/include/)
 include_directories(vendor/imgui/)
+include_directories(vendor/imgui/backends/)
 include_directories(vendor/GLAD/include/)
 include_directories(vendor/spdlog/include/)
 
@@ -12,19 +13,20 @@ include_directories(vendor/spdlog/include/)
 file (GLOB Renderer     "src/Renderer/*.cpp")
 file (GLOB core         "src/core/*.cpp" "src/core/profiling/*.cpp")
 
-
+####################################################################
+########## EXTERNAL LIBS ###########################################
+####################################################################
 #GLFW config
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-
-
 add_subdirectory(vendor/glfw)
 
-
+#IMGUI config
 add_compile_definitions(IMGUI_IMPL_OPENGL_LOADER_GLAD)
 add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
-
+#######################################################################
+######################################################################
 add_library(GLAD        vendor/GLAD/src/glad.c)
 add_library(stb_image   src/image.cpp)
 add_library(core        ${core})

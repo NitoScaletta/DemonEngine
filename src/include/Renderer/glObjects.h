@@ -12,7 +12,10 @@
 #define DE_UNSIGNED_INT 0x1405
 #define DE_FLOAT 0x1406
 
+class vec2 : public glm::vec2
+{
 
+};
 struct Vertex
 {
         glm::vec3 position = {0,0,0};
