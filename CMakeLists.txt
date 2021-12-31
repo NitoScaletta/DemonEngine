@@ -8,6 +8,7 @@ include_directories(vendor/imgui/)
 include_directories(vendor/imgui/backends/)
 include_directories(vendor/GLAD/include/)
 include_directories(vendor/spdlog/include/)
+include_directories(vendor/glm/)
 
 
 file (GLOB Renderer     "src/Renderer/*.cpp")
