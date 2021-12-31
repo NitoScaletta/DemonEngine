@@ -12,10 +12,6 @@
 #define DE_UNSIGNED_INT 0x1405
 #define DE_FLOAT 0x1406
 
-class vec2 : public glm::vec2
-{
-
-};
 struct Vertex
 {
         glm::vec3 position = {0,0,0};
@@ -60,33 +56,31 @@ struct Vertex2D
 
 struct QuadVertex
 {
-    glm::vec3 Position;
-    glm::vec4 Color;
+    glm::vec3 Position              = { 0.0f, 0.0f, 0.0f };
+    glm::vec4 Color                 = { 1.0f, 1.0f, 1.0f, 1.0f };
     glm::vec2 TextureCoordinates;
-    float TextureID;
+    float TextureID                 = 0;
+    float TilingFactor              = 1;
 };
 
 struct CircleVertex
 {
-    glm::vec3 Position = { 0.0f, 0.0f, 1.0f };
+    glm::vec3 Position      = { 0.0f, 0.0f, 0.0f };
     glm::vec3 LocalPosition = { 0.0f, 0.0f, 0.0f };
-    glm::vec4 Color =    { 1.0f, 1.0f, 1.0f, 1.0f };
-    float Thickness = 0.5f;
-    float Fade = 0.005;
+    glm::vec4 Color         = { 1.0f, 1.0f, 1.0f, 1.0f };
+    float Thickness         = 0.5f;
+    float Fade              = 0.005;
 };
-
-
-
-
 
 
 
 struct QuadData 
 {
-	glm::vec3 position =	{ 0, 0, 1 };
-	glm::vec4 color =		{ 1, 1, 1, 1};
-    float rotation = 0;
-    glm::vec3 size = { 1.0f, 1.0f, 1.0f };
+	glm::vec3 position      = { 0, 0, 0 };
+	glm::vec4 color         = { 1, 1, 1, 1};
+    float rotation          = 0;
+    glm::vec3 size          = { 1.0f, 1.0f, 1.0f };
+    float TextureSlotIndex  = 0;
 };
 
 
@@ -106,9 +100,6 @@ class VertexArray{
                 
         private:
                 unsigned int id;
-                //unsigned int index;
-                //size_t offset;
-                //int stride;
 };
 
 class VertexBuffer
@@ -143,7 +134,7 @@ class ElementBuffer
                 ElementBuffer(uint32_t *indices, int size);
                 void bind() const;
                 int GetCount() const;
-                void set(uint32_t *indices, int size);
+                void set(uint32_t *indices, size_t size);
                 void unbind() const;
                 void setDynamic(int offset, int* indices,  int size);
         private:
@@ -162,41 +153,25 @@ class Texture
 {
         public:
                 Texture();
-                Texture(int texture_unit, const char* path);
+                Texture(uint32_t width, uint32_t height, void* data);
+                Texture(const char* path);
                 void bind();
                 void active();
-                void Set(const char* path,unsigned int texture_unit = 0x84C0);
+                void bindSlot(uint32_t _slot) { glBindTextureUnit(_slot, id); slot = _slot; };
+                void Set(const char* path, uint32_t texture_unit);
                 void DataSet(unsigned int texture_unit, TextureData* image);
                 void SetType(const char* type);
                 inline const char* GetPath(){ return FilePath.c_str(); }
-                inline void SetTextureID(int texture_unit) { texture_id = texture_unit;}
+                int32_t GetTextureSlot() { return slot; }
+                inline void SetTextureID(int texture_unit) { slot = texture_unit;}
+                void CreateTextures();
         private:
                 uint32_t id;
-                int32_t texture_id = -100;
+                int32_t slot = -100;
                 std::string FilePath, type;
                 void LoadTexture(const char* path);
                 void LoadTexturePNG(const char* path);
 };
 
-
-struct aTexture
-{
-        uint8_t id;
-        std::string type;
-        std::string path;
-};
-
-struct Material
-{
-                glm::vec3 ambient;
-                glm::vec3 diffuse;
-                glm::vec3 specular;
-                float shininess;
-};
-
-namespace texture
-{
-        void loadText(TextureData* images, std::string path);
-}
 
 #endif // GLOBJECTS_H_

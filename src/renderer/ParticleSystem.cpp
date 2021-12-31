@@ -20,7 +20,7 @@ void ParticleSystem::Emit(ParticleProps& props)
     {
         ParticleIndex = 0;
     }
-    particles[ParticleIndex].Position = { props.x, props.y,0.1f};
+    particles[ParticleIndex].Position = props.Position;
     particles[ParticleIndex].LifeTime = props.LifeTime;
     particles[ParticleIndex].Velocity = props.Velocity;
     particles[ParticleIndex].isActive = true;

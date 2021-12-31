@@ -124,6 +124,13 @@ void ShaderProgram::setUnifi(const char *name, int pos)
     glUniform1i(loc, pos);
 }
 
+void ShaderProgram::setUniIntVec(const char* name, int32_t* array, size_t count)
+{
+    glUseProgram(id);
+    int loc = getUniLocation(name);
+    glUniform1iv(loc, count, array);
+}
+
 void ShaderProgram::setUniff(const char *name, float pos)
 {
     glUseProgram(id);

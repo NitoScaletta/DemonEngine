@@ -1,9 +1,11 @@
 #include <Renderer/Camera2dController.h>
 #include <core/Input.h>
+#include "core/Log.h"
 
 
 Camera2dController::Camera2dController() : camera(16.f/9.f), cam_pos(camera.GetPosition()) 
 {
+		Window::SetEventCallBack(BIND_EVENT(Camera2dController::onEvent));
 }
 
 Camera2dController::~Camera2dController() 
@@ -42,4 +44,10 @@ float Camera2dController::GetMousePositionInWorldSpceY(float mouseY)
     return camera.GetPosition().y -((mouseY * camera.GetZoom()*2 / CrossPlatformWindow::GetHeight()) - camera.GetZoom());
 }
 
+
+
+void Camera2dController::onEvent(Event& e)
+{
+    DE_INFO("CAMERA EVENT IS CALLED");
+}
 

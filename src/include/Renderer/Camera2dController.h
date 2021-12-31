@@ -25,6 +25,8 @@ class Camera2dController
     Camera2d camera;
     glm::vec3 cam_pos;
     float rotation;
+
+    void onEvent(Event& e);
 };
 
 

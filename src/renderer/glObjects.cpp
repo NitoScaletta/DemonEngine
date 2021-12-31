@@ -74,13 +74,15 @@ void VertexArray::Layout2D()
 void VertexArray::QuadLayout()
 {
    glEnableVertexAttribArray(0);
-   glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE,sizeof(float)*10, 0);
+   glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE,sizeof(float)*11, 0);
    glEnableVertexAttribArray(1);
-   glVertexAttribPointer(1,4, GL_FLOAT, GL_FALSE,sizeof(float)*10, (const void*)offsetof(QuadVertex, Color));
+   glVertexAttribPointer(1,4, GL_FLOAT, GL_FALSE,sizeof(float)*11, (const void*)offsetof(QuadVertex, Color));
    glEnableVertexAttribArray(2);
-   glVertexAttribPointer(2,2, GL_FLOAT, GL_FALSE,sizeof(float)*10, (const void*)offsetof(QuadVertex, TextureCoordinates));
+   glVertexAttribPointer(2,2, GL_FLOAT, GL_FALSE,sizeof(float)*11, (const void*)offsetof(QuadVertex, TextureCoordinates));
    glEnableVertexAttribArray(3);
-   glVertexAttribPointer(3,1, GL_FLOAT, GL_FALSE,sizeof(float)*10, (const void*)offsetof(QuadVertex, TextureID));
+   glVertexAttribPointer(3,1, GL_FLOAT, GL_FALSE,sizeof(float)*11, (const void*)offsetof(QuadVertex, TextureID));
+   glEnableVertexAttribArray(4);
+   glVertexAttribPointer(4,1, GL_FLOAT, GL_FALSE,sizeof(float)*11, (const void*)offsetof(QuadVertex, TilingFactor));
 }
 
 
@@ -128,8 +130,9 @@ void ElementBuffer::unbind() const
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void ElementBuffer::set(uint32_t *indices, int size)
+void ElementBuffer::set(uint32_t *indices, size_t size)
 {
+    size = sizeof(uint32_t) * size;
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);
 }
 
@@ -141,13 +144,57 @@ void ElementBuffer::setDynamic(int offset, int* indices, int size)
 
 Texture::Texture()  
 {
-    glGenTextures(1, &id);
 }
 
-Texture::Texture(int texture_unit, const char* path)
+Texture::Texture(uint32_t width, uint32_t height, void* data)
 {
-    glGenTextures(1, &id);
-    Set(path, texture_unit);
+    glCreateTextures(GL_TEXTURE_2D, 1, &id);
+    glTextureStorage2D(id, 1, GL_RGBA8, width, height);
+
+    glTextureParameteri(id, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTextureParameteri(id, GL_TEXTURE_MAG_FILTER, GL_NEAREST); 
+    glTextureParameteri(id, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTextureParameteri(id, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    glTextureSubImage2D(id, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+}
+
+Texture::Texture(const char* path) 
+{
+    glCreateTextures(GL_TEXTURE_2D, 1, &id);
+
+    glTextureParameteri(id, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTextureParameteri(id, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+    glTextureParameteri(id, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTextureParameteri(id, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    int32_t width, height, nrChannels;
+    char completePath[100] = "res/textures/";
+    strncat(completePath, path, 99);
+    unsigned char* data = stbi_load(completePath, &width, &height, &nrChannels, 0);
+    if (data)
+    {
+        if (nrChannels == 4)
+        {
+        	glTextureStorage2D(id, 1, GL_RGBA8, width, height);
+        	glTextureSubImage2D(id, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        }
+        else if (nrChannels == 3)
+        {
+        	glTextureStorage2D(id, 1, GL_RGB8, width, height);
+        	glTextureSubImage2D(id, 0, 0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, data);
+        }
+        DE_CORE_TRACE("Loaded {} with {} channels, {}x{}", completePath, nrChannels, width, height);
+	    stbi_image_free(data);
+       
+    }
+    else
+    {
+        DE_CORE_ERROR("Texture {} not found", completePath);
+    }
+
+
 }
 
 void Texture::bind()
@@ -157,19 +204,14 @@ void Texture::bind()
 
 void Texture::active()
 {
-    glActiveTexture(texture_id);
+    glActiveTexture(slot);
     glBindTexture(GL_TEXTURE_2D, id);
 }
 
-void Texture::Set(const char* path, unsigned int texture_unit)
+void Texture::Set(const char* path, uint32_t texture_unit)
 {
-    texture_id = texture_unit;
+    slot = texture_unit;
     FilePath = path;
-    glBindTexture(GL_TEXTURE_2D, id);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     std::string file = path;
     if(path[file.length()-3] == 'p')
     {
@@ -218,7 +260,7 @@ void Texture::LoadTexturePNG(const char* path)
 
 void Texture::DataSet( unsigned int texture_unit, TextureData* image)
 {
-    texture_id = texture_unit;
+    slot = texture_unit;
     glBindTexture(GL_TEXTURE_2D, id);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -242,6 +284,16 @@ void Texture::DataSet( unsigned int texture_unit, TextureData* image)
             }
     }
     else DE_CORE_WARNING("data not found");
+}
+
+
+void Texture::CreateTextures()
+{
+    glBindTexture(GL_TEXTURE_2D, id);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
 void Texture::SetType(const char* typ) 

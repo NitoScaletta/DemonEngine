@@ -9,7 +9,7 @@ enum class ParticleShape
 
 struct ParticleProps
 {
-    float x, y, Scale;
+    float Scale;
     float LifeTime,RotationPerTimeStep;
     glm::vec3 Position;
     glm::vec3 Velocity;
