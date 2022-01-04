@@ -1,15 +1,13 @@
 #include "Renderer/renderer.h"
-#include "Renderer/glObjects.h"
-#include "Renderer/Shader.h"
 #include <core/Window.h>
-#include <iostream>
 #include <core/Log.h>
 
-QuadBufferData *Renderer::s_QuadBufferData;
-CircleBufferData *Renderer::s_CircleBufferData;
+//QuadBufferData* Renderer::s_QuadBufferData; new QuadBufferData
+std::shared_ptr<QuadBufferData>   Renderer::s_QuadBufferData;
+std::shared_ptr<CircleBufferData> Renderer::s_CircleBufferData;
 RendererStats Renderer::Stats;
 
-glm::mat4 *Renderer::s_ProjViewMatrix;
+std::shared_ptr<glm::mat4> Renderer::s_ProjViewMatrix;
 
 
 glm::vec4 QuadVerticesBase[4];
@@ -43,6 +41,7 @@ void Renderer::ImGuiInit()
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
+    io.FontGlobalScale =  1.5f;
     ImGui::StyleColorsDark();
     ImGui_ImplGlfw_InitForOpenGL(CrossPlatformWindow::GetNativeWindow(), true);
     ImGui_ImplOpenGL3_Init(glsl_version);
@@ -53,11 +52,16 @@ void Renderer::ImGuiStart()
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+        ImGuiIO& io = ImGui::GetIO();
+        io.DisplaySize = ImVec2(static_cast<float>(Window::GetWidth()), static_cast<float>(Window::GetHeight()));
+
+
 }
 
 void Renderer::ImGuiEnd() 
 {
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        ImGui::Text("Window resolution is %.0fx%.0f", ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y);
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
@@ -84,29 +88,76 @@ void Renderer::Clear(float r, float g, float b, float alpha)
 //////////////////TEXTURED/////////////////////////////////////////////////////////////////////
 
 
-void Renderer::DrawTexturedQuad(const glm::vec3& Position, Texture& texture, const float Scale, const float Rotation, const float TilingFactor, const glm::vec4& Color)
+void Renderer::DrawTexturedQuad(const glm::vec3& Position, std::shared_ptr<Texture> texture, const float Scale, const float Rotation, const float TilingFactor, const glm::vec4& Color)
 {
-    bool found = false;
-    if (s_QuadBufferData->TextureSlotIndex >= MaxTextureSlots)
+    CheckTexture(texture);
+    if (s_QuadBufferData->QuadVerticesIndex + 4 >= MaxQuadVertices)
     {
         RenderAll();
         s_QuadBufferData->QuadVerticesIndex = 0;
         s_QuadBufferData->IndicesIndex = 0;
-        s_QuadBufferData->TextureSlotIndex = 1;
     }
-    if (s_QuadBufferData->TextureSlotIndex > 0)
-    {
-        for (size_t i = 0; i < s_QuadBufferData->TextureSlotIndex; i++)
-        {
-            if (s_QuadBufferData->Textures[i].GetTextureSlot() == texture.GetTextureSlot())
-                found = true;
-        }
-    }
-    if (!found);
-		LoadTexture(texture);
-
-	DrawQuad(Position, Rotation, glm::vec3(Scale, Scale, 1), Color, texture.GetTextureSlot(), TilingFactor);
+	DrawQuad(Position, Rotation, glm::vec3(Scale, Scale, 1), Color, texture->GetTextureSlot(), TilingFactor);
 }
+
+
+void Renderer::DrawTexturedQuad(const glm::mat4& transform, std::shared_ptr<Texture> texture, const float TilingFactor, const glm::vec4& Color)
+{
+    CheckTexture(texture);
+    if (s_QuadBufferData->QuadVerticesIndex + 4 >= MaxQuadVertices)
+    {
+        RenderAll();
+        s_QuadBufferData->QuadVerticesIndex = 0;
+        s_QuadBufferData->IndicesIndex = 0;
+    }
+    DrawQuad(transform, Color, 1, texture->GetTextureSlot());
+}
+
+void Renderer::DrawSprite(const glm::vec3& Position, std::shared_ptr<SubTexture> subTexture, const float Scale, const float Rotation, const glm::vec4& Color)
+{ 
+    
+    CheckTexture(subTexture->GetTexture());
+
+    if (s_QuadBufferData->QuadVerticesIndex + 4 >= MaxQuadVertices)
+
+    {
+        RenderAll();
+        s_QuadBufferData->QuadVerticesIndex = 0;
+        s_QuadBufferData->IndicesIndex = 0;
+    }
+
+    glm::vec2 TextureCoords[4];
+    subTexture->GetTextureCoords(TextureCoords);
+
+
+    glm::mat4 transform = glm::translate(glm::mat4(1.0f), Position) *
+                            glm::rotate(glm::mat4(1.0f), glm::radians(Rotation), { 0, 0, 1 })*
+                            glm::scale(glm::mat4(1.0f), glm::vec3(Scale, Scale, 1));
+
+    float zDepth = static_cast<float>(s_QuadBufferData->QuadVerticesIndex) / 100000.0f;
+    for (size_t i = 0; i < 4; i++)
+    {
+        s_QuadBufferData->QuadVertices[s_QuadBufferData->QuadVerticesIndex].Position = transform * QuadVerticesBase[i];
+        s_QuadBufferData->QuadVertices[s_QuadBufferData->QuadVerticesIndex].Position.z += zDepth;
+        s_QuadBufferData->QuadVertices[s_QuadBufferData->QuadVerticesIndex].Color = Color;
+        s_QuadBufferData->QuadVertices[s_QuadBufferData->QuadVerticesIndex].TextureCoordinates = TextureCoords[i];
+        s_QuadBufferData->QuadVertices[s_QuadBufferData->QuadVerticesIndex].TextureID = subTexture->GetTexture()->GetTextureSlot();
+        s_QuadBufferData->QuadVertices[s_QuadBufferData->QuadVerticesIndex].TilingFactor = 1.0f;
+        s_QuadBufferData->QuadVerticesIndex++;
+    }
+    s_QuadBufferData->IndicesIndex += 6;
+}
+
+
+
+//void Renderer::DrawParticle(ParticleSystem* Particle)
+//{
+//    Particle->onRender();
+//}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 void Renderer::DrawQuad(QuadData& quad)
 {
@@ -132,9 +183,11 @@ void Renderer::DrawQuad(const glm::mat4& transform, const glm::vec4& color, cons
         s_QuadBufferData->QuadVerticesIndex = 0;
         s_QuadBufferData->IndicesIndex = 0;
     }
+    float zDepth = static_cast<float>(s_QuadBufferData->QuadVerticesIndex) / 100000.0f;
     for (size_t i = 0; i < 4; i++)
     {
         s_QuadBufferData->QuadVertices[s_QuadBufferData->QuadVerticesIndex].Position = transform * QuadVerticesBase[i];
+        s_QuadBufferData->QuadVertices[s_QuadBufferData->QuadVerticesIndex].Position.z += zDepth;
         s_QuadBufferData->QuadVertices[s_QuadBufferData->QuadVerticesIndex].Color = color;
         s_QuadBufferData->QuadVertices[s_QuadBufferData->QuadVerticesIndex].TextureCoordinates = TextureCoordsBase[i];
         s_QuadBufferData->QuadVertices[s_QuadBufferData->QuadVerticesIndex].TextureID = TextureID;
@@ -203,23 +256,23 @@ void Renderer::init()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
-    s_QuadBufferData = new QuadBufferData;
-    s_CircleBufferData = new CircleBufferData;
+    s_QuadBufferData = std::make_shared<QuadBufferData>();
+    s_CircleBufferData = std::make_shared<CircleBufferData>();
 	CreateIndices();
     InitiateQuadsBatch();
     uint32_t data = 0xffffffff;
-    s_QuadBufferData->Textures[0] = Texture(1, 1, &data);
-	s_QuadBufferData->Textures[0].bindSlot(s_QuadBufferData->TextureSlotIndex);
+    s_QuadBufferData->Textures[0]= std::make_shared<Texture>(1, 1, &data);
+	s_QuadBufferData->Textures[0]->bindSlot(s_QuadBufferData->TextureSlotIndex);
 }
 
 
 
 void Renderer::InitiateQuadsBatch()
 {
-    s_QuadBufferData->QuadsVbo = new VertexBuffer;
-    s_QuadBufferData->QuadsVao = new VertexArray;
-    s_QuadBufferData->QuadsEbo = new ElementBuffer;
-    s_QuadBufferData->QuadsPs  = new ShaderProgram;
+    s_QuadBufferData->QuadsVbo = std::make_unique<VertexBuffer>();
+    s_QuadBufferData->QuadsVao = std::make_unique<VertexArray>();
+    s_QuadBufferData->QuadsEbo = std::make_unique<ElementBuffer>();
+    s_QuadBufferData->QuadsPs  = std::make_unique<ShaderProgram>();
     s_QuadBufferData->QuadsVao->bind();
     s_QuadBufferData->QuadsEbo->bind();
     s_QuadBufferData->QuadsVbo->bindDynamic<QuadVertex>(MaxQuadVertices+10);
@@ -243,10 +296,10 @@ void Renderer::InitiateQuadsBatch()
     s_QuadBufferData->QuadsEbo->unbind();
     s_QuadBufferData->QuadsPs->unbind();
 
-    s_CircleBufferData->CirclesVbo = new VertexBuffer;
-    s_CircleBufferData->CirclesVao = new VertexArray;
-    s_CircleBufferData->CirclesEbo = new ElementBuffer;
-    s_CircleBufferData->CirclesPs  = new ShaderProgram;
+    s_CircleBufferData->CirclesVbo = std::make_unique<VertexBuffer>();
+    s_CircleBufferData->CirclesVao = std::make_unique<VertexArray>();
+    s_CircleBufferData->CirclesEbo = std::make_unique<ElementBuffer>();
+    s_CircleBufferData->CirclesPs  = std::make_unique<ShaderProgram>();
     s_CircleBufferData->CirclesVao->bind();
     s_CircleBufferData->CirclesEbo->bind();
     s_CircleBufferData->CirclesVbo->bindDynamic<CircleVertex>(MaxQuadVertices+10);
@@ -265,10 +318,10 @@ void Renderer::InitiateQuadsBatch()
     s_CircleBufferData->CirclesPs->unbind();
 
 
-    QuadVerticesBase[0] = { -0.5f, -0.5f, 0.0f, 1.0f };
-    QuadVerticesBase[1] = {  0.5f, -0.5f, 0.0f, 1.0f };
-    QuadVerticesBase[2] = {  0.5f,  0.5f, 0.0f, 1.0f };
-    QuadVerticesBase[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
+    QuadVerticesBase[0]  = { -0.5f, -0.5f, 0.0f, 1.0f };
+    QuadVerticesBase[1]  = {  0.5f, -0.5f, 0.0f, 1.0f };
+    QuadVerticesBase[2]  = {  0.5f,  0.5f, 0.0f, 1.0f };
+    QuadVerticesBase[3]  = { -0.5f,  0.5f, 0.0f, 1.0f };
     TextureCoordsBase[0] = { 0, 0 };
     TextureCoordsBase[1] = { 1, 0 };
     TextureCoordsBase[2] = { 1, 1 };
@@ -292,8 +345,6 @@ void Renderer::CreateIndices()
 }
 
 
-
-
 /////////////////////////////////////////////////////////////////////////////////
 //////////////// RENDERING /////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -303,7 +354,7 @@ void Renderer::RenderAll()
     if (s_QuadBufferData->QuadVerticesIndex > 0)
     {
         for (size_t i = 0; i < s_QuadBufferData->TextureSlotIndex; i++)
-            s_QuadBufferData->Textures[i].bindSlot(i);
+            s_QuadBufferData->Textures[i]->bindSlot(i);
 
     	s_QuadBufferData->QuadsVao->bind();
     	s_QuadBufferData->QuadsPs->setUniMat4f("aMVP", *s_ProjViewMatrix);
@@ -335,12 +386,12 @@ void Renderer::RenderAll()
 ////////////////////////////////////////////////////////////////////////////////////
 
 
-void Renderer::LoadTexture(const char* path)
+void Renderer::LoadTexture(std::shared_ptr<Texture> texture)
 {
     if (s_QuadBufferData->TextureSlotIndex < MaxTextureSlots)
     {
-        s_QuadBufferData->Textures[s_QuadBufferData->TextureSlotIndex] = Texture(path);
-        s_QuadBufferData->Textures[s_QuadBufferData->TextureSlotIndex].bindSlot(s_QuadBufferData->TextureSlotIndex);
+		texture->bindSlot(s_QuadBufferData->TextureSlotIndex);
+        s_QuadBufferData->Textures[s_QuadBufferData->TextureSlotIndex] = texture;
         s_QuadBufferData->TextureSlotIndex++;
     }
     else
@@ -349,15 +400,34 @@ void Renderer::LoadTexture(const char* path)
 }
 
 
-void Renderer::LoadTexture(Texture& texture)
-{
-    if (s_QuadBufferData->TextureSlotIndex < MaxTextureSlots)
-    {
-        s_QuadBufferData->Textures[s_QuadBufferData->TextureSlotIndex] = texture;
-		texture.bindSlot(s_QuadBufferData->TextureSlotIndex);
-        s_QuadBufferData->TextureSlotIndex++;
-    }
-    else
-        DE_CORE_ERROR(" Too many texture loaded ");
 
+void Renderer::CheckTexture(std::shared_ptr<Texture> texture)
+{
+    bool found = false;
+    if (s_QuadBufferData->TextureSlotIndex >= MaxTextureSlots)
+    {
+        RenderAll();
+        s_QuadBufferData->QuadVerticesIndex = 0;
+        s_QuadBufferData->IndicesIndex = 0;
+        s_QuadBufferData->TextureSlotIndex = 1;
+    }
+    if (s_QuadBufferData->TextureSlotIndex > 0)
+    {
+        for (size_t i = 0; i < s_QuadBufferData->TextureSlotIndex; i++)
+        {
+            if (s_QuadBufferData->Textures[i]->GetID() == texture->GetID())
+                found = true;
+        }
+    }
+    if (!found)
+    {
+        if (s_QuadBufferData->TextureSlotIndex < MaxTextureSlots)
+          {
+          	texture->bindSlot(s_QuadBufferData->TextureSlotIndex);
+              s_QuadBufferData->Textures[s_QuadBufferData->TextureSlotIndex] = texture;
+              s_QuadBufferData->TextureSlotIndex++;
+          }
+          else
+              DE_CORE_ERROR(" Too many texture loaded ");
+    }
 }

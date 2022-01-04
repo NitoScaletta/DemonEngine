@@ -52,20 +52,25 @@ void CrossPlatformWindow::_init()
         data.width = x;
         data.height = y;
         WindowResizeEvent event(x,y);
-        data.EventCallback(event);
+        //data.EventCallback(event);
+        for(auto& f : data.EventCallback)
+            f(event);
         glViewport(0,0, x, y);
         }
     );
     glfwSetCursorPosCallback(window, [](GLFWwindow *window, double xpos, double ypos){
         WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
         MouseMovedEvent event(xpos, ypos);
-        data.EventCallback(event);
+        for(auto& f : data.EventCallback)
+            f(event);
         
     });
     glfwSetScrollCallback(window, [](GLFWwindow *window,double xoffset, double yoffset){
         WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
         MouseScrolledEvent event(xoffset, yoffset);
-        data.EventCallback(event);
+        //data.EventCallback(event);
+        for(auto& f : data.EventCallback)
+            f(event);
 
     });
     glfwSetKeyCallback(window, [](GLFWwindow *window, int key, int scancode, int action, int mods)
@@ -76,19 +81,25 @@ void CrossPlatformWindow::_init()
                 case GLFW_PRESS:
                 {
                     KeyPressedEvent event(key, 0);
-                    data.EventCallback(event);
+                    for(auto& f : data.EventCallback)
+                        f(event);
+                    //data.EventCallback(event);
                     break;
                 }
                 case GLFW_RELEASE:
                 {
                     KeyReleasedEvent event(key);
-                    data.EventCallback(event);
+					for(auto& f : data.EventCallback)
+						f(event);
+                    //data.EventCallback(event);
                     break;
                 }
                 case GLFW_REPEAT:
                 {
                     KeyPressedEvent event(key,1);  
-                    data.EventCallback(event);
+                    for(auto& f : data.EventCallback)
+                        f(event);
+                    //data.EventCallback(event);
                     break;
                 }
             }

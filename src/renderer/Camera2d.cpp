@@ -7,6 +7,7 @@ ViewMatrix(glm::mat4(1.0f)), Position(glm::vec3(0.0f)), Rotation(0.0f),
 AspectRatio(aspectratio)
 {
     ViewProjMatrix = ProjMatrix * ViewMatrix;
+    Renderer::SetViewProjMatrix(std::make_shared<glm::mat4>(ViewProjMatrix));
 }
 
 void Camera2d::CalcViewProjMatrix() 
@@ -16,5 +17,8 @@ void Camera2d::CalcViewProjMatrix()
 
     ViewMatrix = glm::inverse(ViewMatrix);
     ViewProjMatrix = ProjMatrix * ViewMatrix;
-    Renderer::SetViewProjMatrix(&ViewProjMatrix);
+    Renderer::SetViewProjMatrix(std::make_shared<glm::mat4>(ViewProjMatrix));
 }
+
+
+

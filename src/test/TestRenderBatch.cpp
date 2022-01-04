@@ -20,9 +20,13 @@ namespace test{
 		m_quad_data.position = { 0,0,0 };
 		m_quad_data.color = { 1,0,0,1 };
 		t_slot = 0;
-		HappyFace = Texture("awesomeface.png");
-		Wall = Texture("wall.jpg");
-		Background = Texture("bg.jpg");
+		HappyFace = std::make_shared<Texture>("awesomeface.png");
+		Wall = std::make_shared<Texture>("wall.jpg");
+		Background = std::make_shared<Texture>("bg.jpg");
+		anim = std::make_shared<Texture>("anim.png");
+		container = std::make_shared<Texture>("container2.png");
+		Tile=  std::make_shared<SubTexture>(anim, 0, 0, 200, 200);
+		particles = std::make_shared<ParticleSystem>(Wall);
 	}
 
 	void TestRenderBatch::onUpdate(float deltatime)
@@ -35,39 +39,29 @@ namespace test{
 		
 		ParticleProps props;
 		props.Position = { camera.GetMousePositionInWorldSpceX(Input::GetMousePosition().x), camera.GetMousePositionInWorldSpceY(Input::GetMousePosition().y), .6f };
-		props.Shape = ParticleShape::Circle;
-		props.Color = { .4f, .3f, .5f, 1.0f };
-		props.RotationPerTimeStep = 0;
+		props.Shape = ParticleShape::Textured;
+		props.Color = Color::White;
+		props.ScalingStep = .1;
 		for (size_t i = 0; i < n_particles * deltatime; i++)
 		{
 			props.RandomValues();
-			particles.Emit(props);
+			props.Velocity *= .5f;
+		//	particles->Emit(props);
 		}
 
-		for (size_t i = 0; i <= t_slot; i++)
-		{
+		Transform t(glm::vec3(0),glm::vec3(1.0f), 0);
 
-			m_quad_data.position = glm::vec3(x, y, 0);
-			Renderer::DrawTexturedQuad(m_quad_data.position, Wall, 1.0f, -1 * Rotation, 10);
-			//Renderer::DrawQuad(m_quad_data.position, 0, { .5f,.5f,1.0f }, Color::White);
-			if ((i % 50 == 0)&&(i!=0))
-			{
-				x = 0;
-				y+=.5f;
-			}
-			else
-				x+=.5f;
-		}
-		m_quad_data.position = glm::vec3(0, 0, 0.7f);
+		Renderer::DrawQuad(t, Color::Blue);
 
-		Renderer::DrawTexturedQuad({ 0,0,.3f }, HappyFace, 1.0f, Rotation++);
+
+		
 		
 	}
 
 
 	void TestRenderBatch::onRender()
 	{
-		particles.onRender();
+	//	particles->onRender();
 	}
 
 
@@ -84,13 +78,13 @@ namespace test{
 	bool TestRenderBatch::onMouseScrolledEvent(MouseScrolledEvent& e)
 	{
 		camera.Zoom(e.GetYoffset());
-		return true;
+		return false;
 	}
 
 	bool TestRenderBatch::onMouseMovedEvent(MouseMovedEvent& e)
 	{
 		glm::vec3 position = { camera.GetMousePositionInWorldSpceX(e.GetMouseX()), camera.GetMousePositionInWorldSpceY(e.GetMouseY()), 0.0f };
-		return true;
+		return false;
 	}
 
 
@@ -101,7 +95,7 @@ namespace test{
 		if (e.GetKeyCode() == Key::B)
 			Window::SetVSync(false);
 
-		return true;
+		return false;
 	}
 
 
@@ -113,15 +107,14 @@ namespace test{
 		ImGui::Text("Quads		= %d", stats.QuadIndex/4);
 		ImGui::Text("Circles	= %d", stats.CircleIndex/4);
 		ImGui::Separator();
-		ImGui::SliderInt("Particles number", &n_particles, 0, 100000);
+		ImGui::SliderInt("Particles number", &n_particles, 0, 1000);
 		ImGui::SliderInt("TextureSlot", &t_slot, 0, 10000);
 
 	}
 
 	bool TestRenderBatch::onWindowResizeEvent(WindowResizeEvent& e)
 	{
-		camera.ResetAspectRatio(e.GetWidth(), e.GetHeight());
-		return true;
+		return false;
 	}
 	
 

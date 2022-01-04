@@ -12,46 +12,6 @@
 #define DE_UNSIGNED_INT 0x1405
 #define DE_FLOAT 0x1406
 
-struct Vertex
-{
-        glm::vec3 position = {0,0,0};
-        glm::vec4 colors = { 0,0,0, 1.0f}; 
-        glm::vec2 textCoord = {0,0};
-        float textID =  -100; 
-        glm::vec3 normal = {0,0,0};
-
-        Vertex();
-        //Vertex(aiVector3D& pos);
-        Vertex(float _x, float _y);
-        Vertex(float _x, float _y, float _z);
-        ~Vertex();
-        void setPos(float x, float y, float z = 1);
-        void setPos(glm::vec3 pos);
-        //jvoid setPos(aiVector3D& pos);
-        void setCol(float r, float g, float b, float a);
-        void setCol(glm::vec3 col, float a = 1.0f);
-        void setCol(glm::vec4 col);
-        void setTCor(float x, float y);
-        void setTCor(glm::vec2 coords);
-        //void setTCor(aiVector3D& coords);
-        void print();
-        void setNormal(float x, float y, float z);
-        void setNormal(glm::vec3 norm);
-        //void setNormal(aiVector3D& norm);
-};
-
-struct Vertex2D
-{
-    glm::vec3 position;
-    glm::vec2 textCoord;
-    Vertex2D(Vertex2D& vert)        { position = vert.position; textCoord = vert.textCoord; }
-    Vertex2D(glm::vec3 v)           { position = v; textCoord = glm::vec2(0.0f); }
-    Vertex2D(){}
-    ~Vertex2D() {}
-    void SetPosition(glm::vec3 v)   { position = v; }
-    void SetTextureCoordinates(glm::vec2 v) { textCoord = v; }
-};
-
 
 
 struct QuadVertex
@@ -72,8 +32,6 @@ struct CircleVertex
     float Fade              = 0.005;
 };
 
-
-
 struct QuadData 
 {
 	glm::vec3 position      = { 0, 0, 0 };
@@ -93,8 +51,6 @@ class VertexArray{
                 void bind() const       { glBindVertexArray(id);}
                 void unbind() const     { glBindVertexArray(0); }
                 void newLayout(int nValues, const int nAtt);
-                void newLayoutDynamic();
-                void Layout2D();
                 void QuadLayout();
                 void CircleLayout();
                 
@@ -133,7 +89,6 @@ class ElementBuffer
                 ElementBuffer();
                 ElementBuffer(uint32_t *indices, int size);
                 void bind() const;
-                int GetCount() const;
                 void set(uint32_t *indices, size_t size);
                 void unbind() const;
                 void setDynamic(int offset, int* indices,  int size);
@@ -142,35 +97,45 @@ class ElementBuffer
                 unsigned int id;
 };
 
-struct TextureData
-{
-        int width, height, nrChannels;
-        std::string path;
-        unsigned char *data;
-};
 
 class Texture
 {
         public:
-                Texture();
+                Texture() {}
                 Texture(uint32_t width, uint32_t height, void* data);
                 Texture(const char* path);
-                void bind();
-                void active();
                 void bindSlot(uint32_t _slot) { glBindTextureUnit(_slot, id); slot = _slot; };
-                void Set(const char* path, uint32_t texture_unit);
-                void DataSet(unsigned int texture_unit, TextureData* image);
-                void SetType(const char* type);
-                inline const char* GetPath(){ return FilePath.c_str(); }
                 int32_t GetTextureSlot() { return slot; }
-                inline void SetTextureID(int texture_unit) { slot = texture_unit;}
-                void CreateTextures();
+                uint32_t GetWidth() { return m_width; }
+                uint32_t GetHeight() { return m_height; }
+                size_t GetChannelsNumber() { return ChannelNumber; }
+                uint32_t GetID() { return id; }
         private:
                 uint32_t id;
                 int32_t slot = -100;
-                std::string FilePath, type;
-                void LoadTexture(const char* path);
-                void LoadTexturePNG(const char* path);
+                uint32_t m_width = 1, m_height = 1;
+                size_t ChannelNumber = 0;
+};
+
+
+class SubTexture
+{
+public:
+    SubTexture() {};
+    SubTexture(std::shared_ptr<Texture> texture,  const uint32_t x, uint32_t y, const uint32_t width, const uint32_t height);
+    ~SubTexture() {}
+    void GetTextureCoords(glm::vec2* textcoords) const;
+    void ChangeTile(uint32_t x, uint32_t y) { TileCoords.x = x; TileCoords.y = y; }
+    void ChangeTile(glm::vec2 coords) { TileCoords = coords; }
+    const float GetTextureID() const { return m_Texture->GetTextureSlot(); }
+    std::shared_ptr<Texture> GetTexture() { return m_Texture;  }
+
+
+private:
+    uint32_t tile_height = 0, tile_width = 0;
+    glm::vec2 TileCoords = {0,0};
+    std::shared_ptr<Texture>  m_Texture;
+
 };
 
 

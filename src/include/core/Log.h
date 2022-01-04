@@ -1,7 +1,7 @@
 #ifndef __LOG_H__
 #define __LOG_H__
 #include <spdlog/spdlog.h>
-#include <iostream>
+#include <memory>
 
 
 class Log

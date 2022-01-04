@@ -47,28 +47,8 @@ void VertexArray::newLayout(int nValues, const int nAtt)
 {
     }
 
-void VertexArray::newLayoutDynamic()
-{
-   glEnableVertexAttribArray(0);
-   glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE,sizeof(float)*13, 0);
-   glEnableVertexAttribArray(1);
-   glVertexAttribPointer(1,4, GL_FLOAT, GL_FALSE,sizeof(float)*13, (const void*)offsetof(Vertex, colors));
-   glEnableVertexAttribArray(2);
-   glVertexAttribPointer(2,2, GL_FLOAT, GL_FALSE,sizeof(float)*13, (const void*)offsetof(Vertex,textCoord));
-   glEnableVertexAttribArray(3);
-   glVertexAttribPointer(3,1, GL_FLOAT, GL_FALSE,sizeof(float)*13, (const void*)offsetof(Vertex,textID));
-   glEnableVertexAttribArray(4);
-   glVertexAttribPointer(4,3, GL_FLOAT, GL_FALSE,sizeof(float)*13, (const void*)offsetof(Vertex,normal));
-}
 
 
-void VertexArray::Layout2D()
-{
-   glEnableVertexAttribArray(0);
-   glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE,sizeof(float)*5, 0);
-   glEnableVertexAttribArray(1);
-   glVertexAttribPointer(1,2, GL_FLOAT, GL_FALSE,sizeof(float)*5, (const void*)offsetof(Vertex2D, textCoord));
-}
 
 
 void VertexArray::QuadLayout()
@@ -101,7 +81,9 @@ void VertexArray::CircleLayout()
    glVertexAttribPointer(4,1, GL_FLOAT, GL_FALSE,sizeof(float)*12, (const void*)offsetof(CircleVertex, Fade));
 }
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////  ELEMENT BUFFER //////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
 
 ElementBuffer::ElementBuffer()  : iCount(0)
 {
@@ -115,10 +97,6 @@ ElementBuffer::ElementBuffer(uint32_t *indices, int size)
     set(indices,size);
 }
 
-int ElementBuffer::GetCount() const
-{
-    return iCount;
-}
 
 void ElementBuffer::bind() const
 {
@@ -133,7 +111,7 @@ void ElementBuffer::unbind() const
 void ElementBuffer::set(uint32_t *indices, size_t size)
 {
     size = sizeof(uint32_t) * size;
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_DYNAMIC_DRAW);
 }
 
 
@@ -142,9 +120,13 @@ void ElementBuffer::setDynamic(int offset, int* indices, int size)
     glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, indices);
 }
 
-Texture::Texture()  
-{
-}
+
+/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////    TEXTURES /////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
 
 Texture::Texture(uint32_t width, uint32_t height, void* data)
 {
@@ -155,7 +137,7 @@ Texture::Texture(uint32_t width, uint32_t height, void* data)
     glTextureParameteri(id, GL_TEXTURE_MAG_FILTER, GL_NEAREST); 
     glTextureParameteri(id, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTextureParameteri(id, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
+    ChannelNumber = 4;
     glTextureSubImage2D(id, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
 }
 
@@ -173,6 +155,9 @@ Texture::Texture(const char* path)
     char completePath[100] = "res/textures/";
     strncat(completePath, path, 99);
     unsigned char* data = stbi_load(completePath, &width, &height, &nrChannels, 0);
+    m_width = width;
+    m_height = height;
+    ChannelNumber = nrChannels;
     if (data)
     {
         if (nrChannels == 4)
@@ -197,204 +182,23 @@ Texture::Texture(const char* path)
 
 }
 
-void Texture::bind()
-{
-    glBindTexture(GL_TEXTURE_2D, id);
-}
-
-void Texture::active()
-{
-    glActiveTexture(slot);
-    glBindTexture(GL_TEXTURE_2D, id);
-}
-
-void Texture::Set(const char* path, uint32_t texture_unit)
-{
-    slot = texture_unit;
-    FilePath = path;
-    std::string file = path;
-    if(path[file.length()-3] == 'p')
-    {
-        LoadTexturePNG(path);
-    }
-    else
-    {
-        LoadTexture(path);
-    }
-}
 
 
-void Texture::LoadTexture(const char* path)
-{
-    int32_t width, height, nrChannels;
-    char completePath[100] = "res/textures/";
-    strncat(completePath, path, 99);
-    unsigned char* data = stbi_load(completePath, &width, &height, &nrChannels, 0);
-    if(data)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-        stbi_image_free(data);
-    }
-    else{
-        DE_CORE_WARNING("{0} not found", path);
-    }
-}
-
-void Texture::LoadTexturePNG(const char* path)
-{
-    int32_t width, height, nrChannels;
-    char completePath[100] = "res/textures/";
-    strncat(completePath, path, 99);
-    unsigned char* data = stbi_load(completePath, &width, &height, &nrChannels, 0);
-    if(data)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-        stbi_image_free(data);
-    }
-    else{
-        DE_CORE_WARNING("{0} not found", path);
-    }
-}
-
-void Texture::DataSet( unsigned int texture_unit, TextureData* image)
-{
-    slot = texture_unit;
-    glBindTexture(GL_TEXTURE_2D, id);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    std::string file = image->path;
-    if (image){
-            if(file[file.length()-3] == 'p')
-            {
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->width, image->height,
-                             0, GL_RGBA, GL_UNSIGNED_BYTE, image->data);
-                glGenerateMipmap(GL_TEXTURE_2D);
-                stbi_image_free(image->data);
-            }
-            else
-            {
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->width, image->height,
-                             0, GL_RGB, GL_UNSIGNED_BYTE, image->data);
-                glGenerateMipmap(GL_TEXTURE_2D);
-                stbi_image_free(image->data);
-            }
-    }
-    else DE_CORE_WARNING("data not found");
-}
-
-
-void Texture::CreateTextures()
-{
-    glBindTexture(GL_TEXTURE_2D, id);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-}
-
-void Texture::SetType(const char* typ) 
-{
-    type = typ;
-}
-
-
-Vertex::Vertex()
+SubTexture::SubTexture(std::shared_ptr<Texture> texture, const uint32_t x, const uint32_t y, const uint32_t width, const uint32_t height) 
+    : tile_width(width), tile_height(height), m_Texture(texture), TileCoords(glm::vec2(x,y))
 {
 }
 
 
-Vertex::Vertex(float _x, float _y)
+void SubTexture::GetTextureCoords(glm::vec2* textcoords) const
 {
-        setPos( _x, _y, 0.0f);
-        setCol(1.0f, 0.0f, 0.0f, 1.0f);
-        setTCor(1.0f, 1.0f);
-        textID = 0.0f;
+    textcoords[0].x = (TileCoords.x * tile_width ) / m_Texture->GetWidth();
+    textcoords[0].y = (TileCoords.y * tile_height) / m_Texture->GetHeight();
+    textcoords[1].x = ((TileCoords.x + 1) * tile_width )/ m_Texture->GetWidth();
+    textcoords[1].y = (TileCoords.y  * tile_height)/ m_Texture->GetHeight();
+    textcoords[2].x = ((TileCoords.x + 1) * tile_width )/ m_Texture->GetWidth();
+    textcoords[2].y = ((TileCoords.y + 1) * tile_height)/ m_Texture->GetHeight();
+    textcoords[3].x = (TileCoords.x * tile_width ) / m_Texture->GetWidth();
+    textcoords[3].y = ((TileCoords.y + 1) * tile_height)/ m_Texture->GetHeight();
 }
 
-
-Vertex::Vertex(float _x, float _y, float _z)
-{
-        setPos( _x, _y, _z);
-        setCol(1.0f, 0.0f, 0.0f, 1.0f);
-        setTCor(1.0f, 1.0f);
-        textID = 0.0f;
-}
-
-
-Vertex::~Vertex(){
-
-}
-
-void Vertex::setPos(float x, float y, float z){
-    position.x = x;
-    position.y = y;
-    position.z = z;
-}
-
-void Vertex::setPos(glm::vec3 pos)
-{
-    position = pos;
-}
-
-void Vertex::setCol(float r, float g, float b, float a){
-    colors.x = r;
-    colors.y = g;
-    colors.z = b;
-    colors.w = a;
-}
-
-void Vertex::setCol(glm::vec3 col, float a)
-{
-    colors = glm::vec4(col,a);
-}
-
-
-void Vertex::setCol(glm::vec4 col)
-{
-    colors = col;
-}
-
-void Vertex::setTCor(float x, float y){
-    textCoord.x = x;
-    textCoord.y = y;
-}
-
-
-void Vertex::setTCor(glm::vec2 tcoo)
-{
-    textCoord =  tcoo;
-}
-
-
-void Vertex::print()
-{
-    DE_CORE_TRACE("position   x = {0}, y = {1} z = {2}", position.x, position.y, position.z);
-    DE_CORE_TRACE("normal     x = {0}, y = {1} z = {2}", normal.x, normal.y, normal.z);
-    DE_CORE_TRACE("color      r = {0}, g = {1} b = {2}, a = {3}", colors.x, colors.y, colors.z);
-}
-
-void Vertex::setNormal(float x, float y, float z)
-{
-    normal.x = x;
-    normal.y = y;
-    normal.z = z;
-}
-void Vertex::setNormal(glm::vec3 norm)
-{
-    normal = norm;
-}
-
-namespace texture
-{
-void loadText(TextureData* images, std::string path)
-    {
-        images->data = stbi_load(path.c_str(), &images->width, &images->height,
-                                 &images->nrChannels, 0);
-        images->path = path;
-    }
-
-}

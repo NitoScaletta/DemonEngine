@@ -15,16 +15,16 @@ Camera2dController::~Camera2dController()
 
 void Camera2dController::movement(float deltatime) 
 {
-        float speed = 10*deltatime;
-        if(Input::isPressed(Key::W))
-            cam_pos.y += speed * camera.GetZoom();
-        if(Input::isPressed(Key::S))
-            cam_pos.y -= speed* camera.GetZoom();
-        if(Input::isPressed(Key::D))
-            cam_pos.x += speed* camera.GetZoom();
-        if(Input::isPressed(Key::A))
-            cam_pos.x -= speed* camera.GetZoom();
-        camera.SetPosition(cam_pos);
+	float speed = 10 * Window::GetDeltaTime();
+     if(Input::isPressed(Key::W))
+		cam_pos.y += speed * camera.GetZoom();
+	if(Input::isPressed(Key::S))
+		cam_pos.y -= speed* camera.GetZoom();
+	if(Input::isPressed(Key::D))
+		cam_pos.x += speed* camera.GetZoom();
+	if(Input::isPressed(Key::A))
+		cam_pos.x -= speed* camera.GetZoom();
+	camera.SetPosition(cam_pos);
 }
 
 
@@ -48,6 +48,22 @@ float Camera2dController::GetMousePositionInWorldSpceY(float mouseY)
 
 void Camera2dController::onEvent(Event& e)
 {
-    DE_INFO("CAMERA EVENT IS CALLED");
+    EventDispatcher dispatcher(e);
+    dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT(Camera2dController::onKeyPressedEvent));
+    dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT(Camera2dController::onWindowResizeEvent));
+}
+
+
+bool Camera2dController::onKeyPressedEvent(KeyPressedEvent& e)
+{
+   	return false;
+
+}
+
+
+bool Camera2dController::onWindowResizeEvent(WindowResizeEvent& e)
+{
+		camera.ResetProjMatrix(e.GetWidth(), e.GetHeight());
+		return false;
 }
 

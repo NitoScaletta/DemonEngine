@@ -3,26 +3,25 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
 #include <core/CoreFun.h>
 #include <iostream>
 #include <vector>
 #include <future>
 #include <functional>
 #include <stb_image.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include <core/Math.h>
 #include <Renderer/imgui_de.h>
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
+
 #include <Renderer/Shader.h>
 #include <Renderer/glObjects.h>
 #include <Renderer/renderer.h>
 #include <core/profiling/Timer.h>
 #include <core/Input.h>
-#include <imgui.h>
-
+#include <core/Log.h>
 
 
 #endif // CORE_H_

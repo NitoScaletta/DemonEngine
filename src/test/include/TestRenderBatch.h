@@ -29,9 +29,10 @@ namespace test {
 		
 		int32_t quadindex;
 		QuadData m_quad_data;
-		ParticleSystem particles;
+		std::shared_ptr<ParticleSystem> particles;
 		int n_particles = 1000;
-		Texture Numbers[40], HappyFace, Wall, Background;
+		std::shared_ptr<Texture> Numbers[40], HappyFace, Wall, Background, anim, container;
+		std::shared_ptr<SubTexture> Tile;
 		float Rotation=0;
 		int t_slot;
 

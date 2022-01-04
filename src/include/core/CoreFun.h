@@ -6,7 +6,6 @@
 
 namespace core{
     void createIndices(int nquad,std::vector<int>& indices, bool log = false);
-    void createVerticesCube(std::vector<Vertex>& vertices, bool log = false);
     void err();
     void CreateIndices(std::vector<int>& indices, int quad_number, bool log = false);
     void msg(const char* mess);

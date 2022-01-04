@@ -25,7 +25,7 @@ class CrossPlatformWindow
         }
         static void SetVSync(bool vsync) { glfwSwapInterval(vsync); s_window->m_Data.VSync = vsync;}
         static void SetEventCallBack(const EventCallbackFn& callback)   
-                                            { Get()->_SetEventCallback(callback); }
+        { Get()->_SetEventCallback(callback); }
         static float CalcDeltaTime();
         static const float& GetDeltaTime()  { return m_deltaTime; };
         static void CaptureCursor()         { glfwSetInputMode(GetNativeWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);}
@@ -43,7 +43,7 @@ class CrossPlatformWindow
         inline uint16_t _GetWidth()       { return m_Data.width; }
         inline uint16_t _GetHeight()      { return m_Data.height; }
         void _SetEventCallback(const EventCallbackFn& callback)  {
-            m_Data.EventCallback = callback;
+            m_Data.EventCallback.push_back(callback);
         }
 
 
@@ -58,7 +58,7 @@ class CrossPlatformWindow
             uint16_t width;
             uint16_t height;
             bool VSync;
-            EventCallbackFn EventCallback;
+            std::vector<EventCallbackFn> EventCallback;
         };
         WindowData m_Data;
         float LastFrame = 0;

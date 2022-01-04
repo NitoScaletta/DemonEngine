@@ -26,8 +26,10 @@ add_subdirectory(vendor/glfw)
 #IMGUI config
 add_compile_definitions(IMGUI_IMPL_OPENGL_LOADER_GLAD)
 add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
+
 #######################################################################
 ######################################################################
+
 add_library(GLAD        vendor/GLAD/src/glad.c)
 add_library(stb_image   src/image.cpp)
 add_library(core        ${core})
@@ -48,7 +50,7 @@ add_library(test     src/test/TestRenderBatch.cpp
 add_executable (DemonEngine src/app.cpp)
 
 #link delle librerie
-target_link_libraries(DemonEngine  opengl32.lib
+target_link_libraries(DemonEngine   opengl32.lib
                                     glfw
                                     GLAD
                                     stb_image

@@ -9,16 +9,12 @@
 
 int main(void)
 {
-#ifdef CARLO
-    std::cout << "hwlloworld" << std::endl;
-
-#endif // CARLO
-
-    
+	static bool demo = true;
     Log::init();
 	DE_CORE_INFO("Welcome to DemonEngine");
     Timer timer("main");
     CrossPlatformWindow::init();
+    DE_CORE_INFO("created window {}x{}", static_cast<int>(Window::GetWidth()), static_cast<int>(Window::GetHeight()));
     Renderer::init();
     Renderer::ImGuiInit();
     Window::SetVSync(true);
@@ -31,6 +27,7 @@ int main(void)
         tst.onRender();
 		Renderer::RenderAll();
         Renderer::ImGuiStart();
+        ImGui::ShowDemoWindow(&demo);
         tst.onImGuiRender();
         Renderer::ImGuiEnd();
         Renderer::End();
