@@ -14,7 +14,7 @@ class Camera2dController
 
     void movement(float deltatime);
     const glm::mat4& GetViewProjMatrix() const           { return camera.GetViewProjMatrix(); }
-    //void ResetAspectRatio(float x, float y)              { camera.ResetProjMatrix(x/y); }
+    void ResetAspectRatio(float x, float y)              { camera.ResetProjMatrix(x/y); }
     void rotate(){ }
     void Zoom(float zoom)                                { camera.ChangeZoomLevel(zoom);}
     const float& GetZoom() const                         { return camera.GetZoom(); }

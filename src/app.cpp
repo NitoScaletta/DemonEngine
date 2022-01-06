@@ -7,7 +7,7 @@
 
 
 
-int main(void)
+int main()
 {
 	static bool demo = true;
     Log::init();
@@ -22,13 +22,14 @@ int main(void)
     while (!Window::ShouldClose())
     {
         Window::CalcDeltaTime();
-        Renderer::Clear();
         tst.onUpdate(Window::GetDeltaTime());
+        Renderer::Clear();
         tst.onRender();
-		Renderer::RenderAll();
         Renderer::ImGuiStart();
         ImGui::ShowDemoWindow(&demo);
+        
         tst.onImGuiRender();
+        Renderer::ImGuiRenderStats();
         Renderer::ImGuiEnd();
         Renderer::End();
     }

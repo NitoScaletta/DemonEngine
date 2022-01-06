@@ -27,11 +27,11 @@ namespace test{
 		container = std::make_shared<Texture>("container2.png");
 		Tile=  std::make_shared<SubTexture>(anim, 0, 0, 200, 200);
 		particles = std::make_shared<ParticleSystem>(Wall);
+
 	}
 
 	void TestRenderBatch::onUpdate(float deltatime)
 	{
-		Renderer::DrawTexturedQuad({0,0,-.9f}, Background, 100.0f, 0.0f, 1000.0f);
 		camera.movement(deltatime);
 		QuadData data;
 		float x = 0, y = 0, z = 0;
@@ -49,19 +49,50 @@ namespace test{
 		//	particles->Emit(props);
 		}
 
-		Transform t(glm::vec3(0),glm::vec3(1.0f), 0);
-
-		Renderer::DrawQuad(t, Color::Blue);
 
 
-		
-		
 	}
 
 
 	void TestRenderBatch::onRender()
 	{
+		const uint32_t fb = Renderer::GetFrameBuffer()->GetColorAttachmentId();
+		Renderer::GetFrameBuffer()->bind();
 	//	particles->onRender();
+		Renderer::DrawTexturedQuad({0,0,-.9f}, Background, 10000.0f, 0.0f, 1000.0f);
+		Transform t(glm::vec3(0),glm::vec3(1.0f), Rotation++);
+		Renderer::DrawQuad(t, Color::Blue);
+		Renderer::DrawTexturedQuad({ 2,1,.4f }, HappyFace);
+		Renderer::EndScene();
+		//glDisable(GL_DEPTH_TEST);
+			
+	}
+
+	void TestRenderBatch::onImGuiRender()
+	{
+		ImGui::Begin("RenderBatch");
+		ImGui::SliderInt("Particles number", &n_particles, 0, 1000);
+		ImGui::SliderInt("TextureSlot", &t_slot, 0, 10000);
+		ImGui::Text("ViewPort size is: %.0f x %.0f", m_ViewPortSize.x, m_ViewPortSize.y);
+		ImGui::End();
+        ImGui::Begin("viewport");
+		glm::vec2 viewportsize = { ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y };
+		if (m_ViewPortSize != viewportsize)
+		{
+			FrameBufferProps fbprops;
+			fbprops.width = viewportsize.x;
+			fbprops.height = viewportsize.y;
+			m_ViewPortSize = viewportsize;
+			glViewport(0,0,m_ViewPortSize.x, m_ViewPortSize.y);
+			Renderer::GetFrameBuffer()->Resize(fbprops);
+			camera.ResetAspectRatio(m_ViewPortSize.x, m_ViewPortSize.y);
+		}
+
+        uint32_t Buffer = Renderer::GetFrameBuffer()->GetColorAttachmentId();
+		//uint32_t Buffer = HappyFace->GetID();
+        ImGui::Image((void*)Buffer, { m_ViewPortSize.x, m_ViewPortSize.y},ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+        ImGui::End();
+
 	}
 
 
@@ -98,19 +129,6 @@ namespace test{
 		return false;
 	}
 
-
-	void TestRenderBatch::onImGuiRender()
-	{
-		RendererStats stats = Renderer::GetStats();
-		ImGui::Separator();
-		ImGui::Text("DrawCalls  = %d", stats.DrawCalls);
-		ImGui::Text("Quads		= %d", stats.QuadIndex/4);
-		ImGui::Text("Circles	= %d", stats.CircleIndex/4);
-		ImGui::Separator();
-		ImGui::SliderInt("Particles number", &n_particles, 0, 1000);
-		ImGui::SliderInt("TextureSlot", &t_slot, 0, 10000);
-
-	}
 
 	bool TestRenderBatch::onWindowResizeEvent(WindowResizeEvent& e)
 	{

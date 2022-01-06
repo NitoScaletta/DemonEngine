@@ -3,7 +3,6 @@
 #include <core/Events/MouseEvents.h>
 #include <core/Events/KeyEvents.h>
 #include <core/Events/ApplicationEvents.h>
-#include <stb_image.h>
 #include <core/Log.h>
 
 
@@ -44,7 +43,6 @@ void CrossPlatformWindow::_init()
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     SetVSync(0);
     glfwSetWindowUserPointer(window, &m_Data);
-    stbi_set_flip_vertically_on_load(true);  
     LastFrame = glfwGetTime();
 
     glfwSetFramebufferSizeCallback(window, [](GLFWwindow *window, int x, int y){
@@ -52,10 +50,10 @@ void CrossPlatformWindow::_init()
         data.width = x;
         data.height = y;
         WindowResizeEvent event(x,y);
-        //data.EventCallback(event);
         for(auto& f : data.EventCallback)
             f(event);
-        glViewport(0,0, x, y);
+        ///glViewport(0,0, x, y);
+
         }
     );
     glfwSetCursorPosCallback(window, [](GLFWwindow *window, double xpos, double ypos){

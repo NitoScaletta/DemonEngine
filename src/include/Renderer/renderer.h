@@ -1,6 +1,7 @@
 #ifndef RENDERER_H_
 #define RENDERER_H_
 
+#include <Renderer/FrameBuffer.h>
 #include <core/core.h>
 #include <Renderer/ParticleSystem.h>
 #include <Renderer/Camera2d.h>
@@ -44,7 +45,6 @@ struct CircleBufferData
          std::unique_ptr<ShaderProgram>    CirclesPs;
          CircleVertex     CircleVertices[MaxQuadVertices];
          size_t           CircleVerticesIndex = 0;
-         //uint32_t         Indices[MaxQuadIndices];
          size_t           IndicesIndex = 0;
 };
 
@@ -55,13 +55,16 @@ class Renderer
         ~Renderer();
 
         static void init();
+        static void BeginScene();
         static void Clear(float r = 1.0f, float g = 1.0f, float b = 1.0f, float alpha = 1.0f);
+        static void EndScene();
         static void End();
 
         static void ImGuiInit();
         static void ImGuiStart();
         static void ImGuiEnd();    
         static void ImGuiClose();    
+        static void ImGuiRenderStats();
 
         static void SetViewProjMatrix(std::shared_ptr<glm::mat4> m) { s_ProjViewMatrix = m; };
 
@@ -80,6 +83,7 @@ class Renderer
 
         static void RenderAll();
         static const RendererStats& GetStats() { return Stats; }
+        static std::shared_ptr<FrameBuffer> GetFrameBuffer() { return s_FrameBuffer; }
 
     private:
 
@@ -91,6 +95,7 @@ class Renderer
 
         static std::shared_ptr<QuadBufferData> s_QuadBufferData;
         static std::shared_ptr<CircleBufferData> s_CircleBufferData;
+        static std::shared_ptr<FrameBuffer> s_FrameBuffer;
         static RendererStats Stats;
         static std::shared_ptr<glm::mat4> s_ProjViewMatrix;
 };

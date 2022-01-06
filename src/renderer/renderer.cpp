@@ -5,6 +5,7 @@
 //QuadBufferData* Renderer::s_QuadBufferData; new QuadBufferData
 std::shared_ptr<QuadBufferData>   Renderer::s_QuadBufferData;
 std::shared_ptr<CircleBufferData> Renderer::s_CircleBufferData;
+std::shared_ptr<FrameBuffer> Renderer::s_FrameBuffer;
 RendererStats Renderer::Stats;
 
 std::shared_ptr<glm::mat4> Renderer::s_ProjViewMatrix;
@@ -25,15 +26,19 @@ void Renderer::End()
 {
     glfwSwapBuffers(CrossPlatformWindow::GetNativeWindow());
     glfwPollEvents();
-
-    s_QuadBufferData->QuadVerticesIndex = 0;
-    s_QuadBufferData->IndicesIndex = 0;
-    s_CircleBufferData->CircleVerticesIndex = 0;
-    s_CircleBufferData->IndicesIndex = 0;
     Stats.CircleIndex = 0;
     Stats.QuadIndex = 0;
     Stats.DrawCalls = 0;
 }
+
+void Renderer::EndScene()
+{
+    RenderAll();
+	s_QuadBufferData->QuadVerticesIndex = 0;
+    s_QuadBufferData->IndicesIndex = 0;
+    s_CircleBufferData->CircleVerticesIndex = 0;
+    s_CircleBufferData->IndicesIndex = 0;
+    }
 
 void Renderer::ImGuiInit() 
 {
@@ -43,27 +48,47 @@ void Renderer::ImGuiInit()
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.FontGlobalScale =  1.5f;
     ImGui::StyleColorsDark();
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
+	//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
+	//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
+    ImGuiStyle& style = ImGui::GetStyle();
+    if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+    {
+        style.WindowRounding = 1.0f;
+        style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+    }
     ImGui_ImplGlfw_InitForOpenGL(CrossPlatformWindow::GetNativeWindow(), true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 }
 
+
 void Renderer::ImGuiStart()
 {
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-        ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(static_cast<float>(Window::GetWidth()), static_cast<float>(Window::GetHeight()));
-
-
+    s_FrameBuffer->unbind();
+    ImGuiIO& io = ImGui::GetIO();
+    io.DisplaySize = ImVec2(static_cast<float>(Window::GetWidth()), static_cast<float>(Window::GetHeight()));
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+	ImGui::NewFrame();
+	ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
 }
+
 
 void Renderer::ImGuiEnd() 
 {
-        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        ImGui::Text("Window resolution is %.0fx%.0f", ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y);
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        {
+            GLFWwindow* backup_current_context = glfwGetCurrentContext();
+            ImGui::UpdatePlatformWindows();
+            ImGui::RenderPlatformWindowsDefault();
+            glfwMakeContextCurrent(backup_current_context);
+        }
+        
 }
 
 void Renderer::ImGuiClose() 
@@ -73,9 +98,29 @@ void Renderer::ImGuiClose()
     ImGui::DestroyContext();
 }
 
+void Renderer::ImGuiRenderStats()
+{
+        auto& io = ImGui::GetIO();
+		RendererStats stats = Renderer::GetStats();
+		ImGui::Begin("Rendering Stats");
+		ImGui::Separator();
+		ImGui::Text("DrawCalls  = %d", stats.DrawCalls);
+		ImGui::Text("Quads		= %d", stats.QuadIndex/4);
+		ImGui::Text("Circles	= %d", stats.CircleIndex/4);
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        ImGui::Text("Window resolution is %.0fx%.0f", io.DisplaySize.x, io.DisplaySize.y);
+        ImGui::End();
+}
+
 
 void Renderer::Clear(float r, float g, float b, float alpha)
 {
+    s_QuadBufferData->QuadVerticesIndex = 0;
+    s_QuadBufferData->IndicesIndex = 0;
+    s_CircleBufferData->CircleVerticesIndex = 0;
+    s_CircleBufferData->IndicesIndex = 0;
+
+    s_FrameBuffer->bind();
     glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
@@ -263,6 +308,10 @@ void Renderer::init()
     uint32_t data = 0xffffffff;
     s_QuadBufferData->Textures[0]= std::make_shared<Texture>(1, 1, &data);
 	s_QuadBufferData->Textures[0]->bindSlot(s_QuadBufferData->TextureSlotIndex);
+    FrameBufferProps props;
+    props.width = Window::GetWidth();
+    props.height = Window::GetHeight();
+    s_FrameBuffer = std::make_shared<FrameBuffer>(props);
 }
 
 

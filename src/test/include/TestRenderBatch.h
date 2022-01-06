@@ -7,6 +7,7 @@
 #include "core/Events/MouseEvents.h"
 #include "core/Events/KeyEvents.h"
 #include "core/Events/ApplicationEvents.h"
+#include "Renderer/FrameBuffer.h"
 namespace test {
 
 
@@ -33,8 +34,10 @@ namespace test {
 		int n_particles = 1000;
 		std::shared_ptr<Texture> Numbers[40], HappyFace, Wall, Background, anim, container;
 		std::shared_ptr<SubTexture> Tile;
+		std::shared_ptr<FrameBuffer> fBuffer;
 		float Rotation=0;
 		int t_slot;
+		glm::vec2 m_ViewPortSize;
 
 
 

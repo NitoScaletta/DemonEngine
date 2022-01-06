@@ -150,7 +150,7 @@ Texture::Texture(const char* path)
 
     glTextureParameteri(id, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTextureParameteri(id, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
+    stbi_set_flip_vertically_on_load(true); 
     int32_t width, height, nrChannels;
     char completePath[100] = "res/textures/";
     strncat(completePath, path, 99);
