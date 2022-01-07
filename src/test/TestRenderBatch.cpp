@@ -65,6 +65,7 @@ namespace test{
 		Renderer::DrawTexturedQuad({ 2,1,.4f }, HappyFace);
 		Renderer::EndScene();
 		//glDisable(GL_DEPTH_TEST);
+		Renderer::GetFrameBuffer()->unbind();
 			
 	}
 

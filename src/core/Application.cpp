@@ -2,6 +2,9 @@
 #include "core/EntryPoint.h"
 #include <TestRenderBatch.h>
 #include "core/Window.h"
+#include "core/ImGuiLayer.h"
+#include "TestRenderBatch.h"
+
 
 
 static bool demo = true;
@@ -14,26 +17,47 @@ Application::Application(const char* name)
     Log::init();
     CrossPlatformWindow::init(name);
     Renderer::init();
-    Renderer::ImGuiInit();
+
+    m_ImGuiLayer = new ImGuiLayer();
+    m_ImGuiLayer->onAttach();
+
+    PushLayer(new test::TestRenderBatch);
+
     Window::SetVSync(true);
 }
 
 
 void Application::run()
 {
-	test::TestRenderBatch tst;
+	//test::TestRenderBatch tst;
     while (!Window::ShouldClose())
     {
         Window::CalcDeltaTime();
-        tst.onUpdate(Window::GetDeltaTime());
+        for (auto& layer : m_LayerStack.GetStack())
+        {
+            layer->onUpdate(Window::GetDeltaTime());
+        }
+        //tst.onUpdate(Window::GetDeltaTime());
         Renderer::Clear();
-        tst.onRender();
-        Renderer::ImGuiStart();
+
+        for (auto& layer : m_LayerStack.GetStack())
+        {
+            layer->onRender();
+        }
+        //tst.onRender();
+
+        m_ImGuiLayer->Begin();
+
+        for (auto& layer : m_LayerStack.GetStack())
+        {
+            layer->onImGuiRender();
+        }
         ImGui::ShowDemoWindow(&demo);
-        
-        tst.onImGuiRender();
-        Renderer::ImGuiRenderStats();
-        Renderer::ImGuiEnd();
+
+        //tst.onImGuiRender();
+
+        m_ImGuiLayer->End();
+
         Renderer::End();
     }
     Renderer::ImGuiClose();

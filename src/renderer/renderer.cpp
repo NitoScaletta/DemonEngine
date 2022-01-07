@@ -309,8 +309,8 @@ void Renderer::init()
     s_QuadBufferData->Textures[0]= std::make_shared<Texture>(1, 1, &data);
 	s_QuadBufferData->Textures[0]->bindSlot(s_QuadBufferData->TextureSlotIndex);
     FrameBufferProps props;
-    props.width = Window::GetWidth();
-    props.height = Window::GetHeight();
+    props.width = 500;
+    props.height = 500;
     s_FrameBuffer = std::make_shared<FrameBuffer>(props);
 }
 

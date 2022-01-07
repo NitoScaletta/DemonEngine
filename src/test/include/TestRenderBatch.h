@@ -8,10 +8,11 @@
 #include "core/Events/KeyEvents.h"
 #include "core/Events/ApplicationEvents.h"
 #include "Renderer/FrameBuffer.h"
+#include "core/Layer.h"
 namespace test {
 
 
-	class TestRenderBatch : public Test
+	class TestRenderBatch : public Layer
 	{
 	public: 
 		TestRenderBatch();

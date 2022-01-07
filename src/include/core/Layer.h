@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 #include "core/Layer.h"
 #include "core/Events/Events.h"
 
@@ -21,4 +22,22 @@ public:
 
 protected:
 	std::string m_Name;
+};
+
+
+class LayerStack
+{
+public:
+	LayerStack() {}
+	~LayerStack() {}
+
+	void PushLayer(Layer* layer);
+	void PushTopLayer(Layer* layer);
+	const std::vector<Layer*>& GetStack() { return m_StackLayer; }
+
+	
+private:
+	std::vector<Layer*> m_StackLayer;
+	uint32_t BottomLayerIndex = 0;
+
 };
