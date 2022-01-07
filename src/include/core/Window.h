@@ -14,8 +14,8 @@ class CrossPlatformWindow
     public:
 
         using EventCallbackFn = std::function<void(Event&)>;
-        ~CrossPlatformWindow();
-        static void init() { s_window->_init(); }
+        ~CrossPlatformWindow(); 
+        static void init(const char* name) { ApplicationName = name; s_window->_init(); }
         static bool ShouldClose ()       { return glfwWindowShouldClose(s_glfwwindow); } 
         static float AspectRatio()       { return s_window->_AspectRatio(); }
         static uint16_t GetWidth()       { return s_window->_GetWidth(); }
@@ -63,6 +63,7 @@ class CrossPlatformWindow
         WindowData m_Data;
         float LastFrame = 0;
         static float m_deltaTime;
+        static std::string ApplicationName;
 };
 
 using Window = CrossPlatformWindow;

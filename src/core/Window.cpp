@@ -7,6 +7,7 @@
 
 
 
+
 CrossPlatformWindow::CrossPlatformWindow() 
 {
     m_Data.width = 1920;
@@ -30,15 +31,17 @@ void CrossPlatformWindow::_init()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window = glfwCreateWindow(m_Data.width, m_Data.height, "DemonEngine", NULL, NULL);
+    window = glfwCreateWindow(m_Data.width, m_Data.height, ApplicationName.c_str(), NULL, NULL);
     if (!window)
     {
         DE_ERROR("Impossibile creare finestra glfw");
         glfwTerminate();
         window = nullptr;
     }
+    DE_CORE_INFO("created window {}x{}", static_cast<int>(GetWidth()), static_cast<int>(GetHeight()));
     /* Make the window's context current */
     s_glfwwindow = window;
+
     glfwMakeContextCurrent(window);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     SetVSync(0);
@@ -129,3 +132,4 @@ float CrossPlatformWindow::CalcDeltaTime()
 GLFWwindow *CrossPlatformWindow::s_glfwwindow;
 CrossPlatformWindow *CrossPlatformWindow::s_window = new CrossPlatformWindow;
 float CrossPlatformWindow::m_deltaTime;
+std::string CrossPlatformWindow::ApplicationName;
