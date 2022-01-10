@@ -52,7 +52,7 @@ build cmake_object_order_depends_target_GLAD: phony || CMakeFiles\GLAD.dir
 build CMakeFiles\GLAD.dir\vendor\GLAD\src\glad.c.obj: C_COMPILER__GLAD_Debug C$:\Users\darks\repos\DemonEngine\vendor\GLAD\src\glad.c || cmake_object_order_depends_target_GLAD
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\GLAD.dir
   OBJECT_FILE_DIR = CMakeFiles\GLAD.dir\vendor\GLAD\src
   TARGET_COMPILE_PDB = CMakeFiles\GLAD.dir\GLAD.pdb
@@ -88,7 +88,7 @@ build cmake_object_order_depends_target_stb_image: phony || CMakeFiles\stb_image
 build CMakeFiles\stb_image.dir\src\image.cpp.obj: CXX_COMPILER__stb_image_Debug C$:\Users\darks\repos\DemonEngine\src\image.cpp || cmake_object_order_depends_target_stb_image
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\stb_image.dir
   OBJECT_FILE_DIR = CMakeFiles\stb_image.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\stb_image.dir\stb_image.pdb
@@ -121,10 +121,37 @@ build stb_image.lib: CXX_STATIC_LIBRARY_LINKER__stb_image_Debug CMakeFiles\stb_i
 
 build cmake_object_order_depends_target_core: phony || CMakeFiles\core.dir
 
+build CMakeFiles\core.dir\src\core\Application.cpp.obj: CXX_COMPILER__core_Debug C$:\Users\darks\repos\DemonEngine\src\core\Application.cpp || cmake_object_order_depends_target_core
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
+  OBJECT_DIR = CMakeFiles\core.dir
+  OBJECT_FILE_DIR = CMakeFiles\core.dir\src\core
+  TARGET_COMPILE_PDB = CMakeFiles\core.dir\core.pdb
+  TARGET_PDB = core.pdb
+
 build CMakeFiles\core.dir\src\core\CoreFun.cpp.obj: CXX_COMPILER__core_Debug C$:\Users\darks\repos\DemonEngine\src\core\CoreFun.cpp || cmake_object_order_depends_target_core
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
+  OBJECT_DIR = CMakeFiles\core.dir
+  OBJECT_FILE_DIR = CMakeFiles\core.dir\src\core
+  TARGET_COMPILE_PDB = CMakeFiles\core.dir\core.pdb
+  TARGET_PDB = core.pdb
+
+build CMakeFiles\core.dir\src\core\ImGuiLayer.cpp.obj: CXX_COMPILER__core_Debug C$:\Users\darks\repos\DemonEngine\src\core\ImGuiLayer.cpp || cmake_object_order_depends_target_core
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
+  OBJECT_DIR = CMakeFiles\core.dir
+  OBJECT_FILE_DIR = CMakeFiles\core.dir\src\core
+  TARGET_COMPILE_PDB = CMakeFiles\core.dir\core.pdb
+  TARGET_PDB = core.pdb
+
+build CMakeFiles\core.dir\src\core\Layer.cpp.obj: CXX_COMPILER__core_Debug C$:\Users\darks\repos\DemonEngine\src\core\Layer.cpp || cmake_object_order_depends_target_core
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\core.dir
   OBJECT_FILE_DIR = CMakeFiles\core.dir\src\core
   TARGET_COMPILE_PDB = CMakeFiles\core.dir\core.pdb
@@ -133,7 +160,7 @@ build CMakeFiles\core.dir\src\core\CoreFun.cpp.obj: CXX_COMPILER__core_Debug C$:
 build CMakeFiles\core.dir\src\core\Log.cpp.obj: CXX_COMPILER__core_Debug C$:\Users\darks\repos\DemonEngine\src\core\Log.cpp || cmake_object_order_depends_target_core
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\core.dir
   OBJECT_FILE_DIR = CMakeFiles\core.dir\src\core
   TARGET_COMPILE_PDB = CMakeFiles\core.dir\core.pdb
@@ -142,7 +169,7 @@ build CMakeFiles\core.dir\src\core\Log.cpp.obj: CXX_COMPILER__core_Debug C$:\Use
 build CMakeFiles\core.dir\src\core\Random.cpp.obj: CXX_COMPILER__core_Debug C$:\Users\darks\repos\DemonEngine\src\core\Random.cpp || cmake_object_order_depends_target_core
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\core.dir
   OBJECT_FILE_DIR = CMakeFiles\core.dir\src\core
   TARGET_COMPILE_PDB = CMakeFiles\core.dir\core.pdb
@@ -151,7 +178,7 @@ build CMakeFiles\core.dir\src\core\Random.cpp.obj: CXX_COMPILER__core_Debug C$:\
 build CMakeFiles\core.dir\src\core\Window.cpp.obj: CXX_COMPILER__core_Debug C$:\Users\darks\repos\DemonEngine\src\core\Window.cpp || cmake_object_order_depends_target_core
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\core.dir
   OBJECT_FILE_DIR = CMakeFiles\core.dir\src\core
   TARGET_COMPILE_PDB = CMakeFiles\core.dir\core.pdb
@@ -160,7 +187,7 @@ build CMakeFiles\core.dir\src\core\Window.cpp.obj: CXX_COMPILER__core_Debug C$:\
 build CMakeFiles\core.dir\src\core\profiling\Timer.cpp.obj: CXX_COMPILER__core_Debug C$:\Users\darks\repos\DemonEngine\src\core\profiling\Timer.cpp || cmake_object_order_depends_target_core
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\core.dir
   OBJECT_FILE_DIR = CMakeFiles\core.dir\src\core\profiling
   TARGET_COMPILE_PDB = CMakeFiles\core.dir\core.pdb
@@ -174,7 +201,7 @@ build CMakeFiles\core.dir\src\core\profiling\Timer.cpp.obj: CXX_COMPILER__core_D
 #############################################
 # Link the static library core.lib
 
-build core.lib: CXX_STATIC_LIBRARY_LINKER__core_Debug CMakeFiles\core.dir\src\core\CoreFun.cpp.obj CMakeFiles\core.dir\src\core\Log.cpp.obj CMakeFiles\core.dir\src\core\Random.cpp.obj CMakeFiles\core.dir\src\core\Window.cpp.obj CMakeFiles\core.dir\src\core\profiling\Timer.cpp.obj
+build core.lib: CXX_STATIC_LIBRARY_LINKER__core_Debug CMakeFiles\core.dir\src\core\Application.cpp.obj CMakeFiles\core.dir\src\core\CoreFun.cpp.obj CMakeFiles\core.dir\src\core\ImGuiLayer.cpp.obj CMakeFiles\core.dir\src\core\Layer.cpp.obj CMakeFiles\core.dir\src\core\Log.cpp.obj CMakeFiles\core.dir\src\core\Random.cpp.obj CMakeFiles\core.dir\src\core\Window.cpp.obj CMakeFiles\core.dir\src\core\profiling\Timer.cpp.obj
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = CMakeFiles\core.dir
@@ -196,7 +223,7 @@ build cmake_object_order_depends_target_renderer: phony || cmake_object_order_de
 build CMakeFiles\renderer.dir\src\Renderer\Camera.cpp.obj: CXX_COMPILER__renderer_Debug C$:\Users\darks\repos\DemonEngine\src\Renderer\Camera.cpp || cmake_object_order_depends_target_renderer
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\renderer.dir
   OBJECT_FILE_DIR = CMakeFiles\renderer.dir\src\Renderer
   TARGET_COMPILE_PDB = CMakeFiles\renderer.dir\renderer.pdb
@@ -205,7 +232,7 @@ build CMakeFiles\renderer.dir\src\Renderer\Camera.cpp.obj: CXX_COMPILER__rendere
 build CMakeFiles\renderer.dir\src\Renderer\Camera2d.cpp.obj: CXX_COMPILER__renderer_Debug C$:\Users\darks\repos\DemonEngine\src\Renderer\Camera2d.cpp || cmake_object_order_depends_target_renderer
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\renderer.dir
   OBJECT_FILE_DIR = CMakeFiles\renderer.dir\src\Renderer
   TARGET_COMPILE_PDB = CMakeFiles\renderer.dir\renderer.pdb
@@ -214,7 +241,16 @@ build CMakeFiles\renderer.dir\src\Renderer\Camera2d.cpp.obj: CXX_COMPILER__rende
 build CMakeFiles\renderer.dir\src\Renderer\Camera2dController.cpp.obj: CXX_COMPILER__renderer_Debug C$:\Users\darks\repos\DemonEngine\src\Renderer\Camera2dController.cpp || cmake_object_order_depends_target_renderer
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
+  OBJECT_DIR = CMakeFiles\renderer.dir
+  OBJECT_FILE_DIR = CMakeFiles\renderer.dir\src\Renderer
+  TARGET_COMPILE_PDB = CMakeFiles\renderer.dir\renderer.pdb
+  TARGET_PDB = renderer.pdb
+
+build CMakeFiles\renderer.dir\src\Renderer\FrameBuffer.cpp.obj: CXX_COMPILER__renderer_Debug C$:\Users\darks\repos\DemonEngine\src\Renderer\FrameBuffer.cpp || cmake_object_order_depends_target_renderer
+  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\renderer.dir
   OBJECT_FILE_DIR = CMakeFiles\renderer.dir\src\Renderer
   TARGET_COMPILE_PDB = CMakeFiles\renderer.dir\renderer.pdb
@@ -223,7 +259,7 @@ build CMakeFiles\renderer.dir\src\Renderer\Camera2dController.cpp.obj: CXX_COMPI
 build CMakeFiles\renderer.dir\src\Renderer\ParticleSystem.cpp.obj: CXX_COMPILER__renderer_Debug C$:\Users\darks\repos\DemonEngine\src\Renderer\ParticleSystem.cpp || cmake_object_order_depends_target_renderer
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\renderer.dir
   OBJECT_FILE_DIR = CMakeFiles\renderer.dir\src\Renderer
   TARGET_COMPILE_PDB = CMakeFiles\renderer.dir\renderer.pdb
@@ -232,7 +268,7 @@ build CMakeFiles\renderer.dir\src\Renderer\ParticleSystem.cpp.obj: CXX_COMPILER_
 build CMakeFiles\renderer.dir\src\Renderer\Shader.cpp.obj: CXX_COMPILER__renderer_Debug C$:\Users\darks\repos\DemonEngine\src\Renderer\Shader.cpp || cmake_object_order_depends_target_renderer
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\renderer.dir
   OBJECT_FILE_DIR = CMakeFiles\renderer.dir\src\Renderer
   TARGET_COMPILE_PDB = CMakeFiles\renderer.dir\renderer.pdb
@@ -241,7 +277,7 @@ build CMakeFiles\renderer.dir\src\Renderer\Shader.cpp.obj: CXX_COMPILER__rendere
 build CMakeFiles\renderer.dir\src\Renderer\glObjects.cpp.obj: CXX_COMPILER__renderer_Debug C$:\Users\darks\repos\DemonEngine\src\Renderer\glObjects.cpp || cmake_object_order_depends_target_renderer
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\renderer.dir
   OBJECT_FILE_DIR = CMakeFiles\renderer.dir\src\Renderer
   TARGET_COMPILE_PDB = CMakeFiles\renderer.dir\renderer.pdb
@@ -250,7 +286,7 @@ build CMakeFiles\renderer.dir\src\Renderer\glObjects.cpp.obj: CXX_COMPILER__rend
 build CMakeFiles\renderer.dir\src\Renderer\renderer.cpp.obj: CXX_COMPILER__renderer_Debug C$:\Users\darks\repos\DemonEngine\src\Renderer\renderer.cpp || cmake_object_order_depends_target_renderer
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\renderer.dir
   OBJECT_FILE_DIR = CMakeFiles\renderer.dir\src\Renderer
   TARGET_COMPILE_PDB = CMakeFiles\renderer.dir\renderer.pdb
@@ -264,7 +300,7 @@ build CMakeFiles\renderer.dir\src\Renderer\renderer.cpp.obj: CXX_COMPILER__rende
 #############################################
 # Link the static library renderer.lib
 
-build renderer.lib: CXX_STATIC_LIBRARY_LINKER__renderer_Debug CMakeFiles\renderer.dir\src\Renderer\Camera.cpp.obj CMakeFiles\renderer.dir\src\Renderer\Camera2d.cpp.obj CMakeFiles\renderer.dir\src\Renderer\Camera2dController.cpp.obj CMakeFiles\renderer.dir\src\Renderer\ParticleSystem.cpp.obj CMakeFiles\renderer.dir\src\Renderer\Shader.cpp.obj CMakeFiles\renderer.dir\src\Renderer\glObjects.cpp.obj CMakeFiles\renderer.dir\src\Renderer\renderer.cpp.obj || GLAD.lib
+build renderer.lib: CXX_STATIC_LIBRARY_LINKER__renderer_Debug CMakeFiles\renderer.dir\src\Renderer\Camera.cpp.obj CMakeFiles\renderer.dir\src\Renderer\Camera2d.cpp.obj CMakeFiles\renderer.dir\src\Renderer\Camera2dController.cpp.obj CMakeFiles\renderer.dir\src\Renderer\FrameBuffer.cpp.obj CMakeFiles\renderer.dir\src\Renderer\ParticleSystem.cpp.obj CMakeFiles\renderer.dir\src\Renderer\Shader.cpp.obj CMakeFiles\renderer.dir\src\Renderer\glObjects.cpp.obj CMakeFiles\renderer.dir\src\Renderer\renderer.cpp.obj || GLAD.lib
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = CMakeFiles\renderer.dir
@@ -286,7 +322,7 @@ build cmake_object_order_depends_target_imgui: phony || CMakeFiles\imgui.dir
 build CMakeFiles\imgui.dir\vendor\imgui\imgui.cpp.obj: CXX_COMPILER__imgui_Debug C$:\Users\darks\repos\DemonEngine\vendor\imgui\imgui.cpp || cmake_object_order_depends_target_imgui
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\imgui.dir
   OBJECT_FILE_DIR = CMakeFiles\imgui.dir\vendor\imgui
   TARGET_COMPILE_PDB = CMakeFiles\imgui.dir\imgui.pdb
@@ -295,7 +331,7 @@ build CMakeFiles\imgui.dir\vendor\imgui\imgui.cpp.obj: CXX_COMPILER__imgui_Debug
 build CMakeFiles\imgui.dir\vendor\imgui\imgui_tables.cpp.obj: CXX_COMPILER__imgui_Debug C$:\Users\darks\repos\DemonEngine\vendor\imgui\imgui_tables.cpp || cmake_object_order_depends_target_imgui
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\imgui.dir
   OBJECT_FILE_DIR = CMakeFiles\imgui.dir\vendor\imgui
   TARGET_COMPILE_PDB = CMakeFiles\imgui.dir\imgui.pdb
@@ -304,7 +340,7 @@ build CMakeFiles\imgui.dir\vendor\imgui\imgui_tables.cpp.obj: CXX_COMPILER__imgu
 build CMakeFiles\imgui.dir\vendor\imgui\imgui_draw.cpp.obj: CXX_COMPILER__imgui_Debug C$:\Users\darks\repos\DemonEngine\vendor\imgui\imgui_draw.cpp || cmake_object_order_depends_target_imgui
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\imgui.dir
   OBJECT_FILE_DIR = CMakeFiles\imgui.dir\vendor\imgui
   TARGET_COMPILE_PDB = CMakeFiles\imgui.dir\imgui.pdb
@@ -313,7 +349,7 @@ build CMakeFiles\imgui.dir\vendor\imgui\imgui_draw.cpp.obj: CXX_COMPILER__imgui_
 build CMakeFiles\imgui.dir\vendor\imgui\imgui_widgets.cpp.obj: CXX_COMPILER__imgui_Debug C$:\Users\darks\repos\DemonEngine\vendor\imgui\imgui_widgets.cpp || cmake_object_order_depends_target_imgui
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\imgui.dir
   OBJECT_FILE_DIR = CMakeFiles\imgui.dir\vendor\imgui
   TARGET_COMPILE_PDB = CMakeFiles\imgui.dir\imgui.pdb
@@ -322,7 +358,7 @@ build CMakeFiles\imgui.dir\vendor\imgui\imgui_widgets.cpp.obj: CXX_COMPILER__img
 build CMakeFiles\imgui.dir\vendor\imgui\imgui_demo.cpp.obj: CXX_COMPILER__imgui_Debug C$:\Users\darks\repos\DemonEngine\vendor\imgui\imgui_demo.cpp || cmake_object_order_depends_target_imgui
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\imgui.dir
   OBJECT_FILE_DIR = CMakeFiles\imgui.dir\vendor\imgui
   TARGET_COMPILE_PDB = CMakeFiles\imgui.dir\imgui.pdb
@@ -331,7 +367,7 @@ build CMakeFiles\imgui.dir\vendor\imgui\imgui_demo.cpp.obj: CXX_COMPILER__imgui_
 build CMakeFiles\imgui.dir\vendor\imgui\backends\imgui_impl_opengl3.cpp.obj: CXX_COMPILER__imgui_Debug C$:\Users\darks\repos\DemonEngine\vendor\imgui\backends\imgui_impl_opengl3.cpp || cmake_object_order_depends_target_imgui
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\imgui.dir
   OBJECT_FILE_DIR = CMakeFiles\imgui.dir\vendor\imgui\backends
   TARGET_COMPILE_PDB = CMakeFiles\imgui.dir\imgui.pdb
@@ -340,7 +376,7 @@ build CMakeFiles\imgui.dir\vendor\imgui\backends\imgui_impl_opengl3.cpp.obj: CXX
 build CMakeFiles\imgui.dir\vendor\imgui\backends\imgui_impl_glfw.cpp.obj: CXX_COMPILER__imgui_Debug C$:\Users\darks\repos\DemonEngine\vendor\imgui\backends\imgui_impl_glfw.cpp || cmake_object_order_depends_target_imgui
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm
   OBJECT_DIR = CMakeFiles\imgui.dir
   OBJECT_FILE_DIR = CMakeFiles\imgui.dir\vendor\imgui\backends
   TARGET_COMPILE_PDB = CMakeFiles\imgui.dir\imgui.pdb
@@ -365,56 +401,20 @@ build imgui.lib: CXX_STATIC_LIBRARY_LINKER__imgui_Debug CMakeFiles\imgui.dir\ven
   TARGET_PDB = imgui.pdb
 
 # =============================================================================
-# Object build statements for STATIC_LIBRARY target test
-
-
-#############################################
-# Order-only phony target for test
-
-build cmake_object_order_depends_target_test: phony || CMakeFiles\test.dir
-
-build CMakeFiles\test.dir\src\test\TestRenderBatch.cpp.obj: CXX_COMPILER__test_Debug C$:\Users\darks\repos\DemonEngine\src\test\TestRenderBatch.cpp || cmake_object_order_depends_target_test
-  DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include
-  OBJECT_DIR = CMakeFiles\test.dir
-  OBJECT_FILE_DIR = CMakeFiles\test.dir\src\test
-  TARGET_COMPILE_PDB = CMakeFiles\test.dir\test.pdb
-  TARGET_PDB = test.pdb
-
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target test
-
-
-#############################################
-# Link the static library test.lib
-
-build test.lib: CXX_STATIC_LIBRARY_LINKER__test_Debug CMakeFiles\test.dir\src\test\TestRenderBatch.cpp.obj
-  LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
-  LINK_FLAGS = /machine:x64
-  OBJECT_DIR = CMakeFiles\test.dir
-  POST_BUILD = cd .
-  PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\test.dir\test.pdb
-  TARGET_FILE = test.lib
-  TARGET_PDB = test.pdb
-
-# =============================================================================
 # Object build statements for EXECUTABLE target DemonEngine
 
 
 #############################################
 # Order-only phony target for DemonEngine
 
-build cmake_object_order_depends_target_DemonEngine: phony || cmake_object_order_depends_target_GLAD cmake_object_order_depends_target_core cmake_object_order_depends_target_glfw cmake_object_order_depends_target_imgui cmake_object_order_depends_target_renderer cmake_object_order_depends_target_stb_image cmake_object_order_depends_target_test
+build cmake_object_order_depends_target_DemonEngine: phony || cmake_object_order_depends_target_GLAD cmake_object_order_depends_target_core cmake_object_order_depends_target_glfw cmake_object_order_depends_target_imgui cmake_object_order_depends_target_renderer cmake_object_order_depends_target_stb_image
 
-build CMakeFiles\DemonEngine.dir\src\app.cpp.obj: CXX_COMPILER__DemonEngine_Debug C$:\Users\darks\repos\DemonEngine\src\app.cpp || cmake_object_order_depends_target_DemonEngine
+build CMakeFiles\DemonEngine.dir\src\test\TestRenderBatch.cpp.obj: CXX_COMPILER__DemonEngine_Debug C$:\Users\darks\repos\DemonEngine\src\test\TestRenderBatch.cpp || cmake_object_order_depends_target_DemonEngine
   DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++latest
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include
   OBJECT_DIR = CMakeFiles\DemonEngine.dir
-  OBJECT_FILE_DIR = CMakeFiles\DemonEngine.dir\src
+  OBJECT_FILE_DIR = CMakeFiles\DemonEngine.dir\src\test
   TARGET_COMPILE_PDB = CMakeFiles\DemonEngine.dir\
   TARGET_PDB = DemonEngine.pdb
 
@@ -426,7 +426,7 @@ build CMakeFiles\DemonEngine.dir\src\app.cpp.obj: CXX_COMPILER__DemonEngine_Debu
 #############################################
 # Link the executable DemonEngine.exe
 
-build DemonEngine.exe: CXX_EXECUTABLE_LINKER__DemonEngine_Debug CMakeFiles\DemonEngine.dir\src\app.cpp.obj | vendor\glfw\src\glfw3.lib GLAD.lib stb_image.lib renderer.lib imgui.lib test.lib core.lib GLAD.lib || GLAD.lib core.lib imgui.lib renderer.lib stb_image.lib test.lib vendor\glfw\src\glfw3.lib
+build DemonEngine.exe: CXX_EXECUTABLE_LINKER__DemonEngine_Debug CMakeFiles\DemonEngine.dir\src\test\TestRenderBatch.cpp.obj | vendor\glfw\src\glfw3.lib GLAD.lib stb_image.lib renderer.lib imgui.lib core.lib GLAD.lib || GLAD.lib core.lib imgui.lib renderer.lib stb_image.lib vendor\glfw\src\glfw3.lib
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = opengl32.lib  vendor\glfw\src\glfw3.lib  GLAD.lib  stb_image.lib  renderer.lib  imgui.lib  test.lib  core.lib  GLAD.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
@@ -581,7 +581,7 @@ build cmake_object_order_depends_target_glfw: phony || vendor\glfw\src\CMakeFile
 build vendor\glfw\src\CMakeFiles\glfw.dir\context.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\context.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -590,7 +590,7 @@ build vendor\glfw\src\CMakeFiles\glfw.dir\context.c.obj: C_COMPILER__glfw_Debug 
 build vendor\glfw\src\CMakeFiles\glfw.dir\init.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\init.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -599,7 +599,7 @@ build vendor\glfw\src\CMakeFiles\glfw.dir\init.c.obj: C_COMPILER__glfw_Debug C$:
 build vendor\glfw\src\CMakeFiles\glfw.dir\input.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\input.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -608,7 +608,7 @@ build vendor\glfw\src\CMakeFiles\glfw.dir\input.c.obj: C_COMPILER__glfw_Debug C$
 build vendor\glfw\src\CMakeFiles\glfw.dir\monitor.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\monitor.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -617,7 +617,7 @@ build vendor\glfw\src\CMakeFiles\glfw.dir\monitor.c.obj: C_COMPILER__glfw_Debug 
 build vendor\glfw\src\CMakeFiles\glfw.dir\vulkan.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\vulkan.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -626,7 +626,7 @@ build vendor\glfw\src\CMakeFiles\glfw.dir\vulkan.c.obj: C_COMPILER__glfw_Debug C
 build vendor\glfw\src\CMakeFiles\glfw.dir\window.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\window.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -635,7 +635,7 @@ build vendor\glfw\src\CMakeFiles\glfw.dir\window.c.obj: C_COMPILER__glfw_Debug C
 build vendor\glfw\src\CMakeFiles\glfw.dir\win32_init.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\win32_init.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -644,7 +644,7 @@ build vendor\glfw\src\CMakeFiles\glfw.dir\win32_init.c.obj: C_COMPILER__glfw_Deb
 build vendor\glfw\src\CMakeFiles\glfw.dir\win32_joystick.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\win32_joystick.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -653,7 +653,7 @@ build vendor\glfw\src\CMakeFiles\glfw.dir\win32_joystick.c.obj: C_COMPILER__glfw
 build vendor\glfw\src\CMakeFiles\glfw.dir\win32_monitor.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\win32_monitor.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -662,7 +662,7 @@ build vendor\glfw\src\CMakeFiles\glfw.dir\win32_monitor.c.obj: C_COMPILER__glfw_
 build vendor\glfw\src\CMakeFiles\glfw.dir\win32_time.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\win32_time.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -671,7 +671,7 @@ build vendor\glfw\src\CMakeFiles\glfw.dir\win32_time.c.obj: C_COMPILER__glfw_Deb
 build vendor\glfw\src\CMakeFiles\glfw.dir\win32_thread.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\win32_thread.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -680,7 +680,7 @@ build vendor\glfw\src\CMakeFiles\glfw.dir\win32_thread.c.obj: C_COMPILER__glfw_D
 build vendor\glfw\src\CMakeFiles\glfw.dir\win32_window.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\win32_window.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -689,7 +689,7 @@ build vendor\glfw\src\CMakeFiles\glfw.dir\win32_window.c.obj: C_COMPILER__glfw_D
 build vendor\glfw\src\CMakeFiles\glfw.dir\wgl_context.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\wgl_context.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -698,7 +698,7 @@ build vendor\glfw\src\CMakeFiles\glfw.dir\wgl_context.c.obj: C_COMPILER__glfw_De
 build vendor\glfw\src\CMakeFiles\glfw.dir\egl_context.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\egl_context.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -707,7 +707,7 @@ build vendor\glfw\src\CMakeFiles\glfw.dir\egl_context.c.obj: C_COMPILER__glfw_De
 build vendor\glfw\src\CMakeFiles\glfw.dir\osmesa_context.c.obj: C_COMPILER__glfw_Debug C$:\Users\darks\repos\DemonEngine\vendor\glfw\src\osmesa_context.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd /W3
-  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
+  INCLUDES = -IC:\Users\darks\repos\DemonEngine\src\include -IC:\Users\darks\repos\DemonEngine\src\test\include -IC:\Users\darks\repos\DemonEngine\vendor\imgui -IC:\Users\darks\repos\DemonEngine\vendor\imgui\backends -IC:\Users\darks\repos\DemonEngine\vendor\GLAD\include -IC:\Users\darks\repos\DemonEngine\vendor\spdlog\include -IC:\Users\darks\repos\DemonEngine\vendor\glm -IC:\Users\darks\repos\DemonEngine\vendor\glfw\include -IC:\Users\darks\repos\DemonEngine\vendor\glfw\src -IC:\Users\darks\repos\DemonEngine\build\vendor\glfw\src
   OBJECT_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = vendor\glfw\src\CMakeFiles\glfw.dir
   TARGET_COMPILE_PDB = vendor\glfw\src\CMakeFiles\glfw.dir\glfw.pdb
@@ -804,8 +804,6 @@ build renderer: phony renderer.lib
 
 build stb_image: phony stb_image.lib
 
-build test: phony test.lib
-
 build uninstall: phony vendor\glfw\uninstall
 
 # =============================================================================
@@ -816,7 +814,7 @@ build uninstall: phony vendor\glfw\uninstall
 #############################################
 # Folder: C:/Users/darks/repos/DemonEngine/build
 
-build all: phony GLAD.lib stb_image.lib core.lib renderer.lib imgui.lib test.lib DemonEngine.exe vendor\glfw\all
+build all: phony GLAD.lib stb_image.lib core.lib renderer.lib imgui.lib DemonEngine.exe vendor\glfw\all
 
 # =============================================================================
 
@@ -839,14 +837,14 @@ build vendor\glfw\src\all: phony vendor\glfw\src\glfw3.lib
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ..\CMakeLists.txt ..\vendor\glfw\CMakeLists.txt ..\vendor\glfw\CMake\cmake_uninstall.cmake.in ..\vendor\glfw\CMake\glfw3.pc.in ..\vendor\glfw\CMake\glfw3Config.cmake.in ..\vendor\glfw\src\CMakeLists.txt ..\vendor\glfw\src\glfw_config.h.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDependentOption.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeRCInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-C.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-CXX.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\GNUInstallDirs.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-Clang-C.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-Clang-CXX.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-Clang.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles\3.22.1\CMakeCCompiler.cmake CMakeFiles\3.22.1\CMakeCXXCompiler.cmake CMakeFiles\3.22.1\CMakeRCCompiler.cmake CMakeFiles\3.22.1\CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ..\CMakeLists.txt ..\vendor\glfw\CMakeLists.txt ..\vendor\glfw\CMake\cmake_uninstall.cmake.in ..\vendor\glfw\CMake\glfw3.pc.in ..\vendor\glfw\CMake\glfw3Config.cmake.in ..\vendor\glfw\src\CMakeLists.txt ..\vendor\glfw\src\glfw_config.h.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCCompiler.cmake.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCCompilerABI.c C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCXXCompiler.cmake.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCXXCompilerABI.cpp C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCompilerIdDetection.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDependentOption.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineCCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineCXXCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineCompileFeatures.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineCompilerABI.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineCompilerId.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineRCCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeFindBinUtils.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeNinjaFindMake.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeParseImplicitIncludeInfo.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeParseImplicitLinkInfo.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeParseLibraryArchitecture.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeRCCompiler.cmake.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeRCInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeTestCCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeTestCXXCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeTestCompilerCommon.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeTestRCCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.c.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\ADSP-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\ARMCC-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\ARMClang-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\AppleClang-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Borland-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Bruce-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-C.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-CXX-FeatureTests.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-CXX-TestableFeatures.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-CXX.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-DetermineCompilerInternal.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-FindBinUtils.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Compaq-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Cray-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Embarcadero-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Fujitsu-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\GHS-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\GNU-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\HP-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\HP-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\IAR-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Intel-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\MSVC-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\NVHPC-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\NVIDIA-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\PGI-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\PathScale-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\SCO-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\SDCC-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\SunPro-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\TI-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Watcom-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\XL-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\XL-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\XLClang-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\zOS-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\GNUInstallDirs.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Internal\FeatureTesting.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-Clang-C.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-Clang-CXX.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-Clang.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-Determine-CXX.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles\3.22.1\CMakeCCompiler.cmake CMakeFiles\3.22.1\CMakeCXXCompiler.cmake CMakeFiles\3.22.1\CMakeRCCompiler.cmake CMakeFiles\3.22.1\CMakeSystem.cmake CMakeFiles\feature_tests.cxx
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ..\CMakeLists.txt ..\vendor\glfw\CMakeLists.txt ..\vendor\glfw\CMake\cmake_uninstall.cmake.in ..\vendor\glfw\CMake\glfw3.pc.in ..\vendor\glfw\CMake\glfw3Config.cmake.in ..\vendor\glfw\src\CMakeLists.txt ..\vendor\glfw\src\glfw_config.h.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDependentOption.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeRCInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-C.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-CXX.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\GNUInstallDirs.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-Clang-C.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-Clang-CXX.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-Clang.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles\3.22.1\CMakeCCompiler.cmake CMakeFiles\3.22.1\CMakeCXXCompiler.cmake CMakeFiles\3.22.1\CMakeRCCompiler.cmake CMakeFiles\3.22.1\CMakeSystem.cmake: phony
+build ..\CMakeLists.txt ..\vendor\glfw\CMakeLists.txt ..\vendor\glfw\CMake\cmake_uninstall.cmake.in ..\vendor\glfw\CMake\glfw3.pc.in ..\vendor\glfw\CMake\glfw3Config.cmake.in ..\vendor\glfw\src\CMakeLists.txt ..\vendor\glfw\src\glfw_config.h.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCCompiler.cmake.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCCompilerABI.c C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCXXCompiler.cmake.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCXXCompilerABI.cpp C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeCompilerIdDetection.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDependentOption.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineCCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineCXXCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineCompileFeatures.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineCompilerABI.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineCompilerId.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineRCCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeFindBinUtils.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeNinjaFindMake.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeParseImplicitIncludeInfo.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeParseImplicitLinkInfo.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeParseLibraryArchitecture.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeRCCompiler.cmake.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeRCInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeTestCCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeTestCXXCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeTestCompilerCommon.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CMakeTestRCCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.c.in C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\ADSP-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\ARMCC-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\ARMClang-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\AppleClang-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Borland-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Bruce-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-C.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-CXX-FeatureTests.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-CXX-TestableFeatures.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-CXX.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-DetermineCompilerInternal.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang-FindBinUtils.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Clang.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Compaq-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Cray-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Embarcadero-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Fujitsu-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\GHS-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\GNU-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\HP-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\HP-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\IAR-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Intel-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\MSVC-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\NVHPC-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\NVIDIA-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\PGI-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\PathScale-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\SCO-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\SDCC-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\SunPro-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\TI-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\Watcom-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\XL-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\XL-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\XLClang-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\zOS-C-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\GNUInstallDirs.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Internal\FeatureTesting.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-Clang-C.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-Clang-CXX.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-Clang.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-Determine-CXX.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files\CMake\share\cmake-3.22\Modules\WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles\3.22.1\CMakeCCompiler.cmake CMakeFiles\3.22.1\CMakeCXXCompiler.cmake CMakeFiles\3.22.1\CMakeRCCompiler.cmake CMakeFiles\3.22.1\CMakeSystem.cmake CMakeFiles\feature_tests.cxx: phony
 
 
 #############################################

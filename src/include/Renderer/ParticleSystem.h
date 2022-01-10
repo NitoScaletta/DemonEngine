@@ -2,6 +2,7 @@
 #define __PARTICLESYSTEM_H__
 #include <core/core.h>
 #include <core/Math.h>
+#include "Renderer/Colors.h"
 
 enum class ParticleShape
 {
@@ -12,9 +13,9 @@ struct ParticleProps
 {
     float Scale;
     float LifeTime = 3, RotationPerTimeStep = 0, FadingStep = 0, ScalingStep = 0;
-    glm::vec3 Position;
-    glm::vec3 Velocity;
-    glm::vec4 Color;
+    glm::vec3 Position = glm::vec3(0);
+    glm::vec3 Velocity = glm::vec3(0);
+    glm::vec4 Color = Color::White;
     ParticleShape Shape;
     void RandomValues();
 };

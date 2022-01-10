@@ -1,8 +1,8 @@
-#include "core/Application.h"
+#include "EditorApp.h"
 
 int main()
 {
-	Application* App = new Application("DemonEngine");
+	Application* App = CreateEditorApplication();
 	App->run();
 	delete App;
 }

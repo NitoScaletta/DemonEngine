@@ -1,6 +1,6 @@
 #ifndef CORE_H_
 #define CORE_H_
-
+#include <core/Log.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -21,7 +21,6 @@
 #include <Renderer/renderer.h>
 #include <core/profiling/Timer.h>
 #include <core/Input.h>
-#include <core/Log.h>
 
 
 #endif // CORE_H_

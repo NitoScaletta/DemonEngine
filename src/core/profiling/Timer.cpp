@@ -1,6 +1,6 @@
+#include <core/Log.h>
 #include "core/profiling/Timer.h"
 #include <iostream>
-#include <core/Log.h>
 
 
 Timer::Timer(const char* nfo) : info(nfo)

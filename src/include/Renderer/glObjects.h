@@ -111,7 +111,7 @@ class Texture
                 size_t GetChannelsNumber() { return ChannelNumber; }
                 uint32_t GetID() { return id; }
         private:
-                uint32_t id;
+                uint32_t id = 0;
                 int32_t slot = -100;
                 uint32_t m_width = 1, m_height = 1;
                 size_t ChannelNumber = 0;

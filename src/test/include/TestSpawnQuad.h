@@ -1,6 +1,6 @@
 #ifndef __TESTSPAWNQUAD_H__
-#define __TESTSPAWNQUAD_H__
 #include <test.h>
+#include <core/Log.h>
 #include <Renderer/Camera2dController.h>
 #include <core/Events/MouseEvents.h>
 #include <core/Events/KeyEvents.h>

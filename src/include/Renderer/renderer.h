@@ -6,7 +6,6 @@
 #include <Renderer/ParticleSystem.h>
 #include <Renderer/Camera2d.h>
 #include "core/Math.h"
-#include "core/Log.h"
 
 
 static constexpr size_t MaxQuads = 10000;

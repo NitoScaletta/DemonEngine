@@ -1,5 +1,6 @@
 #ifndef VERTEXSHADER_H_
 #define VERTEXSHADER_H_
+#include <core/Log.h>
 #include <glm/glm.hpp>
 #include <unordered_map>
 #include <string>

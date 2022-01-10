@@ -29,11 +29,14 @@ class LayerStack
 {
 public:
 	LayerStack() {}
-	~LayerStack() {}
+	~LayerStack();
 
 	void PushLayer(Layer* layer);
 	void PushTopLayer(Layer* layer);
+	void PopLayer(Layer* layer);
+	void PopTopLayer(Layer* Layer);
 	const std::vector<Layer*>& GetStack() { return m_StackLayer; }
+
 
 	
 private:

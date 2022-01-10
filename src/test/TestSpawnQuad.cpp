@@ -2,7 +2,6 @@
 #include "core/Input.h"
 #include <core/Random.h>
 #include <core/core.h>
-#include <core/Log.h>
 
 
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "core/Log.h"
 #include <glad/glad.h>
 #include <iostream>
 

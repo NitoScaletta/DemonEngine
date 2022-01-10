@@ -1,5 +1,4 @@
 #include "core/Application.h"
-#include "core/EntryPoint.h"
 #include <TestRenderBatch.h>
 #include "core/Window.h"
 #include "core/ImGuiLayer.h"
@@ -18,10 +17,10 @@ Application::Application(const char* name)
     CrossPlatformWindow::init(name);
     Renderer::init();
 
+	Window::SetEventCallBack(BIND_EVENT(Application::onEvent));
     m_ImGuiLayer = new ImGuiLayer();
-    m_ImGuiLayer->onAttach();
+    PushTopLayer(m_ImGuiLayer);
 
-    PushLayer(new test::TestRenderBatch);
 
     Window::SetVSync(true);
 }
@@ -32,19 +31,18 @@ void Application::run()
 	//test::TestRenderBatch tst;
     while (!Window::ShouldClose())
     {
-        Window::CalcDeltaTime();
+        float deltatime = Window::CalcDeltaTime();
         for (auto& layer : m_LayerStack.GetStack())
         {
-            layer->onUpdate(Window::GetDeltaTime());
+            layer->onUpdate(deltatime);
         }
-        //tst.onUpdate(Window::GetDeltaTime());
+
         Renderer::Clear();
 
         for (auto& layer : m_LayerStack.GetStack())
         {
             layer->onRender();
         }
-        //tst.onRender();
 
         m_ImGuiLayer->Begin();
 
@@ -54,7 +52,7 @@ void Application::run()
         }
         ImGui::ShowDemoWindow(&demo);
 
-        //tst.onImGuiRender();
+        Renderer::ImGuiRenderStats();
 
         m_ImGuiLayer->End();
 
@@ -64,4 +62,16 @@ void Application::run()
     glfwTerminate();
 }
 
+
+
+void Application::onEvent(Event& e)
+{
+    int32_t size = m_LayerStack.GetStack().size() - 1;
+    
+    for ( int i = size; i>=0;  i--)
+    {
+        m_LayerStack.GetStack()[i]->onEvent(e);
+
+    }
+}
 

@@ -10,7 +10,7 @@ public:
 	Application(const char* name);
 	~Application() {}
 	void onUpdate() {}
-	void onEvent(Event& e) {}
+	void onEvent(Event& e);
 	void run();
 	void PushLayer(Layer* layer) { m_LayerStack.PushLayer(layer); }
 	void PushTopLayer(Layer* layer) { m_LayerStack.PushTopLayer(layer); }

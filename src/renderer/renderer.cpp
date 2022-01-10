@@ -1,6 +1,5 @@
 #include "Renderer/renderer.h"
 #include <core/Window.h>
-#include <core/Log.h>
 
 //QuadBufferData* Renderer::s_QuadBufferData; new QuadBufferData
 std::shared_ptr<QuadBufferData>   Renderer::s_QuadBufferData;

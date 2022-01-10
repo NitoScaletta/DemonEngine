@@ -1,6 +1,5 @@
 #include <Renderer/Camera2dController.h>
 #include <core/Input.h>
-#include "core/Log.h"
 
 
 Camera2dController::Camera2dController() : camera(16.f/9.f), cam_pos(camera.GetPosition()) 
@@ -15,16 +14,20 @@ Camera2dController::~Camera2dController()
 
 void Camera2dController::movement(float deltatime) 
 {
-	float speed = 10 * Window::GetDeltaTime();
-     if(Input::isPressed(Key::W))
-		cam_pos.y += speed * camera.GetZoom();
-	if(Input::isPressed(Key::S))
-		cam_pos.y -= speed* camera.GetZoom();
-	if(Input::isPressed(Key::D))
-		cam_pos.x += speed* camera.GetZoom();
-	if(Input::isPressed(Key::A))
-		cam_pos.x -= speed* camera.GetZoom();
-	camera.SetPosition(cam_pos);
+	if (AreEventsEnabled)
+	{
+		float speed = 10 * Window::GetDeltaTime();
+		 if(Input::isPressed(Key::W))
+			cam_pos.y += speed * camera.GetZoom();
+		if(Input::isPressed(Key::S))
+			cam_pos.y -= speed* camera.GetZoom();
+		if(Input::isPressed(Key::D))
+			cam_pos.x += speed* camera.GetZoom();
+		if(Input::isPressed(Key::A))
+			cam_pos.x -= speed* camera.GetZoom();
+		camera.SetPosition(cam_pos);
+
+	}
 }
 
 
@@ -48,9 +51,13 @@ float Camera2dController::GetMousePositionInWorldSpceY(float mouseY)
 
 void Camera2dController::onEvent(Event& e)
 {
-    EventDispatcher dispatcher(e);
-    dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT(Camera2dController::onKeyPressedEvent));
-    dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT(Camera2dController::onWindowResizeEvent));
+	if (AreEventsEnabled)
+	{
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT(Camera2dController::onKeyPressedEvent));
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT(Camera2dController::onWindowResizeEvent));
+		dispatcher.Dispatch<MouseScrolledEvent>(BIND_EVENT(Camera2dController::onMouseScrolledEvent));
+	}
 }
 
 
@@ -63,7 +70,15 @@ bool Camera2dController::onKeyPressedEvent(KeyPressedEvent& e)
 
 bool Camera2dController::onWindowResizeEvent(WindowResizeEvent& e)
 {
-		camera.ResetProjMatrix(e.GetWidth(), e.GetHeight());
+		//camera.ResetProjMatrix(e.GetWidth(), e.GetHeight());
 		return false;
+}
+
+
+
+bool Camera2dController::onMouseScrolledEvent(MouseScrolledEvent& e)
+{
+	camera.ChangeZoomLevel(e.GetYoffset());
+	return false;
 }
 

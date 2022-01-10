@@ -1,9 +1,9 @@
+#include <core/Log.h>
 #include <core/Window.h>
 #include <assert.h>
 #include <core/Events/MouseEvents.h>
 #include <core/Events/KeyEvents.h>
 #include <core/Events/ApplicationEvents.h>
-#include <core/Log.h>
 
 
 
@@ -43,7 +43,7 @@ void CrossPlatformWindow::_init()
     s_glfwwindow = window;
 
     glfwMakeContextCurrent(window);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(window , GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     SetVSync(0);
     glfwSetWindowUserPointer(window, &m_Data);
     LastFrame = glfwGetTime();
@@ -52,10 +52,10 @@ void CrossPlatformWindow::_init()
         WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
         data.width = x;
         data.height = y;
+        glViewport(0,0, x, y);
         WindowResizeEvent event(x,y);
         for(auto& f : data.EventCallback)
             f(event);
-        ///glViewport(0,0, x, y);
 
         }
     );

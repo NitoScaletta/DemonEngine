@@ -17,6 +17,10 @@ class CrossPlatformWindow
         ~CrossPlatformWindow(); 
         static void init(const char* name) { ApplicationName = name; s_window->_init(); }
         static bool ShouldClose ()       { return glfwWindowShouldClose(s_glfwwindow); } 
+        static void SetShouldClose(bool close) {
+            glfwSetWindowShouldClose(s_glfwwindow, close);
+        }
+
         static float AspectRatio()       { return s_window->_AspectRatio(); }
         static uint16_t GetWidth()       { return s_window->_GetWidth(); }
         static uint16_t GetHeight()      { return s_window->_GetHeight(); }

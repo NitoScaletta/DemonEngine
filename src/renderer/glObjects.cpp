@@ -1,8 +1,8 @@
+#include "core/Log.h"
 #include <core/CoreFun.h>
 #include "Renderer/glObjects.h"
 #include "glad/glad.h"
 #include "core/profiling/Timer.h"
-#include "core/Log.h"
 
 VertexBuffer::VertexBuffer()
 {

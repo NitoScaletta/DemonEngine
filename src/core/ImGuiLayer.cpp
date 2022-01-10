@@ -1,5 +1,6 @@
 #include "core/ImGuiLayer.h"
 #include "core/Window.h"
+#include "core/Log.h"
 
 void ImGuiLayer::onAttach()
 {
@@ -28,16 +29,15 @@ void ImGuiLayer::onAttach()
 
 void ImGuiLayer::Begin()
 {
-    //s_FrameBuffer->unbind();
+    bool* p_open = new bool; 
+    *p_open = true;
     ImGuiIO& io = ImGui::GetIO();
     io.DisplaySize = ImVec2(static_cast<float>(Window::GetWidth()), static_cast<float>(Window::GetHeight()));
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
-	ImGui::NewFrame();
-	ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
-}
-
-
+    ImGui::NewFrame();
+    //ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+  }
 
 void ImGuiLayer::End()
 {
@@ -51,3 +51,16 @@ void ImGuiLayer::End()
     glfwMakeContextCurrent(backup_current_context);
     }
 }
+
+
+void ImGuiLayer::onEvent(Event& e)
+{
+    EventDispatcher dispatcher(e);
+    dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT(ImGuiLayer::onKeyPressedEvent));
+}
+
+bool ImGuiLayer::onKeyPressedEvent(KeyPressedEvent & e)
+{
+	return false;
+}
+

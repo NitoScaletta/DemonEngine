@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <core/Log.h>
 
 
 Shader::Shader(){

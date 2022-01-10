@@ -1,5 +1,4 @@
 #include "Renderer/FrameBuffer.h"
-#include "core/Log.h"
 
 
 FrameBuffer::FrameBuffer(FrameBufferProps& fbprops)

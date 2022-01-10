@@ -1,6 +1,5 @@
 #include <Renderer/ParticleSystem.h>
 #include <core/profiling/Timer.h>
-#include <core/Log.h>
 #include "core/Random.h"
 
 
