@@ -14,9 +14,10 @@ public:
 	void run();
 	void PushLayer(Layer* layer) { m_LayerStack.PushLayer(layer); }
 	void PushTopLayer(Layer* layer) { m_LayerStack.PushTopLayer(layer); }
-	static Application* Get() { return s_Application; }
+	//static Application* Get() { return s_Application; }
 
-private:
+
+protected:
 	void onWindowResized(WindowResizeEvent& e) {}
 	void onWindowClose(WindowCloseEvent& e) {}
 	static Application *s_Application;

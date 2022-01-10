@@ -4,6 +4,6 @@
 class  ImGuiEditorLayer : public Layer
 {
 public:
-	ImGuiEditorLayer() {}
+	ImGuiEditorLayer() : Layer("ImGuiEditorLayer") {}
 	virtual void onImGuiRender() override;
 };

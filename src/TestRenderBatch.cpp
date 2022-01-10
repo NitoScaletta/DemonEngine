@@ -9,7 +9,7 @@
 
 
 
-TestRenderBatch::TestRenderBatch() : Layer("scene")
+TestRenderBatch::TestRenderBatch()
 {
 	Random::init();
 	m_quad_data.position = { 0,0,0 };

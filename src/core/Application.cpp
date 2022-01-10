@@ -46,10 +46,13 @@ void Application::run()
 
         m_ImGuiLayer->Begin();
 
-        for (auto& layer : m_LayerStack.GetStack())
+        int32_t size = m_LayerStack.GetStack().size() - 1;
+        for ( int i = size; i>=0;  i--)
         {
-            layer->onImGuiRender();
+            m_LayerStack.GetStack()[i]->onImGuiRender();
+
         }
+
         ImGui::ShowDemoWindow(&demo);
 
         Renderer::ImGuiRenderStats();

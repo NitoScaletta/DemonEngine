@@ -36,8 +36,7 @@
 
 *.cmake
 
-build/vendor/
-out/build/
+build/
 out/
 .vs/
 .vscode/

@@ -36,6 +36,7 @@ public:
 	void PopLayer(Layer* layer);
 	void PopTopLayer(Layer* Layer);
 	const std::vector<Layer*>& GetStack() { return m_StackLayer; }
+	void PrintLayerStackList();
 
 
 	

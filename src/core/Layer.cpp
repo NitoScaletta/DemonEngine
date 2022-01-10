@@ -1,4 +1,5 @@
 #include "core/Layer.h"
+#include "core/Log.h"
 
 LayerStack::~LayerStack()
 {
@@ -50,4 +51,9 @@ void LayerStack::PopTopLayer(Layer* layer)
 
 
 
+void LayerStack::PrintLayerStackList()
+{
+	for (auto& layer : m_StackLayer)
+		DE_CORE_INFO("{}", layer->GetName());
+}
 

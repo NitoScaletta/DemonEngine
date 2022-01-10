@@ -10,6 +10,7 @@ class EditorApp : public Application
 		{
 			PushTopLayer(new ImGuiEditorLayer);
 			PushLayer(new TestRenderBatch);
+			m_LayerStack.PrintLayerStackList();
 		}
 
 		

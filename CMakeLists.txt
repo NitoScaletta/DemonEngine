@@ -3,7 +3,7 @@ project(DemonEngine)
 set (CMAKE_CXX_STANDARD 20)
 
 include_directories(src/include/)
-include_directories(src/test/include/)
+include_directories(src/test/)
 include_directories(src/Editor/)
 include_directories(vendor/imgui/)
 include_directories(vendor/imgui/backends/)
@@ -59,7 +59,6 @@ target_link_libraries(DemonEngine   opengl32.lib
                                     stb_image
                                     renderer
                                     imgui
-                                    test
                                     core
                                     )
 
