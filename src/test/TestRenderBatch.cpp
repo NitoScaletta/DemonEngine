@@ -27,13 +27,13 @@ TestRenderBatch::TestRenderBatch() : Layer("scene")
 
 void TestRenderBatch::onUpdate(float deltatime)
 {
-	camera.movement(deltatime);
+	//camera.movement(deltatime);
 	QuadData data;
 	float x = 0, y = 0, z = 0;
 
 		
 	ParticleProps props;
-	props.Position = { camera.GetMousePositionInWorldSpceX(Input::GetMousePosition().x), camera.GetMousePositionInWorldSpceY(Input::GetMousePosition().y), .6f };
+	//props.Position = { camera.GetMousePositionInWorldSpceX(Input::GetMousePosition().x), camera.GetMousePositionInWorldSpceY(Input::GetMousePosition().y), .6f };
 	props.Shape = ParticleShape::Textured;
 	props.Color = Color::White;
 	props.ScalingStep = .1;
@@ -52,54 +52,27 @@ void TestRenderBatch::onUpdate(float deltatime)
 void TestRenderBatch::onRender()
 {
 	const uint32_t fb = Renderer::GetFrameBuffer()->GetColorAttachmentId();
-	Renderer::GetFrameBuffer()->bind();
+	//Renderer::GetFrameBuffer()->bind();
 	particles->onRender();
 	Renderer::DrawTexturedQuad({0,0,-.9f}, Background, 10000.0f, 0.0f, 1000.0f);
-	Transform t(glm::vec3(0),glm::vec3(1.0f), Rotation++);
+	Transform t(glm::vec3(1,1,0),glm::vec3(1.0f), Rotation++);
 	Renderer::DrawQuad(t, Color::Blue);
+	for(int i = 0; i < 20000; i++)
+		Renderer::DrawCircle({ i , 0, 0 }, Color::Green);
 	Renderer::DrawTexturedQuad({ 2,1,.4f }, HappyFace);
 	Renderer::EndScene();
 	//glDisable(GL_DEPTH_TEST);
-	Renderer::GetFrameBuffer()->unbind();
+	//Renderer::GetFrameBuffer()->unbind();
 			
 }
 
 void TestRenderBatch::onImGuiRender()
 {
 	ImGui::Begin("RenderBatch");
-	
-	ImGui::SliderInt("Particles number", &n_particles, 0, 1000);
+	ImGui::SliderInt("Particles number", &n_particles, 0, 111000);
 	ImGui::SliderInt("TextureSlot", &t_slot, 0, 10000);
-	ImGui::Text("ViewPort size is: %.0f x %.0f", m_ViewPortSize.x, m_ViewPortSize.y);
 	ImGui::End();
-    ImGui::Begin("viewport");
-	glm::vec2 viewportsize = { ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y };
-	if (ImGui::IsWindowFocused(ImGuiFocusedFlags_RootAndChildWindows)|| ImGui::IsWindowHovered())
-	{
-		AreEventsEnabled = true;
-		camera.EnableEvents(true);
-	}
-	else
-	{
-		AreEventsEnabled = false;
-		camera.EnableEvents(false);
-	}
-
-	if (m_ViewPortSize != viewportsize)
-	{
-		FrameBufferProps fbprops;
-		fbprops.width = viewportsize.x;
-		fbprops.height = viewportsize.y;
-		m_ViewPortSize = viewportsize;
-		glViewport(0,0,m_ViewPortSize.x, m_ViewPortSize.y);
-		Renderer::GetFrameBuffer()->Resize(fbprops);
-		camera.ResetAspectRatio(m_ViewPortSize.x, m_ViewPortSize.y);
-	}
-
-    uint32_t Buffer = Renderer::GetFrameBuffer()->GetColorAttachmentId();
-    ImGui::Image((void*)Buffer, { m_ViewPortSize.x, m_ViewPortSize.y},ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
-    ImGui::End();
-
+  
 }
 
 
@@ -124,7 +97,6 @@ bool TestRenderBatch::onMouseScrolledEvent(MouseScrolledEvent& e)
 
 bool TestRenderBatch::onMouseMovedEvent(MouseMovedEvent& e)
 {
-	glm::vec3 position = { camera.GetMousePositionInWorldSpceX(e.GetMouseX()), camera.GetMousePositionInWorldSpceY(e.GetMouseY()), 0.0f };
 	return false;
 }
 

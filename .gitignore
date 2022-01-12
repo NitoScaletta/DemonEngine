@@ -46,18 +46,5 @@ build.ninja
 .ninja_log
 *.ninja
 *.pdb
+.dir-locals.el
 
-CMakeLists.txt.user
-CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
-Makefile
-cmake_install.cmake
-install_manifest.txt
-compile_commands.json
-CTestTestfile.cmake
-LearnOpenGL
-_deps
-build/DemonEngine.pdb
-build/build.ninja

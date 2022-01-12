@@ -399,6 +399,7 @@ void Renderer::CreateIndices()
 
 void Renderer::RenderAll()
 {
+    s_FrameBuffer->bind();
     if (s_QuadBufferData->QuadVerticesIndex > 0)
     {
         for (size_t i = 0; i < s_QuadBufferData->TextureSlotIndex; i++)
@@ -422,6 +423,7 @@ void Renderer::RenderAll()
 		glDrawElements(GL_TRIANGLES, s_CircleBufferData->IndicesIndex, GL_UNSIGNED_INT, nullptr );
         Stats.DrawCalls++;
     }
+    s_FrameBuffer->unbind();
 }
 
 

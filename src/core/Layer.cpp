@@ -53,7 +53,8 @@ void LayerStack::PopTopLayer(Layer* layer)
 
 void LayerStack::PrintLayerStackList()
 {
+	DE_CORE_INFO("Layers loaded:");
 	for (auto& layer : m_StackLayer)
-		DE_CORE_INFO("{}", layer->GetName());
+		DE_CORE_TRACE("---> {}", layer->GetName());
 }
 
